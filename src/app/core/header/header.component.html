@@ -1,21 +1,21 @@
-<nav class="navbar navbar-expand-md bg-dark fixed-top navbar-dark" id="header">
-  <a class="navbar-brand" href="index.html" id="navbar-icon">
-    <img src="../../../assets/Imagenes/Logo.gif" alt="logo" class="mt-n2 mb-n2" style="width:110px;">
-  </a>
-
+<nav class="navbar navbar-expand-md bg-dark fixed-top navbar-dark" id="header" >
+  <div class="">
+    <a class="navbar-brand" href="index.html" id="navbar-icon">
+     <img src="/assets/Imagenes/Logo.gif" alt="logo" class="mt-n2 mb-n2" style="width:110px;">
+    </a>
+  </div>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
 
+<!-- NavBar opciones-->
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav ml-auto" id="navbar-options">
       <div id="button-2">
-        <div id="deslizar" class="rounded"></div>
-        <a class="nav-link text-light" id="button ">Contactenos</a>
-      </div>
-      <div id="button-2">
-        <div id="deslizar"></div>
-        <a class="nav-link text-light" id="button">Acerca de</a>
+        <div id="deslizar" class="rounded text-light"></div>
+        <a class="nav-link text-light" id="button" class="nav-link"
+            routerLink="/home/acercade"
+            routerLinkActive="active">Acerca de</a>
       </div>
       <li class="nav-item dropdown">
         <div class="dropdown">
@@ -33,4 +33,5 @@
       </li>
     </ul>
   </div>
+<!-- NavBar opciones-->
 </nav>

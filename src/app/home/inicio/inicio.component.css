@@ -1,0 +1,224 @@
+#main {
+  display: inline-block;
+}
+
+#banner{
+  margin-top: 1.6rem;
+}
+
+#juego-container {
+  padding-bottom: 1rem;
+}
+
+#juego-container a :hover {
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.767);
+}
+
+#juego-container img {
+  max-height: 288.84px;
+  max-width: 219.99px;
+  height: 288.84px;
+  width: 219.99px;
+  transition: box-shadow 0.3s;
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.22);
+}
+
+#juego-container p {
+  margin-top: -5px;
+  max-width: 219.99px;
+  width: 219.99px;
+  padding: 10px;
+  font-size: 13px;
+  color: white;
+  background: rgb(52, 58, 64);
+  height: 55px;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+}
+
+#news {
+  padding-top: 15px;
+  margin-bottom: 10px;
+  padding-bottom: 15px;
+  background: rgb(52, 58, 64);
+  border-radius: 4px 4px 4px 4px;
+  width: 100%;
+  font-family: Calibri;
+}
+
+#noticia-container {
+  text-align: justify;
+  color: white;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+#proximamente-container {
+  float: left;
+  margin-bottom: 2px;
+}
+
+#proximamente-container p {
+  margin: 0;
+  margin-top: -5px;
+  padding: 10px;
+  font-size: 13px;
+  color: white;
+  background: rgb(0, 64, 152);
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+}
+
+#noticia-container-nintendo {
+  text-align: justify;
+  color: white;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+#proximamente-container-nintendo {
+  float: right;
+  margin-bottom: 2px;
+}
+
+#proximamente-container-nintendo p {
+  margin: 0;
+  margin-top: -5px;
+  padding: 10px;
+  font-size: 13px;
+  color: white;
+  background: #a50000;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+}
+
+#noticia-container-xbox {
+  text-align: justify;
+  color: white;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+#proximamente-container-xbox {
+  float: left;
+  margin-bottom: 2px;
+}
+
+#proximamente-container-xbox p {
+  margin: 0;
+  margin-top: -5px;
+  padding: 10px;
+  font-size: 13px;
+  color: white;
+  background: #00a50e;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+}
+
+#song {
+  margin-left: 10px;
+  width: 544px;
+}
+
+#catalogo{
+  color: black;
+  text-decoration: none;
+  float: right;
+}
+
+h4{
+  margin-left: -15px;
+  overflow: hidden;
+}
+@media only screen and (max-width: 1199px) {
+  h4{
+    margin-left: unset;
+    margin-right: -20px;
+  }
+
+  #song {
+    margin-right: 10px;
+    width: 445px;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  #juego-container img {
+    max-height: 185.33px;
+    max-width: 142.5px;
+    height: 292.63;
+    width: 142.5;
+  }
+
+  #juego-container {
+    padding-bottom: 2rem;
+  }
+
+  #juego-container p {
+    width: 142.5px;
+  }
+
+  #song {
+    width: 96%;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  #juego-container img {
+    max-height: 292.63px;
+    max-width: 225px;
+    height: 292.63px;
+    width: 225px;
+  }
+
+  #juego-container {
+    padding-bottom: 1rem;
+  }
+
+  #juego-container p {
+    max-width: 225px;
+    width: 225px;
+  }
+
+  #proximamente-container {
+    margin-bottom: 5px;
+  }
+
+#proximamente-container-nintendo {
+    margin-bottom: 5px;
+  }
+
+  #proximamente-container-xbox {
+    margin-bottom: 5px;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  #juego-container img {
+    width: 100%;
+    height: unset;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  #juego-container {
+    padding-bottom: 2rem;
+  }
+
+  #juego-container p {
+    font-size: 15px;
+    width: unset;
+    max-width: 100%;
+  }
+
+  h4{
+    margin-top: -100px;
+  }
+}
+
+@media only screen and (max-width: 297px) {
+  h1{
+    font-size: 1px;
+  }
+}
+

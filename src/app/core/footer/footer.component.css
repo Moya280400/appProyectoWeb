@@ -1,0 +1,24 @@
+#footer {
+  background: rgb(52, 58, 64);
+
+}
+
+#footer h6,
+p a,
+p {
+  color: white;
+}
+
+#contenido{
+  margin: 0;
+  margin-top: -10px;
+}
+
+#linkfooter{
+  text-decoration: none;
+}
+
+#linkfooter:hover{
+  color: rgb(136, 135, 135);
+}
+

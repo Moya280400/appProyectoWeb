@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { ShareModule } from './share/share.module';
 import { HomeModule } from './home/home.module';
@@ -10,19 +11,26 @@ import { UsuarioModule } from './usuario/usuario.module';
 import { VideojuegoModule } from './videojuego/videojuego.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    // importar HttpClientModule después BrowserModule.
+    // comunicarse con un servidor a través del protocolo HTTP
+    HttpClientModule,
+    // importar otras dependencias que sean necesario cargar en el componente principal.
+
+    //Modulos propios en orden
     CoreModule,
     ShareModule,
+
     HomeModule,
+    UsuarioModule,
     VideojuegoModule,
-    UsuarioModule
+
+    //Va de ultimo gestor de rutas principal
+    AppRoutingModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
