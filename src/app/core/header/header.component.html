@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-md bg-dark fixed-top navbar-dark" id="header">
   <div class="">
     <a class="navbar-brand" href="index.html" id="navbar-icon">
-      <img src="/assets/Imagenes/Logo.gif" alt="logo" class="mt-n2 mb-n2" style="width:110px;">
+      <img src="/assets/Imagenes/LogoEstatico.gif" onmouseout="this.src='/assets/Imagenes/LogoEstatico.gif';"
+      onmouseover="this.src='/assets/Imagenes/Logo.gif';" alt="logo" class="mt-n2 mb-n2" style="width:110px;">
     </a>
   </div>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -13,12 +14,12 @@
     <ul class="navbar-nav ml-auto" id="navbar-options">
       <div id="button-2">
         <div id="underline" class="rounded text-light"></div>
-        <a class="nav-link text-light" id="button" class="nav-link" routerLink="/home/acercade"
+        <a class="nav-link text-light" id="button" routerLink="/home/acercade"
           routerLinkActive="active"> <i class="fas fa-info-circle fa-lg"></i> Acerca de nosotros</a>
       </div>
       <div id="button-2">
         <div id="underline" class="rounded text-light"></div>
-        <a class="nav-link text-light" id="button" class="nav-link" routerLink="/home/acercade"
+        <a class="nav-link text-light" id="button" routerLink="/home/acercade"
           routerLinkActive="active"> <i class="far fa-user fa-lg"></i> Logearse</a>
       </div>
     </ul>
