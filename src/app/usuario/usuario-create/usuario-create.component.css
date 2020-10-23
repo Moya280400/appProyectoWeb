@@ -10,7 +10,7 @@ body {
 
 h2 {
   margin: 0;
-  color: white;
+  color: rgb(7, 4, 36);
   font-size: 25px;
   font-weight: 400;
   text-align: center;
@@ -20,6 +20,7 @@ h2 {
 
 .container{
   padding-top: 0.01rem;
+  padding-bottom: 3rem;
 }
 
 p.register-p {
@@ -30,8 +31,8 @@ p.register-p {
 }
 
 .login-form {
-  background: rgba(0, 0, 0, 0.4117647058823529);
-  max-width: 500px;
+  background: rgba(207, 202, 206, 0.412);
+  max-width: 700px;
   margin: 0 auto;
   padding: 3em;
   border-radius: 10px;
@@ -52,10 +53,9 @@ p.register-p {
   display: block;
   text-transform: uppercase;
   font-size: 13px;
-  color: #d2d2d2;
+  color: #222121;
   letter-spacing: 2px;
   margin-bottom: 10px;
-  font-style: italic;
 }
 
 input[type="text"],
@@ -73,7 +73,7 @@ input[type="password"]:focus {
 }
 
 button {
-  background: #fc3955;
+  background: #BB4F5A;
   color: #ffffff;
   font-size: 13px;
   text-transform: uppercase;
@@ -86,8 +86,8 @@ button {
 }
 
 button:hover {
-  background-color: #C1A57B;
-  transition-duration: 5s;
+  background-color: #660902;
+  transition: 6s;
 }
 
 .forgot {
@@ -114,31 +114,6 @@ font-size: 13px;
   font-size: 16px;
 }
 
-/*--footer--*/
-
-footer p a {
-  display: inline-block;
-  color: #fff;
-  text-decoration: underline;
-}
-
-footer p a:hover {
-  color: #fff;
-  text-decoration: none;
-  -webkit-transition: 0.5s all;
-  -o-transition: 0.5s all;
-  -moz-transition: 0.5s all;
-  -ms-transition: 0.5s all;
-  transition: 0.5s all;
-}
-
-footer {
-  padding: 4em 0;
-  text-align: center;
-}
-
-
-/*--//footer--*/
 
 /*-- /responsive design --*/
 

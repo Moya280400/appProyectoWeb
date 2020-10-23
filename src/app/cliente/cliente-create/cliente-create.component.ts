@@ -7,13 +7,12 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 @Component({
-  selector: 'app-usuario-create',
-  templateUrl: './usuario-create.component.html',
-  styleUrls: ['./usuario-create.component.css'],
+  selector: 'app-cliente-create',
+  templateUrl: './cliente-create.component.html',
+  styleUrls: ['./cliente-create.component.css'],
 })
-export class UsuarioCreateComponent implements OnInit {
-  usuario: any;
-  roles: any;
+export class ClienteCreateComponent implements OnInit {
+  cliente: any;
   error: any;
   formCreate: FormGroup;
   makeSubmit: boolean = false;
@@ -31,7 +30,8 @@ export class UsuarioCreateComponent implements OnInit {
   //cambiar
   reactiveForm() {
     this.formCreate = this.fb.group({
-      email: ['', [Validators.required, Validators.minLength(9),Validators.maxLength(15)]],
+      id: ['', [Validators.required, Validators.minLength(9),Validators.maxLength(15)]],
+      email: ['', [Validators.required, Validators.email]],
       direccion: ['', [Validators.required]],
       nombre: ['', [Validators.required]],
       telefono: ['', [Validators.required, Validators.minLength(8),Validators.maxLength(8)]],
@@ -39,7 +39,6 @@ export class UsuarioCreateComponent implements OnInit {
     });
     //this.getRoles();
   }
-
 
 
   ngOnInit(): void {
@@ -56,8 +55,7 @@ export class UsuarioCreateComponent implements OnInit {
    }))
 
    if (login) {
-     console.log("Orale puto");
-    this.notificacion.mensaje('Usuario','Iniciado con exito','success');
+    this.notificacion.mensaje('Cliente','Cliente agregado con exito','success');
    }
   }
   submitForm() {
@@ -65,7 +63,6 @@ export class UsuarioCreateComponent implements OnInit {
     this.authService
       .createUser(this.formCreate.value)
       .subscribe((respuesta: any) => {
-        this.usuario = respuesta;
         this.router.navigate(['/usuario/login'], {
           //Parametro es cualquiera
           queryParams: { register: 'true' },
@@ -75,14 +72,6 @@ export class UsuarioCreateComponent implements OnInit {
   onReset() {
     this.formCreate.reset();
   }
-  //getRoles() {
-    //this.gService
-      //.list('videojuego/rol')
-      //.pipe(takeUntil(this.destroy$))
-      //.subscribe((data: any) => {
-        //this.roles = data;
-      //});
-  //}
   public errorHandling = (control: string, error: string) => {
     return (
       this.formCreate.controls[control].hasError(error) &&

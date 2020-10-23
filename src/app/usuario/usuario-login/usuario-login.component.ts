@@ -37,7 +37,23 @@ export class UsuarioLoginComponent implements OnInit {
       password: ['', [Validators.required]]
     });
   }
-  ngOnInit(): void {
+   ngOnInit(): void {
+    this.mensajes();
+  }
+
+  mensajes(){
+   let login=true;
+   //Obtener parametros de la URL
+   this.route.queryParams.subscribe((params=>{
+     //Le indico que si no lo encuentra coloquelo como falso
+     console.log(params.mensaje);
+     login=params.mensaje || false;
+   }))
+
+   if (login) {
+     console.log("Orale puto");
+    this.notificacion.mensaje('Usuario','Iniciado con exito','success');
+   }
   }
   onReset() {
     this.formulario.reset();

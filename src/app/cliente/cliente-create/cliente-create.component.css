@@ -3,14 +3,9 @@ body {
   padding: 0;
   background: url(../../../assets/Imagenes/Fondo/GeraltGif.gif) no-repeat 0px 0px;
   min-height: 100vh;
-  height: 20%;
+  height: 10%;
   background-size: cover;
   font-family: 'Raleway', sans-serif;
-}
-
-@font-face {
-  font-family: PixelFont;
-  src: url(../../../assets/Fonts/advanced_pixel-7.ttf);
 }
 
 h2 {
@@ -24,7 +19,8 @@ h2 {
 }
 
 .container{
-  padding-top: 1px;
+  padding-top: 0.01rem;
+  padding-bottom: 3rem;
 }
 
 p.register-p {
@@ -39,11 +35,9 @@ p.register-p {
   max-width: 500px;
   margin: 0 auto;
   padding: 3em;
-  padding-bottom: 10px;
   border-radius: 10px;
   box-sizing: border-box;
   margin-top: 110px;
-
 }
 
 .group {
@@ -62,9 +56,10 @@ p.register-p {
   color: #222121;
   letter-spacing: 2px;
   margin-bottom: 10px;
+  font-style: italic;
 }
 
-input[type="email"],
+input[type="text"],
 input[type="password"] {
   width: 100%;
   border: none;
@@ -73,7 +68,7 @@ input[type="password"] {
   color: #000;
 }
 
-input[type="email"]:focus,
+input[type="text"]:focus,
 input[type="password"]:focus {
   outline: none;
 }
@@ -85,7 +80,7 @@ button {
   text-transform: uppercase;
   letter-spacing: 1px;
   border: none;
-  padding: 12px 60px;
+  padding: 12px 30px;
   cursor: pointer;
   width: 100%;
   border-radius: 6px;
@@ -120,7 +115,6 @@ font-size: 13px;
   font-size: 16px;
 }
 
-/*--footer--*/
 
 /*-- /responsive design --*/
 
@@ -137,6 +131,9 @@ font-size: 13px;
 }
 
 @media(max-width:640px) {
+  p.copyright-agileinfo {
+      letter-spacing: 1px;
+  }
   h1 {
       font-size: 43px;
   }
@@ -146,6 +143,9 @@ font-size: 13px;
   h1 {
       font-size: 40px;
   }
+  p.copyright-agileinfo {
+      font-size: 14px;
+  }
 }
 
 @media(max-width:480px) {
@@ -154,6 +154,9 @@ font-size: 13px;
 }
   h1 {
       font-size: 38px;
+  }
+  p.copyright-agileinfo {
+      line-height: 1.8em;
   }
 }
 
@@ -172,6 +175,12 @@ font-size: 13px;
 @media(max-width:320px) {
   h1 {
       font-size: 25px;
+  }
+  .forgot p {
+      text-align: left;
+  }
+  .forgot {
+      display: block;
   }
 }
 

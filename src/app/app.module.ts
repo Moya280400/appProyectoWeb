@@ -9,6 +9,7 @@ import { ShareModule } from './share/share.module';
 import { HomeModule } from './home/home.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { VideojuegoModule } from './videojuego/videojuego.module';
+import { ClienteModule } from './cliente/cliente.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +26,7 @@ import { VideojuegoModule } from './videojuego/videojuego.module';
 
     HomeModule,
     UsuarioModule,
+    ClienteModule,
     VideojuegoModule,
 
     //Va de ultimo gestor de rutas principal
