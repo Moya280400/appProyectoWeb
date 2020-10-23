@@ -1,0 +1,63 @@
+<body>
+  <div class="container">
+    <div class="login-form">
+      <h2>Iniciar Sesión</h2>
+       <form  [formGroup]="formCreate" (ngSubmit)="submitForm()" novalidate>
+        <div class="form-group">
+          <label>Correo:</label>
+          <div class="group rounded">
+            <input type="email" class="form-control" placeholder="Correo" required="required" formControlName="email">
+          </div>
+          <div class="col-sm-12">
+            <small class="text-danger" *ngIf="errorHandling('email','required')">
+              El email es requerido
+            </small>
+            <small class="text-danger" *ngIf="errorHandling('email','email')">
+              Verifique el formato del email
+            </small>
+          </div>
+        </div>
+        <!--Nombre-->
+        <div class="form-group">
+          <label>Nombre completo:</label>
+          <div class="group rounded">
+            <input type="text" class="form-control" placeholder="Nombre Completo" required="required" formControlName="nombre">
+          </div>
+          <div class="col-sm-12">
+            <small class="text-danger" *ngIf="errorHandling('nombre','required')">
+              El nombre es requerido
+            </small>
+          </div>
+        </div>
+        <!--Telefono -->
+        <div class="form-group">
+          <label>Telefono:</label>
+          <div class="group rounded">
+            <input type="text" class="form-control" placeholder="Telefono" required="required" formControlName="telefono">
+          </div>
+          <div class="col-sm-12">
+            <small class="text-danger" *ngIf="errorHandling('telefono','required')">
+              El telefono es requerido
+            </small>
+          </div>
+        </div>
+        <!--Contraseña-->
+        <div class="form-group">
+          <label>Contraseña:</label>
+          <div class="group rounded">
+            <input type="password" class="form-control" placeholder="Contraseña" required="required" formControlName="password">
+          </div>
+          <div class="col-sm-12">
+            <small class="text-danger" *ngIf="errorHandling('password','required')">
+              La contraseña es requerida
+            </small>
+          </div>
+        </div>
+        <button type="submit">Iniciar Sesión</button>
+        <button type="reset" class="btn btn-secondary mt-4" (click)="onReset()">
+          Cancelar
+        </button>
+      </form>
+    </div>
+  </div>
+</body>
