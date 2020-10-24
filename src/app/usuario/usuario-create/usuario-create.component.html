@@ -2,7 +2,7 @@
   <div class="container">
     <div class="login-form">
       <h2>Iniciar Sesión</h2>
-       <form  [formGroup]="formCreate" (ngSubmit)="submitForm()" novalidate>
+      <form [formGroup]="formCreate" (ngSubmit)="submitForm()" novalidate>
         <label class="sr-only" for="inlineFormInputName2">Name</label>
         <input type="text" class="form-control" id="inlineFormInputName2" placeholder="Jane Doe">
 
@@ -16,7 +16,8 @@
         <div class="form-group">
           <label>Identificación:</label>
           <div class="group rounded">
-            <input type="text" class="form-control" placeholder="Identificación" required="required" formControlName="id">
+            <input type="text" class="form-control" placeholder="Identificación" required="required"
+              formControlName="id">
           </div>
           <div class="col-sm-12">
             <small class="text-danger" *ngIf="errorHandling('email','required')">
@@ -42,7 +43,8 @@
         <div class="form-group">
           <label>Nombre completo:</label>
           <div class="group rounded">
-            <input type="text" class="form-control" placeholder="Nombre Completo" required="required" formControlName="nombre">
+            <input type="text" class="form-control" placeholder="Nombre Completo" required="required"
+              formControlName="nombre">
           </div>
           <div class="col-sm-12">
             <small class="text-danger" *ngIf="errorHandling('nombre','required')">
@@ -54,7 +56,8 @@
         <div class="form-group">
           <label>Telefono:</label>
           <div class="group rounded">
-            <input type="text" class="form-control" placeholder="Telefono" required="required" formControlName="telefono">
+            <input type="text" class="form-control" placeholder="Telefono" required="required"
+              formControlName="telefono">
           </div>
           <div class="col-sm-12">
             <small class="text-danger" *ngIf="errorHandling('telefono','required')">
@@ -66,7 +69,8 @@
         <div class="form-group">
           <label>Dirección:</label>
           <div class="group rounded">
-            <input type="text" class="form-control" placeholder="Dirección" required="required" formControlName="direccion">
+            <input type="text" class="form-control" placeholder="Dirección" required="required"
+              formControlName="direccion">
           </div>
           <div class="col-sm-12">
             <small class="text-danger" *ngIf="errorHandling('direccion','required')">

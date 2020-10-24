@@ -20,9 +20,8 @@ export class UsuarioLoginComponent implements OnInit {
   constructor(public fb: FormBuilder,
     private authService: AuthenticationService,
     private notificacion: NotificacionService,
-    private router:Router,
-    private route:ActivatedRoute)
-     {
+    private router: Router,
+    private route: ActivatedRoute) {
     this.reactiveForm();
   }
   //Definir form con reglas de validacion
@@ -37,43 +36,42 @@ export class UsuarioLoginComponent implements OnInit {
       password: ['', [Validators.required]]
     });
   }
-   ngOnInit(): void {
+  ngOnInit(): void {
     this.mensajes();
   }
 
-  mensajes(){
-   let login=true;
-   //Obtener parametros de la URL
-   this.route.queryParams.subscribe((params=>{
-     //Le indico que si no lo encuentra coloquelo como falso
-     console.log(params.mensaje);
-     login=params.mensaje || false;
-   }))
+  mensajes() {
+    let login = true;
+    //Obtener parametros de la URL
+    this.route.queryParams.subscribe((params => {
+      //Le indico que si no lo encuentra coloquelo como falso
+      console.log(params);
+      login = params.mensaje || false;
+    }))
 
-   if (login) {
-     console.log("Orale puto");
-    this.notificacion.mensaje('Usuario','Iniciado con exito','success');
-   }
+    if (login) {
+      this.notificacion.mensaje('Usuario', 'Cliente ingresado con exito', 'success');
+    }
   }
   onReset() {
     this.formulario.reset();
   }
 
-  submitForm(){
-    this.makeSubmit=true;
+  submitForm() {
+    this.makeSubmit = true;
     //Validacion
     if (this.formulario.invalid) {
       return;
-}
+    }
     this.authService
-    .loginUser(this.formulario.value)
-    .subscribe((respuesta:any)=>{
-        this.infoUsuario=respuesta;
+      .loginUser(this.formulario.value)
+      .subscribe((respuesta: any) => {
+        this.infoUsuario = respuesta;
         this.router.navigate(['/usuario/register'], {
           queryParams: { mensaje: 'true' },
         });
-    }
-    );
+      }
+      );
 
 
   }

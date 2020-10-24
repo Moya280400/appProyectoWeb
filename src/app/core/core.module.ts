@@ -6,14 +6,15 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
-declarations: [HeaderComponent, FooterComponent, PageNotFoundComponent],
-imports: [
-CommonModule,
-RouterModule,
-BrowserAnimationsModule, // modulo de animaciones requerido
-ToastrModule.forRoot(), // ToastrModule agregado
-],
-exports: [HeaderComponent, FooterComponent],
+  declarations: [HeaderComponent, FooterComponent, PageNotFoundComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    BrowserAnimationsModule, // modulo de animaciones requerido
+    ToastrModule.forRoot(), // ToastrModule agregado
+  ],
+  exports: [HeaderComponent, FooterComponent],
 })
-export class CoreModule {}
+export class CoreModule { }

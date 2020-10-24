@@ -46,6 +46,15 @@ p.register-p {
 
 }
 
+.register-form {
+  background: rgba(27, 27, 27, 0.412);
+  max-width: 450px;
+  margin-top: 10px;
+  padding: 2px;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
 .group {
   display: flex;
   background-color: #ffffff;
@@ -103,21 +112,21 @@ button:hover {
 }
 
 a {
-  color: #eee;
-  font-size: 14px;
-  text-decoration: none;
+  color: #ffffff;
+  font-size: 20px;
+
 }
 
 .forgot p {
   color: #ffffff;
   text-align: center;
   margin: 0px;
-font-size: 13px;
+  font-size: 20px;
 }
 
 .register {
-  color:  #ffffff;
-  font-size: 16px;
+  color: #ffffff;
+  font-size: 20px;
 }
 
 /*--footer--*/

@@ -32,10 +32,11 @@
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  color: white;
+  color: #282B34;
 }
 
 #button-2 a {
+  color: #282B34;
   position: relative;
   transition: all .45s ease-Out;
 }
@@ -89,3 +90,10 @@
   color: #2D3142;
 }
 
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 40px;
+
+  margin: 5px;
+}

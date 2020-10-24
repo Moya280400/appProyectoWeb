@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute,Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/share/authentication.service';
 import { NotificacionService } from 'src/app/share/notificacion.service';
 import { GenericService } from 'src/app/share/generic.service';
@@ -24,17 +24,17 @@ export class UsuarioCreateComponent implements OnInit {
     private gService: GenericService,
     private authService: AuthenticationService,
     private notificacion: NotificacionService,
-    private route:ActivatedRoute
+    private route: ActivatedRoute
   ) {
     this.reactiveForm();
   }
   //cambiar
   reactiveForm() {
     this.formCreate = this.fb.group({
-      email: ['', [Validators.required, Validators.minLength(9),Validators.maxLength(15)]],
+      email: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(15)]],
       direccion: ['', [Validators.required]],
       nombre: ['', [Validators.required]],
-      telefono: ['', [Validators.required, Validators.minLength(8),Validators.maxLength(8)]],
+      telefono: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
       password: ['', [Validators.required]],
     });
     //this.getRoles();
@@ -46,19 +46,21 @@ export class UsuarioCreateComponent implements OnInit {
     this.mensajes();
   }
 
-  mensajes(){
-   let login=true;
-   //Obtener parametros de la URL
-   this.route.queryParams.subscribe((params=>{
-     //Le indico que si no lo encuentra coloquelo como falso
-     console.log(params.mensaje);
-     login=params.mensaje || false;
-   }))
+  mensajes() {
+    let login = true;
+    //Obtener parametros de la URL
+    this.route.queryParams.subscribe((params => {
+      //Le indico que si no lo encuentra coloquelo como falso
+      console.log(params.mensaje);
+      login = params.mensaje || false;
+    }))
 
-   if (login) {
-     console.log("Orale puto");
-    this.notificacion.mensaje('Usuario','Iniciado con exito','success');
-   }
+    if (login) {
+      console.log("Orale puto");
+      this.notificacion.mensaje('Usuario', 'Iniciado con exito', 'success');
+    } else {
+      this.notificacion.mensaje('Usuario', 'Credenciales no validas', 'error');
+    }
   }
   submitForm() {
     this.makeSubmit = true;
@@ -76,12 +78,12 @@ export class UsuarioCreateComponent implements OnInit {
     this.formCreate.reset();
   }
   //getRoles() {
-    //this.gService
-      //.list('videojuego/rol')
-      //.pipe(takeUntil(this.destroy$))
-      //.subscribe((data: any) => {
-        //this.roles = data;
-      //});
+  //this.gService
+  //.list('videojuego/rol')
+  //.pipe(takeUntil(this.destroy$))
+  //.subscribe((data: any) => {
+  //this.roles = data;
+  //});
   //}
   public errorHandling = (control: string, error: string) => {
     return (
