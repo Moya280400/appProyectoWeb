@@ -6,6 +6,7 @@ import { GenericService } from 'src/app/share/generic.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-cliente-create',
   templateUrl: './cliente-create.component.html',
@@ -14,6 +15,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class ClienteCreateComponent implements OnInit {
   cliente: any;
   error: any;
+
+  Server_URL: any;
+
   formCreate: FormGroup;
   makeSubmit: boolean = false;
   destroy$: Subject<boolean> = new Subject<boolean>();
@@ -31,13 +35,12 @@ export class ClienteCreateComponent implements OnInit {
   reactiveForm() {
     this.formCreate = this.fb.group({
       id: ['', [Validators.required, Validators.minLength(9),Validators.maxLength(15)]],
-      email: ['', [Validators.required, Validators.email]],
+      correo: ['', [Validators.required, Validators.email]],
       direccion: ['', [Validators.required]],
       nombre: ['', [Validators.required]],
       telefono: ['', [Validators.required, Validators.minLength(8),Validators.maxLength(8)]],
-      password: ['', [Validators.required]],
+      estado: ['', [Validators.required]]
     });
-    //this.getRoles();
   }
 
 
@@ -58,12 +61,16 @@ export class ClienteCreateComponent implements OnInit {
     this.notificacion.mensaje('Cliente','Cliente agregado con exito','success');
    }
   }
+
   submitForm() {
     this.makeSubmit = true;
-    this.authService
-      .createUser(this.formCreate.value)
-      .subscribe((respuesta: any) => {
-        this.router.navigate(['/usuario/login'], {
+    var numeroString= this.formCreate.value['telefono'].toString();
+    this.formCreate.value['telefono']=numeroString;
+
+
+    this.Server_URL='cliente/create?';
+    this.gService.create(this.Server_URL, this.formCreate.value).subscribe((respuesta: any)=> {
+        this.router.navigate(['/'], {
           //Parametro es cualquiera
           queryParams: { register: 'true' },
         });

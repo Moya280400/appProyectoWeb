@@ -16,6 +16,9 @@ private currentUserSubject: BehaviorSubject<any>;
 public currentUser: Observable<any>;
 //Booleano para estado de usuario autenticado
 private authenticated = new BehaviorSubject<boolean>(false);
+
+private admin = new BehaviorSubject<boolean>(false);
+
 //Inyectar cliente HTTP para las solicitudes al API
 constructor(private http: HttpClient) {
 //Obtener los datos del usuario en localStorage, si existe
@@ -29,6 +32,8 @@ this.currentUser = this.currentUserSubject.asObservable();
 public get currentUserValue(): any {
 return this.currentUserSubject.value;
 }
+
+
 //Establecer booleano verificando si esta autenticado
 get isAuthenticated() {
 if (this.currentUserValue != null) {
@@ -39,10 +44,21 @@ return this.authenticated.asObservable();
 //Crear usuario
 createUser(user: any): Observable<any> {
 return this.http.post<any>(
-this.ServerUrl + 'api/proyectowb/',
+this.ServerUrl + 'auth/register?',
 user
 );
 }
+
+//Establecer boolena esAdmin
+get esAdmin() {
+  if(this.currentUserValue !=null){
+    if (this.currentUserValue.usuario['rol_id']==1) {
+      this.admin.next(true);
+    }
+  }
+  return this.admin.asObservable();
+  }
+
 //Login
 loginUser(user: any): Observable<any> {
   return this.http
@@ -54,6 +70,12 @@ loginUser(user: any): Observable<any> {
   localStorage.setItem('currentUser', JSON.stringify(user));
   this.authenticated.next(true);
   this.currentUserSubject.next(user);
+  if (this.currentUserValue.usuario['rol_id']==1) {
+    this.admin.next(true);
+  }
+  else{
+    this.admin.next(false);
+  }
   return user;
   })
   );
@@ -68,6 +90,7 @@ loginUser(user: any): Observable<any> {
   this.currentUserSubject.next(null);
   //Eliminarlo del observable del boleano si esta autenticado
   this.authenticated.next(false);
+  this.admin.next(false);
   return this.http.post<any>(this.ServerUrl + '/', {});
   }
   }

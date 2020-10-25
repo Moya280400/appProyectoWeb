@@ -31,16 +31,16 @@ export class UsuarioCreateComponent implements OnInit {
   //cambiar
   reactiveForm() {
     this.formCreate = this.fb.group({
-      email: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(15)]],
-      direccion: ['', [Validators.required]],
       nombre: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(15)]],
       telefono: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
       password: ['', [Validators.required]],
+      estado: ['', [Validators.required]],
+      rol_id: ['', [Validators.required]],
+
     });
-    //this.getRoles();
+    this.getRoles();
   }
-
-
 
   ngOnInit(): void {
     this.mensajes();
@@ -56,14 +56,16 @@ export class UsuarioCreateComponent implements OnInit {
     }))
 
     if (login) {
-      console.log("Orale puto");
       this.notificacion.mensaje('Usuario', 'Iniciado con exito', 'success');
-    } else {
-      this.notificacion.mensaje('Usuario', 'Credenciales no validas', 'error');
     }
   }
+
   submitForm() {
     this.makeSubmit = true;
+
+    var numeroString= this.formCreate.value['telefono'].toString();
+    this.formCreate.value['telefono']=numeroString;
+    console.log(this.formCreate.value);
     this.authService
       .createUser(this.formCreate.value)
       .subscribe((respuesta: any) => {
@@ -77,14 +79,16 @@ export class UsuarioCreateComponent implements OnInit {
   onReset() {
     this.formCreate.reset();
   }
-  //getRoles() {
-  //this.gService
-  //.list('videojuego/rol')
-  //.pipe(takeUntil(this.destroy$))
-  //.subscribe((data: any) => {
-  //this.roles = data;
-  //});
-  //}
+
+  getRoles() {
+    this.gService
+    .list('rol')
+   .pipe(takeUntil(this.destroy$))
+    .subscribe((data: any) => {
+   this.roles = data;
+  });
+  }
+
   public errorHandling = (control: string, error: string) => {
     return (
       this.formCreate.controls[control].hasError(error) &&

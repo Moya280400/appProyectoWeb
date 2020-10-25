@@ -10,23 +10,33 @@ import { AuthenticationService } from 'src/app/share/authentication.service';
 export class HeaderComponent implements OnInit {
   currentUser: any;
   isAutenticated: boolean;
+  esAdmin:boolean;
   constructor(
     private authService: AuthenticationService,
-    private router: Router
+    private router: Router,
+
   ) { }
 
   ngOnInit(): void {
     //Subscripción a la información del usuario actual
     this.authService.currentUser.subscribe((x) => (this.currentUser = x));
-
     //Subscripción al booleano que indica si esta autenticado
     this.authService.isAuthenticated.subscribe(
       (valor) => (this.isAutenticated = valor)
     );
-    console.log(this.currentUser.usuario.nombre.substring(0, 2));
+
+    this.authService.esAdmin.subscribe(
+      (valor) => (this.esAdmin = valor)
+    );
+
+    console.log(this.esAdmin)
+    //Mantenimiento Clientes Admin
+
   }
   logout() {
     this.authService.logout();
     this.router.navigate(['usuario/login']);
   }
+
+
 }

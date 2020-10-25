@@ -45,7 +45,6 @@ export class UsuarioLoginComponent implements OnInit {
     //Obtener parametros de la URL
     this.route.queryParams.subscribe((params => {
       //Le indico que si no lo encuentra coloquelo como falso
-      console.log(params);
       login = params.mensaje || false;
     }))
 
@@ -66,14 +65,12 @@ export class UsuarioLoginComponent implements OnInit {
     this.authService
       .loginUser(this.formulario.value)
       .subscribe((respuesta: any) => {
-        this.infoUsuario = respuesta;
-        this.router.navigate(['/usuario/register'], {
+        (this.infoUsuario = respuesta),
+        this.router.navigate(['/'], {
           queryParams: { mensaje: 'true' },
         });
       }
-      );
-
-
+    );
   }
 
   //Mensaje errores de form en Angular

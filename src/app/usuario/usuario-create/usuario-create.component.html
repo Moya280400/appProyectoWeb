@@ -1,30 +1,8 @@
 <body>
   <div class="container">
     <div class="login-form">
-      <h2>Iniciar Sesión</h2>
+      <h2>Crear Usuario</h2>
       <form [formGroup]="formCreate" (ngSubmit)="submitForm()" novalidate>
-        <label class="sr-only" for="inlineFormInputName2">Name</label>
-        <input type="text" class="form-control" id="inlineFormInputName2" placeholder="Jane Doe">
-
-        <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <div class="input-group-text">@</div>
-          </div>
-          <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
-        </div>
-        <div class="form-group">
-          <label>Identificación:</label>
-          <div class="group rounded">
-            <input type="text" class="form-control" placeholder="Identificación" required="required"
-              formControlName="id">
-          </div>
-          <div class="col-sm-12">
-            <small class="text-danger" *ngIf="errorHandling('email','required')">
-              La identificación es requerida
-            </small>
-          </div>
-        </div>
         <div class="form-group">
           <label>Correo:</label>
           <div class="group rounded">
@@ -36,6 +14,17 @@
             </small>
             <small class="text-danger" *ngIf="errorHandling('email','email')">
               Verifique el formato del email
+            </small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Contraseña</label>
+          <div class="group rounded">
+            <input type="password" class="form-control" placeholder="Password" formControlName="password" />
+          </div>
+          <div class="col-sm-4">
+            <small *ngIf="errorHandling('password', 'required')" class="text-danger">
+              El password es requerido
             </small>
           </div>
         </div>
@@ -56,7 +45,7 @@
         <div class="form-group">
           <label>Telefono:</label>
           <div class="group rounded">
-            <input type="text" class="form-control" placeholder="Telefono" required="required"
+            <input type="number" class="form-control" placeholder="Telefono" required="required"
               formControlName="telefono">
           </div>
           <div class="col-sm-12">
@@ -65,20 +54,25 @@
             </small>
           </div>
         </div>
-        <!--Direccion-->
+
+        <!--estado -->
+        <input type="hidden" value="1" formControlName="estado">
+
         <div class="form-group">
-          <label>Dirección:</label>
-          <div class="group rounded">
-            <input type="text" class="form-control" placeholder="Dirección" required="required"
-              formControlName="direccion">
-          </div>
-          <div class="col-sm-12">
-            <small class="text-danger" *ngIf="errorHandling('direccion','required')">
-              La dirección es requerida
+          <label for="roles">Rol</label>
+          <select class="form-control" formControlName="rol_id">
+            <option *ngFor="let rol of roles" [value]="rol.id">
+              {{rol.descripcion}}
+            </option>
+          </select>
+          <div class="col-sm-4">
+            <small *ngIf="errorHandling('rol_id', 'required')" class="text-danger">
+              El rol es requerido
             </small>
           </div>
         </div>
-        <button type="submit">Iniciar Sesión</button>
+
+        <button type="submit">Crear Usuario</button>
         <button type="reset" class="btn btn-secondary mt-4" (click)="onReset()">
           Cancelar
         </button>
