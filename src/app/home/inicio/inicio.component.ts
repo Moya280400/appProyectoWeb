@@ -6,7 +6,7 @@ import { NotificacionService } from 'src/app/share/notificacion.service';
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.component.html',
-  styleUrls: ['./inicio.component.css','./ribbonInicio.component.css']
+  styleUrls: ['./inicio.component.css', './ribbonInicio.component.css']
 })
 export class InicioComponent implements OnInit {
 

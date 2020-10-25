@@ -42,4 +42,4 @@ import { HttpErrorInterceptorService } from './share/http-error-interceptor.serv
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

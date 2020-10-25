@@ -70,7 +70,7 @@ export class UsuarioLoginComponent implements OnInit {
           queryParams: { login: 'true' },
         });
       }
-    );
+      );
   }
 
   //Mensaje errores de form en Angular
