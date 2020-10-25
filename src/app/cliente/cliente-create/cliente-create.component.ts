@@ -72,7 +72,7 @@ export class ClienteCreateComponent implements OnInit {
     this.gService.create(this.Server_URL, this.formCreate.value).subscribe((respuesta: any)=> {
         this.router.navigate(['/'], {
           //Parametro es cualquiera
-          queryParams: { register: 'true' },
+          queryParams: { crear: 'true' },
         });
       });
   }

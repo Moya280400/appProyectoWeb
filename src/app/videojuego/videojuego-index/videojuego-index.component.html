@@ -1,0 +1,12 @@
+<div class="container">
+  <!-- /.row -->
+  <div class="row mt-n5">
+    <!-- Lista videojuegos -->
+    <div class="col-sm-6 col-md-3" id="juego-container" *ngFor="let item of datos">
+      <a title="{{item.nombre}}" href="#"><img
+          src="{{item.pathCover}}" class="img-fluid rounded" alt="img"></a>
+      <p class="text-center">{{item.nombre}}</p>
+    </div>
+  </div>
+  <!-- /.row -->
+</div>

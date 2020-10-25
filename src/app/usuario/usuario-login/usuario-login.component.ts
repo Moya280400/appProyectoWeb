@@ -67,7 +67,7 @@ export class UsuarioLoginComponent implements OnInit {
       .subscribe((respuesta: any) => {
         (this.infoUsuario = respuesta),
         this.router.navigate(['/'], {
-          queryParams: { mensaje: 'true' },
+          queryParams: { login: 'true' },
         });
       }
     );
