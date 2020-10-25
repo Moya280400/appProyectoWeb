@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute,Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/share/authentication.service';
 import { NotificacionService } from 'src/app/share/notificacion.service';
 import { GenericService } from 'src/app/share/generic.service';
@@ -27,18 +27,18 @@ export class ClienteCreateComponent implements OnInit {
     private gService: GenericService,
     private authService: AuthenticationService,
     private notificacion: NotificacionService,
-    private route:ActivatedRoute
+    private route: ActivatedRoute
   ) {
     this.reactiveForm();
   }
   //cambiar
   reactiveForm() {
     this.formCreate = this.fb.group({
-      id: ['', [Validators.required, Validators.minLength(9),Validators.maxLength(15)]],
+      id: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(15)]],
       correo: ['', [Validators.required, Validators.email]],
       direccion: ['', [Validators.required]],
       nombre: ['', [Validators.required]],
-      telefono: ['', [Validators.required, Validators.minLength(8),Validators.maxLength(8)]],
+      telefono: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
       estado: ['', [Validators.required]]
     });
   }
@@ -48,33 +48,33 @@ export class ClienteCreateComponent implements OnInit {
     this.mensajes();
   }
 
-  mensajes(){
-   let login=true;
-   //Obtener parametros de la URL
-   this.route.queryParams.subscribe((params=>{
-     //Le indico que si no lo encuentra coloquelo como falso
-     console.log(params.mensaje);
-     login=params.mensaje || false;
-   }))
+  mensajes() {
+    let login = true;
+    //Obtener parametros de la URL
+    this.route.queryParams.subscribe((params => {
+      //Le indico que si no lo encuentra coloquelo como falso
+      console.log(params.mensaje);
+      login = params.mensaje || false;
+    }))
 
-   if (login) {
-    this.notificacion.mensaje('Cliente','Cliente agregado con exito','success');
-   }
+    if (login) {
+      this.notificacion.mensaje('Cliente', 'Cliente agregado con exito', 'success');
+    }
   }
 
   submitForm() {
     this.makeSubmit = true;
-    var numeroString= this.formCreate.value['telefono'].toString();
-    this.formCreate.value['telefono']=numeroString;
+    var numeroString = this.formCreate.value['telefono'].toString();
+    this.formCreate.value['telefono'] = numeroString;
 
 
-    this.Server_URL='cliente/create?';
-    this.gService.create(this.Server_URL, this.formCreate.value).subscribe((respuesta: any)=> {
-        this.router.navigate(['/'], {
-          //Parametro es cualquiera
-          queryParams: { register: 'true' },
-        });
+    this.Server_URL = 'cliente/create?';
+    this.gService.create(this.Server_URL, this.formCreate.value).subscribe((respuesta: any) => {
+      this.router.navigate(['/'], {
+        //Parametro es cualquiera
+        queryParams: { crear: 'true' },
       });
+    });
   }
   onReset() {
     this.formCreate.reset();

@@ -66,11 +66,11 @@ export class UsuarioLoginComponent implements OnInit {
       .loginUser(this.formulario.value)
       .subscribe((respuesta: any) => {
         (this.infoUsuario = respuesta),
-        this.router.navigate(['/'], {
-          queryParams: { mensaje: 'true' },
-        });
+          this.router.navigate(['/'], {
+            queryParams: { login: 'true' },
+          });
       }
-    );
+      );
   }
 
   //Mensaje errores de form en Angular

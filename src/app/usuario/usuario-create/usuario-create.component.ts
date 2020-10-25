@@ -63,8 +63,8 @@ export class UsuarioCreateComponent implements OnInit {
   submitForm() {
     this.makeSubmit = true;
 
-    var numeroString= this.formCreate.value['telefono'].toString();
-    this.formCreate.value['telefono']=numeroString;
+    var numeroString = this.formCreate.value['telefono'].toString();
+    this.formCreate.value['telefono'] = numeroString;
     console.log(this.formCreate.value);
     this.authService
       .createUser(this.formCreate.value)
@@ -72,7 +72,7 @@ export class UsuarioCreateComponent implements OnInit {
         this.usuario = respuesta;
         this.router.navigate(['/usuario/login'], {
           //Parametro es cualquiera
-          queryParams: { register: 'true' },
+          queryParams: { crear: 'true' },
         });
       });
   }
@@ -82,11 +82,11 @@ export class UsuarioCreateComponent implements OnInit {
 
   getRoles() {
     this.gService
-    .list('rol')
-   .pipe(takeUntil(this.destroy$))
-    .subscribe((data: any) => {
-   this.roles = data;
-  });
+      .list('rol')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        this.roles = data;
+      });
   }
 
   public errorHandling = (control: string, error: string) => {
