@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { VideojuegoRoutingModule } from './videojuego-routing.module';
 import { VideojuegoIndexComponent } from './videojuego-index/videojuego-index.component';
+import { VideojuegoListComponent } from './videojuego-list/videojuego-list.component';
 
 
 @NgModule({
-  declarations: [VideojuegoIndexComponent],
+  declarations: [VideojuegoIndexComponent, VideojuegoListComponent],
   imports: [
     CommonModule,
     VideojuegoRoutingModule

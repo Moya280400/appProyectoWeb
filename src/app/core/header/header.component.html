@@ -12,7 +12,7 @@
   <!-- NavBar opciones-->
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav ml-auto" id="navbar-options">
-      <div id="button-2">
+      <div id="button-2" *ngIf="!(isAutenticated)">
         <div id="underline" class="rounded text-light"></div>
         <a class="nav-link text-light" id="button" routerLink="/home/acercade" routerLinkActive="active"> <i
             class="fas fa-info-circle fa-lg"></i> Acerca de nosotros</a>
@@ -29,24 +29,19 @@
       <div *ngIf="esAdmin">
       <ul class="navbar-nav ml-auto ml-md-0">
         <li class="nav-item dropdown" ngbDropdown placement="bottom-right" display="dynamic">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-            aria-expanded="false">
-            <span>
-              <i class="text-light far fa-user fa-lg"></i>
-              <i class="text-light"> Usuarios</i>
-            </span>
-          </a>
-          <div class="dropdown-menu dropdown-menu-right">
-            <div class="dropdown-item">
-              <div id="button-2">
-                <div id="underline" class="rounded"></div>
-                <a class="dropdown-item" id="button" routerLink="/usuario/register"><i class="fas fa-plus-circle fa-lg"></i> Añadir Usuarios</a>
+              <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button"           data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <i class=" text-light fas fa-tools fa-lg"></i> Mantenimientos
+               </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div id="button-2">
+                <div id="underline2" class="rounded"></div>
+                <a class="dropdown-item" id="button" routerLink="/videojuego/list"><i class="fas fa-gamepad fa-lg mr-1"></i> Videojuegos</a>
               </div>
-            </div>
           </div>
         </li>
-      </ul>
-    </div>
+        </ul>
+      </div>
 
       <!-- Login/Logout -->
       <ul class="navbar-nav ml-auto ml-md-0">
@@ -66,13 +61,13 @@
             <div class="dropdown-divider"></div>
 
             <div id="button-2">
-              <div id="underline" class="rounded"></div>
+              <div id="underline2" class="rounded"></div>
               <a class="nav-link" id="button" [routerLink]="['usuario/login']" *ngIf="!(isAutenticated)"
                 routerLinkActive="active">
                 <i class="fas fa-key fa-lg"></i> Loguearse</a>
             </div>
             <div id="button-2">
-              <div id="underline" class="rounded"></div>
+              <div id="underline2" class="rounded"></div>
               <a class="dropdown-item" (click)="logout()" id="button" *ngIf="isAutenticated"  routerLinkActive="active"><i
                   class="fas fa-sign-out-alt fa-lg"></i>
                 Salir</a>
@@ -83,8 +78,6 @@
         </li>
       </ul>
     </ul>
-
-
   </div>
   <!-- NavBar opciones-->
 
