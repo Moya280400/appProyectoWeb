@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { PedidoRoutingModule } from './pedido-routing.module';
 import { PedidoListComponent } from './pedido-list/pedido-list.component';
+import { PedidoShowComponent } from './pedido-show/pedido-show.component';
 
 
 @NgModule({
-  declarations: [PedidoListComponent],
+  declarations: [PedidoListComponent, PedidoShowComponent],
   imports: [
     CommonModule,
     PedidoRoutingModule
