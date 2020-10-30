@@ -1,0 +1,74 @@
+<div class="container" *ngIf="datos?.id">
+  <h2>{{datos.nombre}}</h2>
+
+  <div class="main row">
+    <article class="col-md-6">
+      <img id="banner" src="{{datos.pathCover}}" alt="{{datos.nombre}}" class="img-fluid rounded">
+    </article>
+    <article class="col-md-6" id="Imagenes">
+      <div class="Imagenes">
+        <!--Video-->
+        <div class="embed-responsive embed-responsive-16by9 img-fluid rounded" id="Video">
+          <iframe class="embed-responsive-item" [src]="video" allowfullscreen></iframe>
+        </div>
+
+        <!--Inicio Carrucel-->
+        <div class="ca" id="Carrusel">
+          <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+            <ol class="carousel-indicators"  >
+                <li data-target="#myCarousel" *ngFor="let data of datos.imagenes_videojuego; let i=index" attr.data-slide-to="{{i}}" [class]="(i === 0) ? 'active' : ''" ></li>
+            </ol>
+            <div class="carousel-inner">
+              <div *ngFor="let data of datos.imagenes_videojuego; let i=index" [class]="(i === 0)? 'carousel-item active' : 'carousel-item'">
+                <img class="img-fluid rounded" src="{{ data.pathImagen }}" alt="{{ data.id }}">
+              </div>
+            </div>
+
+            <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="col-md-12">
+      <div class="info">
+        <ul class="Desarrollador" style="padding-top: 5px;">
+          <li>
+            <h6>Fecha de lanzamiento</h6>
+            <p>{{datos.fechaSalida}}</p>
+          </li>
+          <li>
+            <h6>Desarrollador</h6>
+            <p>{{datos.desarrollador.descripcion}}</p>
+          </li>
+          <li>
+            <h6>Distribuidor</h6>
+            <p>{{datos.distribuidor.descripcion}}</p>
+          </li>
+        </ul>
+
+        <h3 style="padding-top: 5px;">Descripción</h3>
+        <span style="white-space: pre-line;" class="text-dark" id="descripcion">{{datos.descripcion}}</span>
+
+        <h3 style="padding-top: 5px;">Géneros</h3>
+        <ul class="Genero">
+          <li *ngFor="let item of datos.generos">
+            <span>{{item.descripcion}}</span>
+          </li>
+        </ul>
+
+        <h3 style="padding-top: 5px;">Plataformas</h3>
+        <ul class="Genero">
+          <li *ngFor="let item of datos.plataformas">
+            <span>{{item.descripcion}}</span>
+          </li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</div>

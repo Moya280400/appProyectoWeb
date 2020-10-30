@@ -1,0 +1,65 @@
+<div class="container">
+  <h2>Detalle</h2>
+  <div *ngIf="datos?.id">
+    <h4>Repartidor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+      <dt>
+        Identificación
+      </dt>
+      <dd>
+        {{datos.id}}
+      </dd>
+
+    </dl>
+    <dl class="dl-horizontal">
+      <dt>
+        Nombre repartidor
+      </dt>
+      <dd>
+        {{datos.nombre}}
+      </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+      <dt>
+        Correo
+      </dt>
+      <dd>
+        {{datos.correo}}
+      </dd>
+
+    </dl>
+    <dl class="dl-horizontal">
+      <dt>
+        Telefono
+      </dt>
+      <dd>
+        {{datos.telefono}}
+      </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+      <dt>
+        Placa vehiculo
+      </dt>
+      <dd>
+        {{datos.vehiculo_id}}
+      </dd>
+
+    </dl>
+    <dl class="dl-horizontal">
+      <dt>
+        Estado repartidor
+      </dt>
+      <dd>
+        {{datos.estado}}
+      </dd>
+    </dl>
+
+  </div>
+  <p>
+    <!--  @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning " }) |-->
+    <!--@Html.ActionLink("Volver a la lista", "Index", new { area = "" }, new { @class = "btn btn-secondary" })-->
+  </p>
+</div>

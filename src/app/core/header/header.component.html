@@ -25,21 +25,34 @@
           <i class="fas fa-plus-circle fa-lg"></i> Clientes</a>
       </div>
 
+      <div id="button-2" *ngIf="esAdmin">
+        <div id="underline" class="rounded text-light"></div>
+        <a class="nav-link text-light" id="button" routerLink="/pedido"><i
+            class="fas fa-box fa-lg mr-1"></i> Pedidos</a>
+      </div>
+
       <!-- Usuarios/ -->
       <div *ngIf="esAdmin">
-      <ul class="navbar-nav ml-auto ml-md-0">
-        <li class="nav-item dropdown" ngbDropdown placement="bottom-right" display="dynamic">
-              <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button"           data-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false">
-                  <i class=" text-light fas fa-tools fa-lg"></i> Mantenimientos
-               </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <div id="button-2">
+        <ul class="navbar-nav ml-auto ml-md-0">
+          <li class="nav-item dropdown" ngbDropdown placement="bottom-right" display="dynamic">
+            <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class=" text-light fas fa-tools fa-lg"></i> Mantenimientos
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <div id="button-2">
                 <div id="underline2" class="rounded"></div>
-                <a class="dropdown-item" id="button" routerLink="/videojuego/list"><i class="fas fa-gamepad fa-lg mr-1"></i> Videojuegos</a>
+                <a class="dropdown-item" id="button" routerLink="/videojuego/list"><i
+                    class="fas fa-gamepad fa-lg mr-1"></i> Videojuegos</a>
               </div>
-          </div>
-        </li>
+
+              <div id="button-2">
+                <div id="underline2" class="rounded"></div>
+                <a class="dropdown-item" id="button" routerLink="/repartidor"><i
+                    class="fas fa-shipping-fast fa-lg mr-1"></i> Repartidores</a>
+              </div>
+            </div>
+          </li>
         </ul>
       </div>
 
@@ -68,8 +81,8 @@
             </div>
             <div id="button-2">
               <div id="underline2" class="rounded"></div>
-              <a class="dropdown-item" (click)="logout()" id="button" *ngIf="isAutenticated"  routerLinkActive="active"><i
-                  class="fas fa-sign-out-alt fa-lg"></i>
+              <a class="dropdown-item" (click)="logout()" id="button" *ngIf="isAutenticated"
+                routerLinkActive="active"><i class="fas fa-sign-out-alt fa-lg"></i>
                 Salir</a>
 
             </div>

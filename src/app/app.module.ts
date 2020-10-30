@@ -32,12 +32,13 @@ import { RepartidorModule } from './repartidor/repartidor.module';
     ClienteModule,
     VideojuegoModule,
 
-    //Va de ultimo gestor de rutas principal
-    AppRoutingModule,
-
     PedidoModule,
 
     RepartidorModule,
+
+    //Va de ultimo gestor de rutas principal
+    AppRoutingModule,
+
   ],
    providers: [
     {

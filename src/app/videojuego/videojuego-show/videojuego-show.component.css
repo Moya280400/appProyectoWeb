@@ -1,0 +1,262 @@
+.container {
+  padding-top: 4.5rem;
+  overflow: hidden;
+  color: transparent;
+}
+
+.parallax {
+  background: url(https://wallpapershome.com/images/wallpapers/the-witcher-3-wild-hunt-3840x2160-4k-5k-10954.jpg);
+  min-height: 100%;
+  position: relative;
+  opacity: .75;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+
+#heading {
+  position: absolute;
+  color: #fff;
+  width: 100%;
+  top: 25%;
+  text-transform: uppercase;
+  letter-spacing: 8px;
+  text-shadow: 0 0 10px #000;
+}
+
+#heading img{
+  left: 25%;
+  width: 50%;
+}
+
+.detalles {
+  right: 0%;
+  margin: 0%;
+  padding: 0%;
+  list-style: none;
+}
+
+ul li{
+  color: black;
+}
+
+.detalles li {
+  display: inline-block;
+  padding: 5px;
+  color: black;
+}
+
+.icono {
+  width: 28px;
+  height: 37px;
+}
+
+#Video {
+  padding-bottom: 1rem;
+}
+
+#banner{
+  max-height: 625px;
+  max-width: 500px;
+  height: 625px;
+  width: 500px;
+}
+
+#descripcion{
+color: black;
+}
+
+#Carrusel {
+  padding-top: 1rem;
+}
+
+#Carrusel img, #Video{
+  max-width: 540px;
+  max-height: 304px;
+  width: 540px;
+  height: 304px;
+}
+
+.Genero {
+  right: 0%;
+  margin: 0%;
+  padding: 0%;
+  list-style: none;
+}
+
+.Genero li {
+  display: inline-block;
+  padding: 5px;
+  padding-top: 0;
+  color: black;
+}
+
+.Desarrollador {
+  right: 0%;
+  margin: 0%;
+  padding: 0%;
+  list-style: none;
+}
+
+.Desarrollador li {
+  display: inline-block;
+  padding: 5px;
+  padding-top: 7px;
+  color: black;
+  padding-right: 7px;
+}
+
+.carousel-item {
+  width: 445;
+  height: 250.36;
+}
+
+.video-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.info, #titulo{
+    text-align: justify;
+}
+
+.info p,h1,h2,h3,h4,h5,h6,li p, .Genero {
+  color: black;
+}
+@media only screen and (max-width: 1199px) {
+  #banner{
+    max-height: 516px;
+    max-width: 420px;
+    height: 516px;
+    width: 420px;
+  }
+  #Carrusel img, #Video{
+    max-width: 450px;
+    max-height: 250px;
+    width: 450px;
+    height: 250px;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  #banner{
+    max-height: 386px;
+    max-width: 315px;
+    height: 386px;
+    width: 315px;
+  }
+  #Carrusel img, #Video{
+    max-width: 330px;
+    max-height: 185px;
+    width: 330px;
+    height: 185px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  #Imagenes {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  #banner{
+    max-height: unset;
+    max-width: 100%;
+    height: unset;
+    width: 100%;
+  }
+  #Carrusel img, #Video{
+    max-width: 100%;
+    max-height: 285px;
+    width: 100%;
+    height: 285px;
+  }
+}
+@media only screen and (max-width: 760px) {
+  .menu-button {
+    display: block;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+  }
+
+  .navigation {
+    width: 100%;
+    padding: 0%;
+  }
+
+  .navigation ul {
+    float: none;
+    display: none;
+  }
+
+  .navigation ul.show {
+    display: block;
+  }
+  .navigation ul li {
+    display: block;
+  }
+
+  .navigation ul li a {
+    display: inline-block;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    line-height: normal;
+    font-size: 20px;
+    font-weight: bold;
+    -webkit-transition: all 500ms ease;
+    -o-transition: all 500ms ease;
+    transition: all 500ms ease;
+  }
+
+  .Imagenes {
+    padding-top: 0;
+  }
+  .informacion {
+    padding-top: 1rem;
+  }
+  #content {
+    margin: 0 auto 0 auto;
+  }
+
+  .detalles li {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 535px) {
+  #banner{
+    max-height: unset;
+    max-width: 100%;
+    height: unset;
+    width: 100%;
+  }
+  #Carrusel img, #Video{
+    max-width: 100%;
+    max-height: unset;
+    width: 100%;
+    height: unset;
+  }
+
+  .table{
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heading {
+    font-size: 250%;
+  }
+  .heading-sm {
+    font-size: 180%;
+  }
+  .two-col {
+    width: 100%;
+    padding: 0;
+    text-align: center;
+  }
+}

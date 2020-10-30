@@ -3,7 +3,7 @@
   <div class="row mt-n5">
     <!-- Lista videojuegos -->
     <div class="col-sm-6 col-md-3" id="juego-container" *ngFor="let item of datos">
-      <a title="{{item.nombre}}" href="#"><img
+      <a title="{{item.nombre}}" [routerLink]="['/videojuego/',item.id]" routerLinkActive="active"><img
           src="{{item.pathCover}}" class="img-fluid rounded" alt="img"></a>
       <p class="text-center"><strong>{{item.nombre}}</strong><span><hr class="mb-n3 bg-light" style="margin-top: 7px;"> <br >Precio: ₡ <strong>{{item.precio}}</strong></span></p>
 

@@ -1,1 +1,24 @@
-<p>pedido-list works!</p>
+<div class="container">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Tipo Envio</th>
+        <th scope="col">Subtotal</th>
+        <th scope="col">Total</th>
+        <th scope="col"> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of datos">
+        <th scope="row" >{{item.id}}</th>
+        <td>{{item.fecha}}</td>
+        <td>{{item.tipo_entrega.descripcion}}</td>
+        <td>{{item.subtotal}}</td>
+        <td>{{item.total}}</td>
+        <td><button type="button" class="btn btn-primary">Detalle</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,1 +1,22 @@
-<p>repartidor-list works!</p>
+<div class="container">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Cédula</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Correo</th>
+        <th scope="col">Telefono</th>
+        <th scope="col"> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of datos">
+        <th scope="row" >{{item.id}}</th>
+        <td>{{item.nombre}}</td>
+        <td>{{item.correo}}</td>
+        <td>{{item.telefono}}</td>
+        <td> <button type="button" [routerLink]="['/repartidor/',item.id]" class="btn btn-primary">Detalle</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
