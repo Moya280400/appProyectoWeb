@@ -4,18 +4,6 @@
   color: transparent;
 }
 
-.parallax {
-  background: url(https://wallpapershome.com/images/wallpapers/the-witcher-3-wild-hunt-3840x2160-4k-5k-10954.jpg);
-  min-height: 100%;
-  position: relative;
-  opacity: .75;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
-
-
 #heading {
   position: absolute;
   color: #fff;
@@ -49,8 +37,8 @@ ul li{
 }
 
 .icono {
-  width: 28px;
-  height: 37px;
+  width: 40px;
+  height: 40px;
 }
 
 #Video {

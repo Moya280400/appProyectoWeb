@@ -31,7 +31,10 @@ export class RepartidorShowComponent implements OnInit {
   this.gService.get('repartidor',id)
   .pipe(takeUntil(this.destroy$))
   .subscribe((data:any)=>{
-  this.datos=data;
+    let estadoVar= data.estado? 'Activo':'Inactivo';
+    data.estado=estadoVar;
+
+    this.datos=data;
   })
   }
  ngOnDestroy() {

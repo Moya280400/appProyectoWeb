@@ -23,6 +23,10 @@ export class VideojuegoListComponent implements OnInit {
 
   listaVideojuegos(){
     this.gService.list('videojuego/').pipe(takeUntil(this.destroy$)).subscribe((data:any)=>{
+      for (const item of data) {
+       let estadoVar= item.estado? 'Activo':'Inactivo';
+       item.estado=estadoVar;
+      }
       console.log(data);
       this.datos=data;
     });

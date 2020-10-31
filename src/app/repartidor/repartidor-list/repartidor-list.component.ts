@@ -25,7 +25,7 @@ export class RepartidorListComponent implements OnInit {
 
   listaRepartidores(){
     this.gService.list('repartidor/').pipe(takeUntil(this.destroy$)).subscribe((data:any)=>{
-      console.log(data);
+
       this.datos=data;
     });
   }

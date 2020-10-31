@@ -1,5 +1,7 @@
+
+
 <div class="container" *ngIf="datos?.id">
-  <h2>{{datos.nombre}}</h2>
+  <h2 class="text-center">{{datos.nombre}}</h2>
 
   <div class="main row">
     <article class="col-md-6">
@@ -58,14 +60,16 @@
         <h3 style="padding-top: 5px;">Géneros</h3>
         <ul class="Genero">
           <li *ngFor="let item of datos.generos">
-            <span>{{item.descripcion}}</span>
+            <img class="icono" src="{{item.pathIcono}}" alt="">
+            <span>       {{item.descripcion}}</span>
           </li>
         </ul>
 
         <h3 style="padding-top: 5px;">Plataformas</h3>
         <ul class="Genero">
           <li *ngFor="let item of datos.plataformas">
-            <span>{{item.descripcion}}</span>
+            <img class="icono" src="{{item.pathIcono}}" alt="">
+            <span>  {{item.descripcion}}</span>
           </li>
         </ul>
       </div>

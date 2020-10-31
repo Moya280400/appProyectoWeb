@@ -1,89 +1,109 @@
 <div class="container">
-  <h2>Detalle</h2>
-  <div *ngIf="datos?.id">
-    <h4>Pedido</h4>
-    <hr />
-    <dl class="dl-horizontal">
-      <dt>
-        Identificación
-      </dt>
-      <dd>
-        {{datos.id}}
-      </dd>
+  <div class="row">
+    <article class="col-md-6">
+      <h2>Detalle</h2>
+      <div *ngIf="datos?.id">
+        <h4>Pedido</h4>
+        <dl class="dl-horizontal">
+          <span>
+            <strong># Pedido: </strong> {{datos.id}}
+          </span>
+          <dd>
 
-    </dl>
-    <dl class="dl-horizontal">
-      <dt>
-        Fecha Pedido
-      </dt>
-      <dd>
-        {{datos.fecha}}
-      </dd>
-    </dl>
+          </dd>
+        </dl>
+        <dl class="dl-horizontal">
+          <dt>
+            Fecha Pedido
+          </dt>
+          <dd>
+            {{datos.fecha}}
+          </dd>
+        </dl>
 
-    <dl class="dl-horizontal">
-      <dt>
-        Dirección Entrega
-      </dt>
-      <dd>
-        {{datos.direccion_entrega}}
-      </dd>
+        <dl class="dl-horizontal">
+          <dt>
+            Dirección Entrega
+          </dt>
+          <dd>
+            {{datos.direccion_entrega}}
+          </dd>
+        </dl>
+        <dl class="dl-horizontal">
+          <dt>
+            Estado
+          </dt>
+          <dd>
+            {{datos.estado}}
+          </dd>
+        </dl>
+        <dl class="dl-horizontal">
+          <dt>
+            Tipo Entrega
+          </dt>
+          <dd>
+            {{datos.tipo_entrega.descripcion}}
+          </dd>
+        </dl>
+      </div>
 
-    </dl>
-    <hr />
-    <h4>Linea detalle pedido</h4>
-    <!-- Tabla -->
-    <table class="table">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">Videojuego</th>
-          <th scope="col">Cantidad</th>
-          <th scope="col">Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of datos.pedido__videojuegos">
-          <th scope="row">{{item.videojuego_id}}</th>
-          <td>{{item.cantidad}}</td>
-          <td>{{item.total}}</td>
-        </tr>
-      </tbody>
-    </table>
-    <hr />
-    <dl class="dl-horizontal">
-      <dt>
-        Subtotal pedido
-      </dt>
-      <dd>
-        {{datos.subtotal}}
-      </dd>
-    </dl>
+      <dl class="dl-horizontal">
+        <dt>
+          Subtotal pedido
+        </dt>
+        <dd>
+          {{datos.subtotal}}
+        </dd>
+      </dl>
 
-    <dl class="dl-horizontal">
-      <dt>
-        Costo Envio del pedido
-      </dt>
-      <dd>
-        {{datos.costo_envio}}
-      </dd>
+      <dl class="dl-horizontal">
+        <dt>
+          Costo Envio del pedido
+        </dt>
+        <dd>
+          {{datos.costo_envio}}
+        </dd>
 
-    </dl>
-    <dl class="dl-horizontal">
-      <dt>
-        Impuesto
-      </dt>
-      <dd>
-        {{datos.impuesto}}
-      </dd>
-    </dl>
-    <dl class="dl-horizontal">
-      <dt>
-        Total
-      </dt>
-      <dd>
-        {{datos.total}}
-      </dd>
-    </dl>
+      </dl>
+      <dl class="dl-horizontal">
+        <dt>
+          Impuesto
+        </dt>
+        <dd>
+          {{datos.impuesto}}
+        </dd>
+      </dl>
+      <dl class="dl-horizontal">
+        <dt>
+          Total
+        </dt>
+        <dd>
+          {{datos.total}}
+        </dd>
+      </dl>
+    </article>
 
+    <article class="col-md-6">
+      <h4>Linea detalle pedido</h4>
+      <!-- Tabla -->
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Codigo</th>
+            <th scope="col">Videojuego</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of datos.pedido__videojuegos">
+            <th scope="row">{{item.videojuego_id}}</th>
+            <th>{{item.videojuego.nombre}}</th>
+            <td>{{item.cantidad}}</td>
+            <td>{{item.total}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
   </div>
 </div>

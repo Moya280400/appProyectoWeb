@@ -31,6 +31,9 @@ export class PedidoShowComponent implements OnInit {
     this.gService.get('pedido', id)
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
+        let estadoVar= data.estado? 'Completado':'Facturado';
+        data.estado=estadoVar;
+        console.log(data.tipo_entrega.descripcion);
         this.datos = data;
       })
   }

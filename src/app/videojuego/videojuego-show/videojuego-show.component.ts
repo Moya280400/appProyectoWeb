@@ -9,7 +9,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-videojuego-show',
   templateUrl: './videojuego-show.component.html',
-  styleUrls: ['./videojuego-show.component.css']
+  styleUrls: ['./videojuego-show.component.css', './videojuego-show-carouselparallax.component.css']
 })
 export class VideojuegoShowComponent implements OnInit {
   datos: any;
@@ -33,9 +33,13 @@ export class VideojuegoShowComponent implements OnInit {
   this.gService.get('videojuego',id)
   .pipe(takeUntil(this.destroy$))
   .subscribe((data:any)=>{
+
+  let estadoVar= data.estado? 'Activo':'Inactivo';
+  data.estado=estadoVar;
+
   this.datos=data;
+
   this.video = this.sanitizer.bypassSecurityTrustResourceUrl(this.datos.pathVideo);
-  console.log(this.video);
   })
   }
  ngOnDestroy() {
@@ -43,4 +47,5 @@ export class VideojuegoShowComponent implements OnInit {
     // Desinscribirse
     this.destroy$.unsubscribe();
   }
+
 }
