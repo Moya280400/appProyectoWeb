@@ -52,16 +52,16 @@
           Subtotal pedido
         </dt>
         <dd>
-          {{datos.subtotal}}
+          ₡ {{datos.subtotal}}
         </dd>
       </dl>
 
       <dl class="dl-horizontal">
         <dt>
-          Costo Envio del pedido
+         Costo Envio del pedido
         </dt>
         <dd>
-          {{datos.costo_envio}}
+          ₡ {{datos.costo_envio}}
         </dd>
 
       </dl>
@@ -70,7 +70,7 @@
           Impuesto
         </dt>
         <dd>
-          {{datos.impuesto}}
+        ₡ {{datos.impuesto}}
         </dd>
       </dl>
       <dl class="dl-horizontal">
@@ -78,7 +78,7 @@
           Total
         </dt>
         <dd>
-          {{datos.total}}
+         ₡ {{datos.total}}
         </dd>
       </dl>
     </article>
@@ -100,7 +100,7 @@
             <th scope="row">{{item.videojuego_id}}</th>
             <th>{{item.videojuego.nombre}}</th>
             <td>{{item.cantidad}}</td>
-            <td>{{item.total}}</td>
+            <td>₡ {{item.total}}</td>
           </tr>
         </tbody>
       </table>

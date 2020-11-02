@@ -1,5 +1,3 @@
-
-
 <div class="container" *ngIf="datos?.id">
   <h2 class="text-center">{{datos.nombre}}</h2>
 
@@ -18,11 +16,13 @@
         <div class="ca" id="Carrusel">
           <div id="myCarousel" class="carousel slide" data-ride="carousel">
 
-            <ol class="carousel-indicators"  >
-                <li data-target="#myCarousel" *ngFor="let data of datos.imagenes_videojuego; let i=index" attr.data-slide-to="{{i}}" [class]="(i === 0) ? 'active' : ''" ></li>
+            <ol class="carousel-indicators">
+              <li data-target="#myCarousel" *ngFor="let data of datos.imagenes_videojuego; let i=index"
+                attr.data-slide-to="{{i}}" [class]="(i === 0) ? 'active' : ''"></li>
             </ol>
             <div class="carousel-inner">
-              <div *ngFor="let data of datos.imagenes_videojuego; let i=index" [class]="(i === 0)? 'carousel-item active' : 'carousel-item'">
+              <div *ngFor="let data of datos.imagenes_videojuego; let i=index"
+                [class]="(i === 0)? 'carousel-item active' : 'carousel-item'">
                 <img class="img-fluid rounded" src="{{ data.pathImagen }}" alt="{{ data.id }}">
               </div>
             </div>
@@ -52,6 +52,10 @@
             <h6>Distribuidor</h6>
             <p>{{datos.distribuidor.descripcion}}</p>
           </li>
+          <li>
+            <h6>Precio</h6>
+            <p> ₡ {{datos.precio}}</p>
+          </li>
         </ul>
 
         <h3 style="padding-top: 5px;">Descripción</h3>
@@ -61,7 +65,7 @@
         <ul class="Genero">
           <li *ngFor="let item of datos.generos">
             <img class="icono" src="{{item.pathIcono}}" alt="">
-            <span>       {{item.descripcion}}</span>
+            <span> {{item.descripcion}}</span>
           </li>
         </ul>
 
@@ -69,7 +73,7 @@
         <ul class="Genero">
           <li *ngFor="let item of datos.plataformas">
             <img class="icono" src="{{item.pathIcono}}" alt="">
-            <span>  {{item.descripcion}}</span>
+            <span> {{item.descripcion}}</span>
           </li>
         </ul>
       </div>

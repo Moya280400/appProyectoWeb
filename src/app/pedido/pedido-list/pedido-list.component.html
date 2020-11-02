@@ -15,8 +15,8 @@
         <th scope="row">{{item.id}}</th>
         <td>{{item.fecha}}</td>
         <td>{{item.tipo_entrega.descripcion}}</td>
-        <td>{{item.subtotal}}</td>
-        <td>{{item.total}}</td>
+        <td>₡ {{item.subtotal}}</td>
+        <td>₡ {{item.total}}</td>
         <td><button type="button" [routerLink]="['/pedido/',item.id]" class="btn btn-primary">Detalle</button></td>
       </tr>
     </tbody>
