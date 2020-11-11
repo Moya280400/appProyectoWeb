@@ -1,4 +1,9 @@
+      <ng-template #loading>
+    <img class="img-fluid rounded mx-auto d-block " id="loading" src="/assets/Imagenes/loading-gear.gif" alt="Cargando..." style="width: 600px;"/>
+  </ng-template>
+ <ng-template [ngIf]="datos" [ngIfElse]="loading">
 <div class="container" *ngIf="datos?.id">
+
   <h2 class="text-center">{{datos.nombre}}</h2>
 
   <div class="main row">
@@ -79,4 +84,6 @@
       </div>
     </article>
   </div>
+
 </div>
+  </ng-template>

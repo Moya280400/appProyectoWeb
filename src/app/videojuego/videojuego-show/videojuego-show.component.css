@@ -37,8 +37,8 @@ ul li{
 }
 
 .icono {
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
 }
 
 #Video {
@@ -75,7 +75,6 @@ color: black;
 }
 
 .Genero li {
-  display: inline-block;
   padding: 5px;
   padding-top: 0;
   color: black;

@@ -13,6 +13,9 @@ import { ClienteModule } from './cliente/cliente.module';
 import { HttpErrorInterceptorService } from './share/http-error-interceptor.service';
 import { PedidoModule } from './pedido/pedido.module';
 import { RepartidorModule } from './repartidor/repartidor.module';
+import { GeneroModule } from './genero/genero.module';
+import { PlataformaModule } from './plataforma/plataforma.module';
+
 
 @NgModule({
   declarations: [AppComponent,],
@@ -31,13 +34,16 @@ import { RepartidorModule } from './repartidor/repartidor.module';
     UsuarioModule,
     ClienteModule,
     VideojuegoModule,
-
     PedidoModule,
-
     RepartidorModule,
+    GeneroModule,
+    PlataformaModule,
 
     //Va de ultimo gestor de rutas principal
     AppRoutingModule,
+
+
+
 
   ],
    providers: [

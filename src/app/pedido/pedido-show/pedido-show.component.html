@@ -1,3 +1,7 @@
+      <ng-template #loading>
+    <img class="img-fluid rounded mx-auto d-block " id="loading" src="/assets/Imagenes/loading-gear.gif" alt="Cargando..." style="width: 600px;"/>
+  </ng-template>
+ <ng-template [ngIf]="datos" [ngIfElse]="loading">
 <div class="container">
   <div class="row">
     <article class="col-md-6">
@@ -107,3 +111,4 @@
     </article>
   </div>
 </div>
+  </ng-template>

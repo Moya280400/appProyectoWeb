@@ -1,4 +1,7 @@
 <div class="container">
+    <ng-template #loading>
+    <img class="img-fluid rounded mx-auto d-block " id="loading" src="/assets/Imagenes/loading-gear.gif" alt="Cargando..." style="width: 600px;"/>
+  </ng-template>
   <table class="table">
     <thead class="thead-dark">
       <tr>
@@ -9,6 +12,7 @@
         <th scope="col"> </th>
       </tr>
     </thead>
+     <ng-template [ngIf]="datos" [ngIfElse]="loading">
     <tbody>
       <tr *ngFor="let item of datos">
         <th scope="row" >{{item.id}}</th>
@@ -18,5 +22,6 @@
         <td> <button type="button" [routerLink]="['/repartidor/',item.id]" class="btn btn-primary">Detalle</button></td>
       </tr>
     </tbody>
+    </ng-template>
   </table>
 </div>

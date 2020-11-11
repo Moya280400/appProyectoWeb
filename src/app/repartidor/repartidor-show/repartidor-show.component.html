@@ -1,3 +1,7 @@
+      <ng-template #loading>
+    <img class="img-fluid rounded mx-auto d-block " id="loading" src="/assets/Imagenes/loading-gear.gif" alt="Cargando..." style="width: 600px;"/>
+  </ng-template>
+ <ng-template [ngIf]="datos" [ngIfElse]="loading">
 <div class="container">
   <h2>Detalle</h2>
   <br>
@@ -64,3 +68,4 @@
     <!--@Html.ActionLink("Volver a la lista", "Index", new { area = "" }, new { @class = "btn btn-secondary" })-->
   </p>
 </div>
+</ng-template>
