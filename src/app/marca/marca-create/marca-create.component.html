@@ -1,0 +1,43 @@
+<body>
+  <div class="container">
+    <div class="login-form">
+      <h2>Crear Genero</h2>
+      <form [formGroup]="formCreate" (ngSubmit)="submitForm()" novalidate>
+        <!--Descripcion-->
+        <div class="form-group">
+          <label>Descripción:</label>
+          <div class="group rounded">
+            <input type="text" class="form-control" placeholder="Descripción" required="required"
+              formControlName="descripcion">
+          </div>
+          <div class="col-sm-12">
+            <small class="text-danger" *ngIf="errorHandling('descripcion','required')">
+              La descripción es requerida
+            </small>
+          </div>
+        </div>
+        <!--Imagen -->
+        <div class="form-group">
+          <label>Imagen:</label>
+          <div class="group rounded">
+            <input type="text" class="form-control" placeholder="Imagen" required="required"
+              formControlName="pathIcono">
+          </div>
+          <div class="col-sm-12">
+            <small class="text-danger" *ngIf="errorHandling('pathIcono','required')">
+              La ruta de la imagen es requerida
+            </small>
+          </div>
+        </div>
+
+        <button type="submit">Crear Genero</button>
+        <button type="reset" class="btn btn-secondary mt-4" (click)="onReset()">
+          Cancelar
+        </button>
+        <button class="btn btn-secondary mt-4" (click)="onBack()">
+          Atras
+        </button>
+      </form>
+    </div>
+  </div>
+</body>

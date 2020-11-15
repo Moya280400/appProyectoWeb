@@ -15,6 +15,8 @@ import { PedidoModule } from './pedido/pedido.module';
 import { RepartidorModule } from './repartidor/repartidor.module';
 import { GeneroModule } from './genero/genero.module';
 import { PlataformaModule } from './plataforma/plataforma.module';
+import { MarcaModule } from './marca/marca.module';
+import { VehiculoModule } from './vehiculo/vehiculo.module';
 
 
 @NgModule({
@@ -38,6 +40,9 @@ import { PlataformaModule } from './plataforma/plataforma.module';
     RepartidorModule,
     GeneroModule,
     PlataformaModule,
+    MarcaModule,
+    VehiculoModule,
+
 
     //Va de ultimo gestor de rutas principal
     AppRoutingModule,
@@ -45,8 +50,10 @@ import { PlataformaModule } from './plataforma/plataforma.module';
 
 
 
+
+
   ],
-   providers: [
+  providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptorService,
