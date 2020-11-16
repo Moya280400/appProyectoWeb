@@ -1,1 +1,73 @@
-<p>vehiculo-create works!</p>
+<body>
+  <div class="container">
+    <div class="login-form">
+      <h2>Crear Vehiculo</h2>
+      <form [formGroup]="formCreate" (ngSubmit)="submitForm()" novalidate>
+        <!--Descripcion-->
+        <div class="form-group">
+          <label>Placa:</label>
+          <div class="group rounded">
+            <input type="text" class="form-control" placeholder="Placa:" required="required"
+              formControlName="id">
+          </div>
+          <div class="col-sm-12">
+            <small class="text-danger" *ngIf="errorHandling('id','required')">
+              La Placa es requerida
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Modelo:</label>
+          <div class="group rounded">
+            <input type="text" class="form-control" placeholder="Modelo:" required="required"
+              formControlName="modelo">
+          </div>
+          <div class="col-sm-12">
+            <small class="text-danger" *ngIf="errorHandling('modelo','required')">
+              El modelo es requerido
+            </small>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="marca">Marca</label>
+          <select class="form-control" formControlName="marca_id">
+            <option *ngFor="let marca of marcas" [value]="marca.id">
+              {{marca.descripcion}}
+            </option>
+          </select>
+          <div class="col-sm-4">
+            <small *ngIf="errorHandling('marca_id', 'required')" class="text-danger">
+              La marca es requerida
+            </small>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="tipo_vehiculo_id">Tipo Vehiculo</label>
+          <select class="form-control" formControlName="tipo_vehiculo_id">
+            <option *ngFor="let tipo_Vehiculo of tipoVehiculos" [value]="tipo_Vehiculo.id">
+              {{tipo_Vehiculo.descripcion}}
+            </option>
+          </select>
+          <div class="col-sm-4">
+            <small *ngIf="errorHandling('tipo_vehiculo_id', 'required')" class="text-danger">
+              El tipo de vehiculo es requerido
+            </small>
+          </div>
+        </div>
+
+        <button type="submit">Crear Vehiculo </button>
+        <button type="reset" class="btn btn-secondary mt-4" (click)="onReset()">
+          Cancelar
+        </button>
+        <button class="btn btn-secondary mt-4" (click)="onBack()">
+          Atras
+        </button>
+      </form>
+    </div>
+  </div>
+</body>

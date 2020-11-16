@@ -17,6 +17,8 @@ import { GeneroModule } from './genero/genero.module';
 import { PlataformaModule } from './plataforma/plataforma.module';
 import { MarcaModule } from './marca/marca.module';
 import { VehiculoModule } from './vehiculo/vehiculo.module';
+import { DesarrolladorModule } from './desarrollador/desarrollador.module';
+import { DistribuidorModule } from './distribuidor/distribuidor.module';
 
 
 @NgModule({
@@ -42,10 +44,12 @@ import { VehiculoModule } from './vehiculo/vehiculo.module';
     PlataformaModule,
     MarcaModule,
     VehiculoModule,
-
+    DesarrolladorModule,
+    DistribuidorModule,
 
     //Va de ultimo gestor de rutas principal
     AppRoutingModule,
+
 
 
 

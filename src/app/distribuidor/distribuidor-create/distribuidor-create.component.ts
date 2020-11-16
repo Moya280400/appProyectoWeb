@@ -8,23 +8,21 @@ import { HttpClient } from '@angular/common/http';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-vehiculo-create',
-  templateUrl: './vehiculo-create.component.html',
-  styleUrls: ['./vehiculo-create.component.css']
+  selector: 'app-distribuidor-create',
+  templateUrl: './distribuidor-create.component.html',
+  styleUrls: ['./distribuidor-create.component.css']
 })
-export class VehiculoCreateComponent implements OnInit {
+export class DistribuidorCreateComponent implements OnInit {
+
 
   error: any;
   makeSubmit: boolean = false;
-
-  marcas:any;
-  tipoVehiculos:any;
 
   Server_URL: any;
 
   formCreate: FormGroup;
   destroy$: Subject<boolean> = new Subject<boolean>();
- constructor(
+  constructor(
     public fb: FormBuilder,
     private router: Router,
     private gService: GenericService,
@@ -33,17 +31,12 @@ export class VehiculoCreateComponent implements OnInit {
   ) {
     this.reactiveForm();
   }
-  //cambiar
+
   reactiveForm() {
     this.formCreate = this.fb.group({
-      id: ['', [Validators.required]],
-      modelo: ['', [Validators.required]],
-      marca_id: ['', [Validators.required]],
-      tipo_vehiculo_id: ['', [Validators.required]],
-
+      descripcion: ['', [Validators.required]],
     });
-    this.getMarcas();
-    this.getTipoVehiculos();
+
   }
   ngOnInit(): void {
     this.mensajes();
@@ -58,43 +51,27 @@ export class VehiculoCreateComponent implements OnInit {
     }))
 
     if (login) {
-      this.notificacion.mensaje('Vehiculo', 'Vehiculo agregado con exito', 'success');
+      this.notificacion.mensaje('Distribuidor', 'Distribuidor agregado con exito', 'success');
     }
   }
 
   submitForm() {
     this.makeSubmit = true;
 
-    this.Server_URL = 'vehiculo/store?';
+    this.Server_URL = 'distribuidor/store?';
     this.gService.create(this.Server_URL, this.formCreate.value).subscribe((respuesta: any) => {
-      this.router.navigate(['/vehiculo'], {
+      this.router.navigate(['/distribuidor'], {
         //Parametro es cualquiera
         queryParams: { crear: 'true' },
       });
     });
   }
 
-  getMarcas() {
-    this.gService
-      .list('marca_vehiculo')
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data: any) => {
-        this.marcas = data;
-      });
-  }
-  getTipoVehiculos() {
-    this.gService
-      .list('tipo_vehiculo')
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data: any) => {
-        this.tipoVehiculos = data;
-      });
-  }
   onReset() {
     this.formCreate.reset();
   }
   onBack() {
-    this.router.navigate(['/vehiculo']);
+    this.router.navigate(['/distribuidor']);
   }
 
   public errorHandling = (control: string, error: string) => {
@@ -104,5 +81,6 @@ export class VehiculoCreateComponent implements OnInit {
       (this.makeSubmit || this.formCreate.controls[control].touched)
     );
   };
+
 
 }

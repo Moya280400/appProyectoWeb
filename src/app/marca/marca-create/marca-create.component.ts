@@ -59,7 +59,7 @@ export class MarcaCreateComponent implements OnInit {
 
     this.Server_URL = 'marca_vehiculo/store?';
     this.gService.create(this.Server_URL, this.formCreate.value).subscribe((respuesta: any) => {
-      this.router.navigate(['/marca_vehiculo'], {
+      this.router.navigate(['/marca'], {
         //Parametro es cualquiera
         queryParams: { crear: 'true' },
       });
@@ -70,7 +70,7 @@ export class MarcaCreateComponent implements OnInit {
     this.formCreate.reset();
   }
   onBack() {
-    this.router.navigate(['/marca_vehiculo']);
+    this.router.navigate(['/marca']);
   }
 
   public errorHandling = (control: string, error: string) => {
