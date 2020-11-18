@@ -1,4 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  Validators,
+  FormGroup,
+  FormBuilder,
+  FormArray,
+  FormControl,
+} from '@angular/forms';
+import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
+import { GenericService } from 'src/app/share/generic.service';
+import { NotificacionService } from 'src/app/share/notificacion.service';
 
 @Component({
   selector: 'app-videojuego-create',
@@ -7,9 +18,179 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VideojuegoCreateComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  videojuego: any;
+  imageURL: string;
+  generosList: any;
+  plataformasList: any;
+  error: any;
+  makeSubmit: boolean = false;
+  formCreate: FormGroup;
+  destroy$: Subject<boolean> = new Subject<boolean>();
+  constructor(
+    public fb: FormBuilder,
+    private router: Router,
+    private gService: GenericService,
+    private notificacion: NotificacionService
+  ) {
+    this.reactiveForm();
   }
 
+  reactiveForm() {
+    this.formCreate = this.fb.group({
+      nombre: ['', [Validators.required]],
+      descripcion: ['', [Validators.required]],
+      fechaEstrenoInicial: ['', [Validators.required]],
+      precio: ['', [Validators.required, Validators.pattern('[0-9]+')]],
+      generos: this.fb.array([]),
+      genero_id: this.fb.array([]),
+      plataformas: this.fb.array([]),
+      plataforma_id: this.fb.array([]),
+      image: [''],
+    });
+    this.getgeneros();
+    this.getplataformas();
+  }
+  ngOnInit(): void {}
+
+  //Inicio Generos
+  getgeneros() {
+    return this.gService.list('genero').subscribe(
+      (respuesta: any) => {
+        (this.generosList = respuesta), this.checkboxgeneros();
+      },
+      (error) => {
+        this.error = error;
+        this.notificacion.msjValidacion(this.error);
+      }
+    );
+  }
+  get generos(): FormArray {
+    return this.formCreate.get('generos') as FormArray;
+  }
+  get genero_id(): FormArray {
+    return this.formCreate.get('genero_id') as FormArray;
+  }
+  private checkboxgeneros() {
+    this.generosList.forEach(() => {
+      const control = new FormControl(); // primer parámetro valor a asignar
+      (this.formCreate.controls.generos as FormArray).push(control);
+    });
+  }
+  onCheckChangeGenero(idCheck, event) {
+    /* seleccionado */
+    if (event.target.checked) {
+      // agregar un nuevo control en el array de controles de los identificadores
+      (this.formCreate.controls.genero_id as FormArray).push(
+        new FormControl(event.target.value)
+      );
+    } else {
+      /* Deseleccionar*/
+      // Buscar el elemento que se le quito la selección
+      let i = 0;
+
+      this.genero_id.controls.forEach((ctrl: FormControl) => {
+        if (idCheck == ctrl.value) {
+          // Quitar el elemento deseleccionado del array
+          (this.formCreate.controls.genero_id as FormArray).removeAt(i);
+          return;
+        }
+
+        i++;
+      });
+    }
+  }
+  //Fin Generos
+
+  //Inicio Plataformas
+  getplataformas() {
+    return this.gService.list('plataforma').subscribe(
+      (respuesta: any) => {
+        (this.plataformasList = respuesta), this.checkboxplataformas();
+      },
+      (error) => {
+        this.error = error;
+        this.notificacion.msjValidacion(this.error);
+      }
+    );
+  }
+  get plataformas(): FormArray {
+    return this.formCreate.get('plataformas') as FormArray;
+  }
+  get plataforma_id(): FormArray {
+    return this.formCreate.get('plataforma_id') as FormArray;
+  }
+  private checkboxplataformas() {
+    this.plataformasList.forEach(() => {
+      const control = new FormControl(); // primer parámetro valor a asignar
+      (this.formCreate.controls.plataformas as FormArray).push(control);
+    });
+  }
+  onCheckChangePlataforma(idCheck, event) {
+    /* seleccionado */
+    if (event.target.checked) {
+      // agregar un nuevo control en el array de controles de los identificadores
+      (this.formCreate.controls.plataforma_id as FormArray).push(
+        new FormControl(event.target.value)
+      );
+    } else {
+      /* Deseleccionar*/
+      // Buscar el elemento que se le quito la selección
+      let i = 0;
+
+      this.plataforma_id.controls.forEach((ctrl: FormControl) => {
+        if (idCheck == ctrl.value) {
+          // Quitar el elemento deseleccionado del array
+          (this.formCreate.controls.plataforma_id as FormArray).removeAt(i);
+          return;
+        }
+
+        i++;
+      });
+    }
+  }
+  //Fin Generos
+
+  //Obtener la imagen o archivo seleccionado
+  onFileSelect(event) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.formCreate.get('image').setValue(file);
+      // Vista previa imagen
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imageURL = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  submitForm() {
+    this.makeSubmit = true;
+
+    let formData = new FormData();
+    formData = this.gService.toFormData(this.formCreate.value);
+    formData.append('_method', 'POST');
+    this.gService
+      .create_formdata('videojuego', formData)
+      .subscribe((respuesta: any) => {
+        this.videojuego = respuesta;
+        this.router.navigate(['/videojuego/all'], {
+          queryParams: { register: 'true' },
+        });
+      });
+  }
+  onReset() {
+    this.formCreate.reset();
+  }
+  onBack() {
+    this.router.navigate(['/videojuego/all']);
+  }
+
+  public errorHandling = (control: string, error: string) => {
+    return (
+      this.formCreate.controls[control].hasError(error) &&
+      this.formCreate.controls[control].invalid &&
+      (this.makeSubmit || this.formCreate.controls[control].touched)
+    );
+  };
 }

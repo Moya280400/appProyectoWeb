@@ -9,7 +9,9 @@
         <th scope="col">Descripción</th>
         <th scope="col">Precio</th>
         <th scope="col">Estado</th>
-        <th scope="col"> </th>
+        <th scope="col"><button type="button" class="btn btn-primary btn-sm" (click)="crearVideojuego()">
+          <i class="fas fa-plus"></i> Crear
+        </button></th>
       </tr>
     </thead>
     <ng-template [ngIf]="datos" [ngIfElse]="loading">

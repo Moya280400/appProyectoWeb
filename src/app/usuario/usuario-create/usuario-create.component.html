@@ -3,11 +3,13 @@
     <div class="login-form">
       <h2>Crear Usuario</h2>
       <form [formGroup]="formCreate" (ngSubmit)="submitForm()" novalidate>
+
         <div class="form-group">
           <label>Correo:</label>
           <div class="group rounded">
             <input type="email" class="form-control" placeholder="Correo" required="required" formControlName="email">
           </div>
+          
           <div class="col-sm-12">
             <small class="text-danger" *ngIf="errorHandling('email','required')">
               El email es requerido
@@ -17,6 +19,7 @@
             </small>
           </div>
         </div>
+
         <div class="form-group">
           <label>Contraseña</label>
           <div class="group rounded">

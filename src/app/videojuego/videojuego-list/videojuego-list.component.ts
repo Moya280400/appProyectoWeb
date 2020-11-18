@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { GenericService } from 'src/app/share/generic.service';
@@ -13,6 +14,8 @@ export class VideojuegoListComponent implements OnInit {
   datos; any;
   destroy$: Subject<boolean> = new Subject<boolean>();
   constructor(private gService: GenericService,
+    private router: Router,
+    private route: ActivatedRoute,
     private notification:NotificacionService,
     ) {
       this.listaVideojuegos();
@@ -29,6 +32,12 @@ export class VideojuegoListComponent implements OnInit {
       }
       console.log(data);
       this.datos=data;
+    });
+  }
+
+  crearVideojuego() {
+    this.router.navigate(['/videojuego/create'], {
+      relativeTo: this.route,
     });
   }
 }

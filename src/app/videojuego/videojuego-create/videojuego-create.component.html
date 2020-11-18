@@ -1,1 +1,135 @@
-<p>videojuego-create works!</p>
+<body>
+  <div class="container">
+    <div class="login-form">
+      <h2>Crear videojuego</h2>
+      <form [formGroup]="formCreate" (ngSubmit)="submitForm()" novalidate>
+
+        <div class="form-group">
+          <label>Nombre </label>
+          <div class="group rounded">
+            <input type="text" class="formControl" formControlName="nombre" name="nombre"
+              placeholder="Nombre videojuego" />
+          </div>
+
+          <div class="col-sm-12">
+            <small class="text-danger" *ngIf="errorHandling('nombre', 'required')" class="text-danger">
+              El nombre del videojuego es requerido
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Descripción </label>
+          <div class="group rounded">
+            <input type="text" class="formControl" formControlName="descripcion" name="descripcion" />
+          </div>
+
+          <div class="col-sm-12">
+            <small class="text-danger" *ngIf="errorHandling('descripcion', 'required')">
+              La descripción del videojuego es requerido
+            </small>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="nombre">Fecha de Estreno inicial </label>
+          <div class="group rounded">
+            <input type="date" class="formControl" name="fechaEstrenoInicial" formControlName="fechaEstrenoInicial" />
+          </div>
+
+          <div class="col-sm-12">
+            <small *ngIf="errorHandling('fechaEstrenoInicial', 'required')" class="text-danger">
+              La fecha de estreno inicial nombre del videojuego es requerido
+            </small>
+            <small *ngIf="errorHandling('fechaEstrenoInicial', 'pattern')" class="text-danger">
+              Verifique el formato de la fecha ##/##/####
+            </small>
+          </div>
+          
+        </div>
+        <div class="form-group">
+          <label for="precio">Precio</label>
+          <div class="group rounded">
+            <input type="text" class="formControl" name="precio" formControlName="precio" />
+          </div>
+
+          <div class="col-sm-12">
+            <small *ngIf="errorHandling('precio', 'required')" class="text-danger">
+              El precio del videojuego es requerido
+            </small>
+            <small *ngIf="errorHandling('precio', 'pattern')" class="text-danger">
+              El precio debe contener solo números
+            </small>
+          </div>
+        </div>
+
+        <!--Generos-->
+        <div class="form-group row">
+          <label for="generos" class="col-sm-4 col-form-label">Generos </label>
+          <div class="col-sm-8">
+            <!--Array control genero-->
+            <div formArrayName="generos">
+              <!--Nombre del control con el indice y valor obtenido de la lista de generos-->
+              <!--Cada vez que cambia o se selecciona, debe actualizar el array que guarda los id de genero-->
+              <div class="form-check" *ngFor="let p of generos.controls; index as i">
+                <input type="checkbox" class="form-check-input" [formControlName]="i" [value]="generosList[i]?.id"
+                  (change)="onCheckChangeGenero(generosList[i]?.id, $event)" />
+                <label class="form-check-label">{{
+              generosList[i]?.descripcion
+            }}</label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!--Plataformas-->
+        <div class="form-group row">
+          <label for="plataformas" class="col-sm-4 col-form-label">Plataformas </label>
+          <div class="col-sm-8">
+            <!--Array control genero-->
+            <div formArrayName="plataformas">
+              <!--Nombre del control con el indice y valor obtenido de la lista de generos-->
+              <!--Cada vez que cambia o se selecciona, debe actualizar el array que guarda los id de genero-->
+              <div class="form-check" *ngFor="let p of plataformas.controls; index as i">
+                <input type="checkbox" class="form-check-input" [formControlName]="i" [value]="plataformasList[i]?.id"
+                  (change)="onCheckChangePlataforma(plataformasList[i]?.id, $event)" />
+                <label class="form-check-label">{{
+              plataformasList[i]?.descripcion
+            }}</label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <div class="btn-group" role="group">
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <button type="reset" class="btn btn-secondary" (click)="onReset()">
+              Cancelar
+            </button>
+            <button type="button" class="btn btn-info" (click)="onBack()">
+              Regresar
+            </button>
+          </div>
+        </div>
+
+        <!--Imagen-->
+        <div class="col-md-6">
+          <div class="form-group row">
+            <label for="image" class="col-sm-4 col-form-label">Imagen </label>
+            <div class="col-sm-8">
+              <input type="file" class="formControl" name="image" (change)="onFileSelect($event)" />
+            </div>
+            <!--Mostrar imagen seleccionada-->
+            <div *ngIf="imageURL && imageURL !== ''" class="card" style="width: 18rem;">
+              <img [src]="imageURL" alt="Imagen videojuego" class="img-fluid card-img-top">
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
