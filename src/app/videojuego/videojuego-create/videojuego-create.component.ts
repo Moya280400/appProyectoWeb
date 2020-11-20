@@ -228,6 +228,7 @@ export class VideojuegoCreateComponent implements OnInit {
 
   }
   eliminarImagen(val){
+
     this.lista.splice(val,1);
   }
 
