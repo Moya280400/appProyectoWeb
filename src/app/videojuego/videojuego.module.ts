@@ -6,15 +6,17 @@ import { VideojuegoIndexComponent } from './videojuego-index/videojuego-index.co
 import { VideojuegoListComponent } from './videojuego-list/videojuego-list.component';
 import { VideojuegoShowComponent } from './videojuego-show/videojuego-show.component';
 import { VideojuegoCreateComponent } from './videojuego-create/videojuego-create.component';
+import { VideojuegoUpdateComponent } from './videojuego-update/videojuego-update.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
+
 @NgModule({
-  declarations: [VideojuegoIndexComponent, VideojuegoListComponent, VideojuegoShowComponent, VideojuegoCreateComponent,],
+  declarations: [VideojuegoIndexComponent, VideojuegoListComponent, VideojuegoShowComponent, VideojuegoCreateComponent, VideojuegoUpdateComponent,],
   imports: [
     CommonModule,
-    VideojuegoRoutingModule,FormsModule,ReactiveFormsModule
+    VideojuegoRoutingModule, FormsModule, ReactiveFormsModule
   ]
 })
 export class VideojuegoModule { }

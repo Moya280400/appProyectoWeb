@@ -67,7 +67,7 @@ export class VideojuegoCreateComponent implements OnInit {
     this.getDistribuidors();
     this.getDesarrolladors();
   }
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   //Inicio Generos
   getGeneros() {
@@ -165,7 +165,7 @@ export class VideojuegoCreateComponent implements OnInit {
       });
     }
   }
-  //Fin Generos
+  //Fin Plataforma
 
   get imagenes(): FormArray {
     return this.formCreate.get('imagenes') as FormArray;
@@ -191,19 +191,19 @@ export class VideojuegoCreateComponent implements OnInit {
   submitForm() {
 
     //this.lista.forEach(function (value){
-      //this.formCreate.controls.imagenes.push(value);
+    //this.formCreate.controls.imagenes.push(value);
     //});
 
     this.makeSubmit = true;
 
-    this.Server_URL='videojuego/store?';
+    this.Server_URL = 'videojuego/store?';
 
-    this.gService.create(this.Server_URL, this.formCreate.value).subscribe((respuesta: any)=> {
-        this.router.navigate(['/videojuego/list'], {
-          //Parametro es cualquiera
-          queryParams: { crear: 'true' },
-        });
+    this.gService.create(this.Server_URL, this.formCreate.value).subscribe((respuesta: any) => {
+      this.router.navigate(['/videojuego/list'], {
+        //Parametro es cualquiera
+        queryParams: { crear: 'true' },
       });
+    });
   }
   onReset() {
     this.formCreate.reset();
@@ -220,16 +220,28 @@ export class VideojuegoCreateComponent implements OnInit {
     );
   };
 
-  annadirImagen(val){
+  annadirImagen(val) {
     this.lista.push(val);
     (this.formCreate.controls.imagenes as FormArray).push(
       new FormControl(val)
-      );
+    );
 
   }
-  eliminarImagen(val){
+  eliminarImagen(val) {
+    /* Deseleccionar*/
+    // Buscar el elemento que se le quito la selección
+    let i = 0;
 
-    this.lista.splice(val,1);
+    this.imagenes.controls.forEach((ctrl: FormControl) => {
+      if (val == i) {
+        // Quitar el elemento deseleccionado del array
+        (this.formCreate.controls.imagenes as FormArray).removeAt(i);
+        return;
+      }
+
+      i++;
+    });
+    this.lista.splice(val, 1);
   }
 
   getDistribuidors() {

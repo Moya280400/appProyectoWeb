@@ -1,6 +1,7 @@
 <div class="container">
-        <ng-template #loading>
-    <img class="img-fluid rounded mx-auto d-block " id="loading" src="/assets/Imagenes/loading-gear.gif" alt="Cargando..." style="width: 600px;"/>
+  <ng-template #loading>
+    <img class="img-fluid rounded mx-auto d-block " id="loading" src="/assets/Imagenes/loading-gear.gif"
+      alt="Cargando..." style="width: 600px;" />
   </ng-template>
   <table class="table">
     <thead class="thead-dark">
@@ -10,21 +11,23 @@
         <th scope="col">Precio</th>
         <th scope="col">Estado</th>
         <th scope="col"><button type="button" class="btn btn-primary btn-sm" (click)="crearVideojuego()">
-          <i class="fas fa-plus"></i> Crear
-        </button></th>
+            <i class="fas fa-plus"></i> Crear
+          </button></th>
       </tr>
     </thead>
     <ng-template [ngIf]="datos" [ngIfElse]="loading">
-    <tbody>
-      <tr *ngFor="let item of datos">
-        <th scope="row" >{{item.id}}</th>
-        <td>{{item.nombre}}</td>
-        <td>₡ {{item.precio}}</td>
-        <td>{{item.estado}}</td>
-        <td><button type="button" [routerLink]="['/videojuego/',item.id]" routerLinkActive="active" class="btn btn-primary">Detalle</button></td>
-      </tr>
-    </tbody>
-     </ng-template>
+      <tbody>
+        <tr *ngFor="let item of datos">
+          <th scope="row">{{item.id}}</th>
+          <td>{{item.nombre}}</td>
+          <td>₡ {{item.precio}}</td>
+          <td>{{item.estado}}</td>
+          <td><button type="button" [routerLink]="['/videojuego/',item.id]" routerLinkActive="active"
+              class="btn btn-primary">Detalle</button>
+            <button type="button" class="btn btn-primary ml-1" (click)="actualizarVideojuego(item.id)"> Editar</button>
+          </td>
+        </tr>
+      </tbody>
+    </ng-template>
   </table>
 </div>
-

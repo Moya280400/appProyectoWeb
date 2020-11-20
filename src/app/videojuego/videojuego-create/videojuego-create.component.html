@@ -7,7 +7,7 @@
         <div class="form-group">
           <label class="font-weight-bold">Código </label>
           <div class="group rounded">
-            <input type="text" class="form-control" formControlName="id" name="id" placeholder="codigo" />
+            <input type="text" class="form-control" formControlName="id" name="id" placeholder="código" />
           </div>
 
           <div class="col-sm-12">
@@ -190,7 +190,8 @@
               <input type="url" class="form-control" placeholder="Link imagen" #imagenTomar />
             </div>
             <div class="col-auto my-1">
-              <button type="button" class="btn btn-success mt-1" (click)="annadirImagen(imagenTomar.value)">
+              <button type="button" class="btn btn-success mt-1"
+                (click)="annadirImagen(imagenTomar.value); imagenTomar.value=''; ">
                 Agregar imagen
               </button>
             </div>
@@ -222,13 +223,13 @@
 
           </div>
 
-          <div class="col-md-12 mb-3">
+          <div class="col-md-12 mb-3 text-center">
             <div class="btn-group" role="group">
-              <button type="submit" class="btn btn-success">Guardar</button>
-              <button type="reset" class="btn btn-secondary" (click)="onReset()">
+              <button type="submit" class="btn butttonBajos">Guardar</button>
+              <button type="reset" class="btn butttonBajos" (click)="onReset()">
                 Cancelar
               </button>
-              <button type="button" class="btn btn-info" (click)="onBack()">
+              <button type="button" class="btn butttonBajos" (click)="onBack()">
                 Regresar
               </button>
             </div>

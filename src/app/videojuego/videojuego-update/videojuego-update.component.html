@@ -1,0 +1,220 @@
+<div class="container">
+  <div class="col-11">
+    <h4 class="mb-3">Actualizar videojuego</h4>
+    <ng-template #loading>
+      <img class="img-fluid rounded mx-auto d-block" src="/assets/img/loading.gif" alt="Cargando..."
+        style="width: 300px;" />
+    </ng-template>
+    <ng-template [ngIf]="videojuego" [ngIfElse]="loading">
+      <form [formGroup]="formUpdate" (ngSubmit)="submitForm()" novalidate>
+
+        <div class="main row">
+          <!--Formulario información-->
+          <article class="col-md-6">
+            <!-- Identificador del videojuego -->
+            <input type="hidden" formControlName="id" />
+            <div class="form-group">
+              <label class="font-weight-bold col-form-label" for=" nombre">Nombre </label>
+              <div class="group rounded">
+                <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre videojuego" />
+              </div>
+              <div class="col-sm-12">
+                <small *ngIf="errorHandling('nombre', 'required')" class="text-danger">
+                  El nombre del videojuego es requerido
+                </small>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="font-weight-bold col-form-label" for="descripcion">Descripción </label>
+              <div class="group rounded">
+                <input type="text" class="form-control" formControlName="descripcion" />
+              </div>
+              <div class="col-sm-12">
+                <small *ngIf="errorHandling('descripcion', 'required')" class="text-danger">
+                  La descripción del videojuego es requerido
+                </small>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="font-weight-bold col-form-label" for="fecha">Fecha de Estreno inicial </label>
+              <div class="group rounded">
+                <input type="date" class="form-control" formControlName="fechaSalida" />
+              </div>
+              <div class="col-auto">
+                <small *ngIf="errorHandling('fechaSalida', 'required')" class="text-danger">
+                  La fecha de salida del videojuego es requerido
+                </small>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="precio" class="font-weight-bold col-form-label">Precio</label>
+              <div class="group rounded">
+                <input type="text" class="form-control" formControlName="precio" />
+              </div>
+              <div class="col-auto">
+                <small *ngIf="errorHandling('precio', 'required')" class="text-danger">
+                  El precio del videojuego es requerido
+                </small>
+                <small *ngIf="errorHandling('precio', 'pattern')" class="text-danger">
+                  El precio debe contener solo números
+                </small>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="roles">Distribuidor</label>
+              <select class="form-control" formControlName="distribuidor_id">
+                <option *ngFor="let distribuidor of distribuidores" [value]="distribuidor.id">
+                  {{distribuidor.descripcion}}
+                </option>
+              </select>
+              <div class="col-sm-4">
+                <small *ngIf="errorHandling('distribuidor_id', 'required')" class="text-danger">
+                  El distribuidor es requerido
+                </small>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="roles">Desarrollador</label>
+              <select class="form-control" formControlName="desarrollador_id">
+                <option *ngFor="let desarrollador of desarrolladors" [value]="desarrollador.id">
+                  {{desarrollador.descripcion}}
+                </option>
+              </select>
+              <div class="col-sm-4">
+                <small *ngIf="errorHandling('desarrollador_id', 'required')" class="text-danger">
+                  El desarrollador es requerido
+                </small>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="font-weight-bold">Portada </label>
+              <div class="group rounded">
+                <input type="text" class="form-control" formControlName="pathCover" name="pathCover"
+                  placeholder="Ruta de la portada" />
+              </div>
+
+              <div class="col-sm-12">
+                <small class="text-danger" *ngIf="errorHandling('pathCover', 'required')" class="text-danger">
+                  La portada del videojuego es requerida
+                </small>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="font-weight-bold">Video </label>
+              <div class="group rounded">
+                <input type="text" class="form-control" formControlName="pathVideo" name="pathVideo"
+                  placeholder="Ruta del video" />
+              </div>
+
+              <div class="col-sm-12">
+                <small class="text-danger" *ngIf="errorHandling('pathVideo', 'required')" class="text-danger">
+                  El video del videojuego es requerido
+                </small>
+              </div>
+            </div>
+          </article>
+          <!--Imagen-->
+          <article class="col-md-6" id="Imagenes">
+            <!--Generos-->
+            <div class="form-group row">
+              <label for="generos" class="col-sm-4 col-form-label font-weight-bold mt-n1">Generos </label>
+              <div class="col-sm-8">
+                <!--Array control genero-->
+                <div formArrayName="generos">
+                  <!--Nombre del control con el indice y valor obtenido de la lista de generos-->
+                  <!--Cada vez que cambia o se selecciona, debe actualizar el array que guarda los id de genero-->
+                  <div class="form-check" *ngFor="let p of generos.controls; index as i">
+                    <input type="checkbox" class="form-check-input" [formControlName]="i" [value]="generosList[i]?.id"
+                      (change)="onCheckChangeGenero(generosList[i]?.id, $event)" />
+                    <label class="form-check-label">{{
+              generosList[i]?.descripcion
+            }}</label>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!--Plataformas-->
+            <div class="form-group row">
+              <label for="plataformas" class="col-sm-4 col-form-label font-weight-bold  mt-n1">Plataformas </label>
+              <div class="col-sm-8">
+                <!--Array control genero-->
+                <div formArrayName="plataformas">
+                  <!--Nombre del control con el indice y valor obtenido de la lista de generos-->
+                  <!--Cada vez que cambia o se selecciona, debe actualizar el array que guarda los id de genero-->
+                  <div class="form-check" *ngFor="let p of plataformas.controls; index as i">
+                    <input type="checkbox" class="form-check-input" [formControlName]="i"
+                      [value]="plataformasList[i]?.id"
+                      (change)="onCheckChangePlataforma(plataformasList[i]?.id, $event)" />
+                    <label class="form-check-label">{{
+              plataformasList[i]?.descripcion
+            }}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="col-md-12">
+            <h4>Imagenes Carrusel</h4>
+            <div class="form-group">
+              <label class="font-weight-bold">Imagen carrousel</label>
+
+              <div class="form-row align-items-center">
+                <div class="col-sm-7 my-1">
+                  <input type="url" class="form-control" placeholder="Link imagen" #imagenTomar />
+                </div>
+                <div class="col-auto my-1">
+                  <button type="button" class="btn btn-success mt-1"
+                    (click)="annadirImagen(imagenTomar.value); imagenTomar.value=''; ">
+                    Agregar imagen
+                  </button>
+                </div>
+
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-12">
+                <table class="table">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">Link</th>
+                      <th scope="col">Imagen</th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of lista; index as i">
+                      <td>{{item}}</td>
+                      <td><img id="banner" src="{{item}}" alt="{{item}}" class="img-fluid rounded"></td>
+                      <td>
+                        <button type="button" (click)="eliminarImagen(i)" class="btn btn-danger">X</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <input type="hidden" value="{{lista}}" formControlName="imagenes">
+
+              </div>
+
+              <div class="col-md-12 mb-3 text-center">
+                <div class="btn-group" role="group">
+                  <button type="submit" class="btn butttonBajos">Guardar</button>
+                  <button type="reset" class="btn butttonBajos" (click)="onReset()">
+                    Cancelar
+                  </button>
+                  <button type="button" class="btn butttonBajos" (click)="onBack()">
+                    Regresar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </form>
+    </ng-template>
+  </div>

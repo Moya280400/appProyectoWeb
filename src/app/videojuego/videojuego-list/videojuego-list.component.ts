@@ -16,25 +16,43 @@ export class VideojuegoListComponent implements OnInit {
   constructor(private gService: GenericService,
     private router: Router,
     private route: ActivatedRoute,
-    private notification:NotificacionService,
-    ) {
-      this.listaVideojuegos();
-    }
+    private notification: NotificacionService,
+  ) {
+    this.listaVideojuegos();
+  }
 
   ngOnInit(): void {
+    this.mensajes();
   }
 
-  listaVideojuegos(){
-    this.gService.list('videojuego/').pipe(takeUntil(this.destroy$)).subscribe((data:any)=>{
+  listaVideojuegos() {
+    this.gService.list('videojuego/').pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
       for (const item of data) {
-       let estadoVar= item.estado? 'Activo':'Inactivo';
-       item.estado=estadoVar;
+        let estadoVar = item.estado ? 'Activo' : 'Inactivo';
+        item.estado = estadoVar;
       }
       console.log(data);
-      this.datos=data;
+      this.datos = data;
     });
   }
+  mensajes() {
+    let crear = true;
+    //Obtener parametros de la URL
+    this.route.queryParams.subscribe((params => {
+      //Le indico que si no lo encuentra coloquelo como falso
+      console.log(params.crear);
+      crear = params.crear || false;
+    }))
 
+    if (crear) {
+      this.notification.mensaje('Videojuego', 'Videojuego agregado con exito', 'success');
+    }
+  }
+  actualizarVideojuego(id: number) {
+    this.router.navigate(['/videojuego/update', id], {
+      relativeTo: this.route,
+    });
+  }
   crearVideojuego() {
     this.router.navigate(['/videojuego/create'], {
       relativeTo: this.route,
