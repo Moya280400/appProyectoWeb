@@ -10,6 +10,8 @@ import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { GenericService } from 'src/app/share/generic.service';
 import { NotificacionService } from 'src/app/share/notificacion.service';
+import { takeUntil } from 'rxjs/operators';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-videojuego-create',
@@ -18,13 +20,18 @@ import { NotificacionService } from 'src/app/share/notificacion.service';
 })
 export class VideojuegoCreateComponent implements OnInit {
 
+  Server_URL: any;
   videojuego: any;
+  distribuidores: any;
+  desarrolladors: any;
   imageURL: string;
   generosList: any;
   plataformasList: any;
+  imagenesList: any;
   error: any;
   makeSubmit: boolean = false;
   formCreate: FormGroup;
+  lista = new Array();
   destroy$: Subject<boolean> = new Subject<boolean>();
   constructor(
     public fb: FormBuilder,
@@ -33,27 +40,37 @@ export class VideojuegoCreateComponent implements OnInit {
     private notificacion: NotificacionService
   ) {
     this.reactiveForm();
+
   }
 
   reactiveForm() {
+    const reg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
     this.formCreate = this.fb.group({
+      id: ['', [Validators.required]],
       nombre: ['', [Validators.required]],
       descripcion: ['', [Validators.required]],
-      fechaEstrenoInicial: ['', [Validators.required]],
+      fechaSalida: ['', [Validators.required]],
       precio: ['', [Validators.required, Validators.pattern('[0-9]+')]],
       generos: this.fb.array([]),
       genero_id: this.fb.array([]),
       plataformas: this.fb.array([]),
       plataforma_id: this.fb.array([]),
-      image: [''],
+      pathCover: ['', [Validators.required, Validators.pattern(reg)]],
+      pathVideo: ['', [Validators.required, Validators.pattern(reg)]],
+      distribuidor_id: ['', [Validators.required]],
+      desarrollador_id: ['', [Validators.required]],
+
+      imagenes: this.fb.array([]),
     });
-    this.getgeneros();
-    this.getplataformas();
+    this.getGeneros();
+    this.getPlataformas();
+    this.getDistribuidors();
+    this.getDesarrolladors();
   }
   ngOnInit(): void {}
 
   //Inicio Generos
-  getgeneros() {
+  getGeneros() {
     return this.gService.list('genero').subscribe(
       (respuesta: any) => {
         (this.generosList = respuesta), this.checkboxgeneros();
@@ -102,7 +119,7 @@ export class VideojuegoCreateComponent implements OnInit {
   //Fin Generos
 
   //Inicio Plataformas
-  getplataformas() {
+  getPlataformas() {
     return this.gService.list('plataforma').subscribe(
       (respuesta: any) => {
         (this.plataformasList = respuesta), this.checkboxplataformas();
@@ -150,6 +167,13 @@ export class VideojuegoCreateComponent implements OnInit {
   }
   //Fin Generos
 
+  get imagenes(): FormArray {
+    return this.formCreate.get('imagenes') as FormArray;
+  }
+  get imagen_id(): FormArray {
+    return this.formCreate.get('imagen_id') as FormArray;
+  }
+
   //Obtener la imagen o archivo seleccionado
   onFileSelect(event) {
     if (event.target.files.length > 0) {
@@ -165,17 +189,19 @@ export class VideojuegoCreateComponent implements OnInit {
   }
 
   submitForm() {
+
+    //this.lista.forEach(function (value){
+      //this.formCreate.controls.imagenes.push(value);
+    //});
+
     this.makeSubmit = true;
 
-    let formData = new FormData();
-    formData = this.gService.toFormData(this.formCreate.value);
-    formData.append('_method', 'POST');
-    this.gService
-      .create_formdata('videojuego', formData)
-      .subscribe((respuesta: any) => {
-        this.videojuego = respuesta;
-        this.router.navigate(['/videojuego/all'], {
-          queryParams: { register: 'true' },
+    this.Server_URL='videojuego/store?';
+
+    this.gService.create(this.Server_URL, this.formCreate.value).subscribe((respuesta: any)=> {
+        this.router.navigate(['/videojuego/list'], {
+          //Parametro es cualquiera
+          queryParams: { crear: 'true' },
         });
       });
   }
@@ -183,7 +209,7 @@ export class VideojuegoCreateComponent implements OnInit {
     this.formCreate.reset();
   }
   onBack() {
-    this.router.navigate(['/videojuego/all']);
+    this.router.navigate(['/videojuego/list']);
   }
 
   public errorHandling = (control: string, error: string) => {
@@ -193,4 +219,33 @@ export class VideojuegoCreateComponent implements OnInit {
       (this.makeSubmit || this.formCreate.controls[control].touched)
     );
   };
+
+  annadirImagen(val){
+    this.lista.push(val);
+    (this.formCreate.controls.imagenes as FormArray).push(
+      new FormControl(val)
+      );
+
+  }
+  eliminarImagen(val){
+    this.lista.splice(val,1);
+  }
+
+  getDistribuidors() {
+    this.gService
+      .list('distribuidor')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        this.distribuidores = data;
+      });
+  }
+
+  getDesarrolladors() {
+    this.gService
+      .list('desarrollador')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        this.desarrolladors = data;
+      });
+  }
 }
