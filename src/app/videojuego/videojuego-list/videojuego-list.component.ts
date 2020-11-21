@@ -37,15 +37,20 @@ export class VideojuegoListComponent implements OnInit {
   }
   mensajes() {
     let crear = true;
+    let actualizar=true;
     //Obtener parametros de la URL
     this.route.queryParams.subscribe((params => {
       //Le indico que si no lo encuentra coloquelo como falso
       console.log(params.crear);
       crear = params.crear || false;
+      actualizar = params.actualizar || false;
     }))
 
     if (crear) {
       this.notification.mensaje('Videojuego', 'Videojuego agregado con exito', 'success');
+    }
+    if (actualizar) {
+      this.notification.mensaje('Videojuego', 'Videojuego actualizado con exito', 'success');
     }
   }
   actualizarVideojuego(id: number) {

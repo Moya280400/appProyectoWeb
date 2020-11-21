@@ -13,6 +13,7 @@
           <article class="col-md-6">
             <!-- Identificador del videojuego -->
             <input type="hidden" formControlName="id" />
+
             <div class="form-group">
               <label class="font-weight-bold col-form-label" for=" nombre">Nombre </label>
               <div class="group rounded">
@@ -67,12 +68,14 @@
                   {{distribuidor.descripcion}}
                 </option>
               </select>
-              <div class="col-sm-4">
+              <!--<div class="col-sm-4">
                 <small *ngIf="errorHandling('distribuidor_id', 'required')" class="text-danger">
                   El distribuidor es requerido
                 </small>
               </div>
+              -->
             </div>
+
 
             <div class="form-group">
               <label for="roles">Desarrollador</label>
@@ -81,11 +84,13 @@
                   {{desarrollador.descripcion}}
                 </option>
               </select>
+              <!--
               <div class="col-sm-4">
                 <small *ngIf="errorHandling('desarrollador_id', 'required')" class="text-danger">
                   El desarrollador es requerido
                 </small>
               </div>
+              -->
             </div>
 
             <div class="form-group">

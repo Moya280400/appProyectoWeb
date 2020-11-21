@@ -20,6 +20,7 @@ import { takeUntil } from 'rxjs/operators';
 export class VideojuegoUpdateComponent implements OnInit {
 
   videojuego: any;
+  Server_URL: any;
   imageURL: string;
   generosList: any;
   plataformasList: any;
@@ -53,6 +54,8 @@ export class VideojuegoUpdateComponent implements OnInit {
     this.getPlataformas();
     this.getDistribuidors();
     this.getDesarrolladors();
+
+    console.log(this.lista);
     //Si hay información del videojuego
     if (this.videojuego) {
       let fecha = formatDate(
@@ -63,7 +66,7 @@ export class VideojuegoUpdateComponent implements OnInit {
       //Cargar la información del videojuego
       //en los controles que conforman el formulario
       this.formUpdate = this.fb.group({
-        id: [this.videojuego.id, [Validators.required]],
+        id: [this.videojuego.id],
         nombre: [this.videojuego.nombre, [Validators.required]],
         descripcion: [this.videojuego.descripcion, [Validators.required]],
         fechaSalida: [
@@ -80,12 +83,14 @@ export class VideojuegoUpdateComponent implements OnInit {
         genero_id: this.fb.array([]),
         plataformas: this.fb.array([]),
         plataforma_id: this.fb.array([]),
-        distribuidor_id: ['', [Validators.required]],
-        desarrollador_id: ['', [Validators.required]],
+        distribuidor_id: this.videojuego.distribuidor_id.toString(),
+        desarrollador_id: this.videojuego.desarrollador_id.toString(),
         imagenes: this.fb.array([]),
       });
+
       // Vista previa imagen
       this.imageURL = this.videojuego.pathImagen;
+      this.getImagenes();
     }
   }
   ngOnInit(): void { }
@@ -222,17 +227,14 @@ export class VideojuegoUpdateComponent implements OnInit {
 
   submitForm() {
     this.makeSubmit = true;
-
-    let formData = new FormData();
-    formData = this.gService.toFormData(this.formUpdate.value);
-    formData.append('_method', 'PATCH');
-    this.gService
-      .update_formdata('videojuego', formData)
+     this.gService
+      .update('videojuego/update', this.formUpdate.value)
       .subscribe((respuesta: any) => {
         this.videojuego = respuesta;
-        this.router.navigate(['/videojuego/all'], {
-          queryParams: { update: 'true' },
-        });
+        this.router.navigate(['/videojuego/list'], {
+        //Parametro es cualquiera
+        queryParams: { actualizar: 'true' },
+      });
       });
   }
   onReset() {
@@ -246,6 +248,7 @@ export class VideojuegoUpdateComponent implements OnInit {
     (this.formUpdate.controls.imagenes as FormArray).push(
       new FormControl(val)
     );
+    console.log(this.lista);
 
   }
   eliminarImagen(val) {
@@ -287,6 +290,25 @@ export class VideojuegoUpdateComponent implements OnInit {
       .subscribe((data: any) => {
         this.desarrolladors = data;
       });
+  }
+
+  getImagenes() {
+
+    this.videojuego.imagenes_videojuego.forEach((o) => {
+
+    // Quitar el elemento deseleccionado del array
+
+
+    this.lista.push(o.pathImagen);
+    console.log(this.lista);
+
+    (this.formUpdate.controls.imagenes as FormArray).push(
+      new FormControl(o.pathImagen)
+    );
+
+    });
+
+
   }
 }
 

@@ -47,6 +47,7 @@ return this.http.post<any | any[]>(this.urlAPI + endopoint, objCreate);
 }
 // actualizar
 update(endopoint: string, objUpdate: any | any): Observable<any | any[]> {
+console.log(this.urlAPI + endopoint + `/${objUpdate.id}`);
 return this.http.patch<any | any[]>(
 this.urlAPI + endopoint + `/${objUpdate.id}`,
 objUpdate
