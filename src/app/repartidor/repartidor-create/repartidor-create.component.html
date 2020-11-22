@@ -1,0 +1,98 @@
+<div class="container">
+  <h2 class="text-center">Agregar repartidor</h2>
+
+  <form [formGroup]="formCreate" (ngSubmit)="submitForm()" novalidate>
+    <div class="main row">
+      <article class="col-md-6">
+        <div class="form-group">
+          <label class="font-weight-bold">Cédula </label>
+          <div class="group rounded">
+            <input type="text" class="form-control" formControlName="id" name="id" placeholder="código" />
+          </div>
+
+          <div class="col-sm-12">
+            <small class="text-danger" *ngIf="errorHandling('id', 'required')" class="text-danger">
+              La cédula del repartidor es requerido
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="font-weight-bold">Nombre </label>
+          <div class="group rounded">
+            <input type="text" class="form-control" formControlName="nombre" name="nombre"
+              placeholder="Nombre Repartidor" />
+          </div>
+
+          <div class="col-sm-12">
+            <small class="text-danger" *ngIf="errorHandling('nombre', 'required')" class="text-danger">
+              El nombre del repartidor es requerido
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="font-weight-bold">Correo </label>
+          <div class="group rounded">
+            <input type="text" class="form-control" formControlName="correo" name="correo" />
+          </div>
+
+          <div class="col-sm-12">
+            <small class="text-danger" *ngIf="errorHandling('correo', 'required')">
+              El correo es requerido
+            </small>
+          </div>
+          <div class="col-sm-12">
+            <small class="text-danger" *ngIf="errorHandling('correo', 'email')">
+              Correo no valido
+            </small>
+          </div>
+
+        </div>
+        <div class="form-group">
+          <label for="telefono" class="font-weight-bold">Telefono</label>
+          <div class="group rounded">
+            <input type="text" class="form-control" name="telefono" formControlName="telefono" />
+          </div>
+
+          <div class="col-sm-12">
+            <small *ngIf="errorHandling('telefono', 'required')" class="text-danger">
+              El telefono del repartidor es requerido
+            </small>
+            <small *ngIf="errorHandling('telefono', 'pattern')" class="text-danger">
+              El telefono debe contener solo números
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="roles">Vehiculo</label>
+          <select class="form-control" formControlName="vehiculo_id">
+            <option *ngFor="let vehiculo of vehiculos" [value]="vehiculo.id">
+              {{vehiculo.id}}
+            </option>
+          </select>
+          <div class="col-sm-4">
+            <small *ngIf="errorHandling('vehiculo_id', 'required')" class="text-danger">
+              El vehiculo es requerido
+            </small>
+          </div>
+        </div>
+
+        <div class="col-md-12 mb-3 text-center">
+          <div class="btn-group" role="group">
+            <button type="submit" class="btn butttonBajos">Guardar</button>
+            <button type="reset" class="btn butttonBajos" (click)="onReset()">
+              Cancelar
+            </button>
+            <button type="button" class="btn butttonBajos" (click)="onBack()">
+              Regresar
+            </button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </form>
+
+</div>

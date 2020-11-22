@@ -30,9 +30,9 @@ export class VideojuegoShowComponent implements OnInit {
   }
 
   obtenerVideojuego(id:any){
-  this.gService.get('videojuego',id)
-  .pipe(takeUntil(this.destroy$))
-  .subscribe((data:any)=>{
+    this.gService.get('videojuego',id)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((data:any)=>{
 
   let estadoVar= data.estado? 'Activo':'Inactivo';
   data.estado=estadoVar;

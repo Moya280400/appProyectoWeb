@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/share/authentication.service';
+import { CartService } from 'src/app/share/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -11,10 +12,11 @@ export class HeaderComponent implements OnInit {
   currentUser: any;
   isAutenticated: boolean;
   esAdmin:boolean;
+  qtyItems = 0;
   constructor(
     private authService: AuthenticationService,
     private router: Router,
-
+    private cartService: CartService
   ) { }
 
   ngOnInit(): void {
@@ -24,6 +26,10 @@ export class HeaderComponent implements OnInit {
     this.authService.isAuthenticated.subscribe(
       (valor) => (this.isAutenticated = valor)
     );
+
+    this.cartService.countItems.subscribe((value) => {
+      this.qtyItems = value;
+    });
 
     this.authService.esAdmin.subscribe(
       (valor) => (this.esAdmin = valor)

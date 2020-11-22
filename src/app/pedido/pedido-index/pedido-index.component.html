@@ -1,0 +1,154 @@
+<div class="container">
+  <div class="row card">
+    <div class="card-header">Orden</div>
+    <div class="card-body">
+      <div class="col">
+        <p class="card-text">Fecha: {{fecha | date:'dd/MM/yyyy'}}</p>
+      </div>
+      <form [formGroup]="formCliente" novalidate>
+        <div class="form-group">
+          <label class="font-weight-bold">Cliente </label>
+          <div class="form-row align-items-center">
+            <div class="col-sm-7 my-1">
+              <input type="text" class="form-control" placeholder="Cédula Cliente" formControlName="id" />
+            </div>
+            <div class="col-auto my-1">
+              <button type="button" class="btn btn-success mt-1" (click)="buscarCliente(); ">
+                Buscar
+              </button>
+            </div>
+
+            <div class="col-sm-12">
+              <small *ngIf="errorHandling('id', 'required')" class="text-danger">
+                La cédula del cliente es requerido
+              </small>
+              <small *ngIf="errorHandling('id', 'pattern')" class="text-danger">
+                La cédula debe contener solo números
+              </small>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="font-weight-bold">Nombre </label>
+          <div class="form-row align-items-center">
+            <div class="col-sm-7 my-1">
+              <input type="text" class="form-control" placeholder="Nombre" readonly value="{{cliente.nombre}}" />
+            </div>
+          </div>
+
+          <label class="font-weight-bold">Dirección </label>
+          <div class="form-row align-items-center">
+            <div class="col-sm-7 my-1">
+              <input type="text" class="form-control" placeholder="Direccion" value="{{cliente.direccion}}" readonly />
+            </div>
+          </div>
+
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+<div class=" row card">
+  <div class="card-header">Detalle Orden</div>
+  <div class="card-body">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>
+            Videojuego
+          </th>
+          <th class="right">
+            Precio
+          </th>
+          <th class="center">
+            Cantidad
+          </th>
+          <th class="right">
+            SubTotal
+          </th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+
+        <tr class="group" style="cursor: pointer" *ngFor="let item of items; let i = index">
+          <td>
+            <p>{{ item.product.nombre}}</p>
+
+
+          </td>
+          <td class="right">
+            <p>${{item.precio}}</p>
+          </td>
+          <td class="center">
+            <input id="cantidad " type="number" class="form-control mb-2" [(ngModel)]="item. cantidad"
+              (change)=" actualizarCantidad(item)">
+          </td>
+
+          <td class="right">
+            <p>${{ item.subtotal}}</p>
+          </td>
+          <td>
+            <button class="btn btn-primary btn-sm" (click)="eliminarItem(item)"><i
+                class="far fa-trash-alt"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="row clearfix d-flex justify-content-end">
+      <div class="col-md-4">
+        <table class="table table-bordered table-hover">
+          <tbody>
+            <tr>
+              <td class="left">
+                <strong>Subtotal</strong>
+              </td>
+              <td class="right">
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">₡</div>
+                  </div>
+                  <input readonly type="text" class="form-control" id="total" type="text" [value]="total">
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <strong>Impuesto</strong>
+              </td>
+              <td class="right">
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">₡</div>
+                  </div>
+                  <input readonly type="text" class="form-control" id="total" type="text" [value]="total">
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <strong>Total</strong>
+              </td>
+              <td class="right">
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">₡</div>
+                  </div>
+                  <input readonly type="text" class="form-control" id="total" type="text" [value]="total">
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="col">
+          <button class="btn btn-success mb-2 float-right" (click)="ordenar()">Ordenar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

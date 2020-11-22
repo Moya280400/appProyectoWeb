@@ -1,0 +1,22 @@
+.container {
+    margin-top: 6rem;
+    margin-bottom: 6rem;
+  }
+
+  .butttonBajos {
+    background: #BB4F5A;
+    color: #ffffff;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    padding: 12px 30px;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 6px;
+  }
+
+  .butttonBajos:hover {
+    background-color: #660902;
+    transition: 6s;
+  }

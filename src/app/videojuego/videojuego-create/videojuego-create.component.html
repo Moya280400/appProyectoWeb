@@ -116,6 +116,9 @@
             <small class="text-danger" *ngIf="errorHandling('pathCover', 'required')" class="text-danger">
               La portada del videojuego es requerida
             </small>
+            <small *ngIf="errorHandling('pathCover', 'pattern')" class="text-danger">
+              Debe ser una dirección valida
+            </small>
           </div>
         </div>
 
@@ -129,6 +132,9 @@
           <div class="col-sm-12">
             <small class="text-danger" *ngIf="errorHandling('pathVideo', 'required')" class="text-danger">
               El video del videojuego es requerido
+            </small>
+            <small *ngIf="errorHandling('pathVideo', 'pattern')" class="text-danger">
+              Debe ser una dirección valida
             </small>
           </div>
         </div>
