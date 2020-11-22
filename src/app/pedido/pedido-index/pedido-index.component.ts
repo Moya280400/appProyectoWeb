@@ -11,6 +11,8 @@ import {
   FormArray,
   FormControl,
 } from '@angular/forms';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 @Component({
   selector: 'app-pedido-index',
   templateUrl: './pedido-index.component.html',
@@ -18,34 +20,48 @@ import {
 })
 export class PedidoIndexComponent implements OnInit {
 
+  tipoEntrega: any;
+  repartidor: any;
   items: ItemCart[] = [];
   total = 0;
+  subtotal = 0;
+  impuesto=0;
+
   fecha = new Date();
   qtyItems = 0;
   error: any;
   makeSubmit: boolean = false;
   formCliente: FormGroup;
   id: any;
-  cliente: any;
+  cliente={ direccion:"", nombre:""};
+  boolRepartidor:any;
+  destroy$: Subject<boolean> = new Subject<boolean>();
   constructor(
     public fb: FormBuilder,
     private cartService: CartService,
     private noti: NotificacionService,
     private gService: GenericService,
-    private router: Router
+    private router: Router,
   ) {
     this.reactiveForm();
   }
   reactiveForm() {
     this.formCliente = this.fb.group({
       id: ['', [Validators.required, Validators.pattern('[0-9]+')]],
+      repartidor_id: ['', [Validators.required]],
+      tipo_entrega_id: ['1', [Validators.required]],
     });
+    this.getTipoEntrega();
+    this.getRepartidores();
   }
 
   ngOnInit(): void {
     this.items = this.cartService.getItems();
     this.total = this.cartService.getTotal();
+    this.impuesto = this.cartService.getImpuesto();
+    this.subtotal = this.cartService.getSubtotal();
 
+    console.log(this.impuesto)
     this.cartService.countItems.subscribe((value) => {
       this.qtyItems = value;
     });
@@ -53,11 +69,15 @@ export class PedidoIndexComponent implements OnInit {
   actualizarCantidad(item: any) {
     this.cartService.addToCart(item);
     this.total = this.cartService.getTotal();
+    this.impuesto = this.cartService.getImpuesto();
+    this.subtotal = this.cartService.getSubtotal();
     this.noti.mensaje('Orden', 'Cantidad actualizada', 'success');
   }
   eliminarItem(item: any) {
     this.cartService.removeFromCart(item);
     this.total = this.cartService.getTotal();
+    this.impuesto = this.cartService.getImpuesto();
+    this.subtotal = this.cartService.getSubtotal();
     this.noti.mensaje('Orden', 'Videojuego eliminado de la orden', 'warning');
   }
   public errorHandling = (control: string, error: string) => {
@@ -92,5 +112,30 @@ export class PedidoIndexComponent implements OnInit {
       this.cliente = data;
       console.log(this.cliente);
     })
+  }
+
+  getTipoEntrega() {
+    this.gService
+      .list('tipo_entrega')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        this.tipoEntrega = data;
+      });
+  }
+
+  getRepartidores() {
+    this.gService
+      .list('repartidor')
+      .subscribe((data: any) => {
+        this.repartidor = data;
+      });
+  }
+
+  cambioEntrega(event: any){
+    if(event.target.value=='2'){
+      this.boolRepartidor=true;
+    }else{
+      this.boolRepartidor=false;
+    }
   }
 }

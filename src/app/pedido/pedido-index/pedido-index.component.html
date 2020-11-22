@@ -2,8 +2,8 @@
   <div class="row card">
     <div class="card-header">Orden</div>
     <div class="card-body">
-      <div class="col">
-        <p class="card-text">Fecha: {{fecha | date:'dd/MM/yyyy'}}</p>
+      <div class="col form-group">
+        <p class="card-text font-weight-bold">Fecha: {{fecha | date:'dd/MM/yyyy'}}</p>
       </div>
       <form [formGroup]="formCliente" novalidate>
         <div class="form-group">
@@ -45,110 +45,153 @@
             </div>
           </div>
 
+          <div class="form-group">
+            <label for="roles">Tipo de entrega</label>
+            <select class="form-control" formControlName="tipo_entrega_id" (change)="cambioEntrega($event)">
+              <option *ngFor="let tipo of tipoEntrega" [value]="tipo.id">
+                {{tipo.descripcion}}
+              </option>
+            </select>
+            <div class="col-sm-4">
+              <small *ngIf="errorHandling('tipo_entrega_id', 'required')" class="text-danger">
+                El tipo entrega es requerido
+              </small>
+            </div>
+          </div>
+
+          <ng-template #MostarRepartidor>
+            <div class="form-group">
+            <label for="roles">Repartidor</label>
+            <select class="form-control" formControlName="repartidor_id">
+              <option *ngFor="let repart of repartidor" [value]="repart.id">
+                {{repart.nombre}}
+              </option>
+            </select>
+            <div class="col-sm-4">
+              <small *ngIf="errorHandling('repartidor_id', 'required')" class="text-danger">
+                El repartidor es requerido
+              </small>
+            </div>
+             </div>
+          </ng-template>
+          <ng-template [ngIf]="boolRepartidor" [ngIfElse]="MostarRepartidor"></ng-template>
         </div>
       </form>
-
     </div>
   </div>
-</div>
-<div class=" row card">
-  <div class="card-header">Detalle Orden</div>
-  <div class="card-body">
-    <table class="table table-bordered table-hover">
-      <thead>
-        <tr>
-          <th>
-            Videojuego
-          </th>
-          <th class="right">
-            Precio
-          </th>
-          <th class="center">
-            Cantidad
-          </th>
-          <th class="right">
-            SubTotal
-          </th>
-          <th></th>
-        </tr>
-      </thead>
+  <div class=" row card">
+    <div class="card-header">Detalle Orden</div>
+    <div class="card-body">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>
+              Videojuego
+            </th>
+            <th class="right">
+              Precio
+            </th>
+            <th class="center">
+              Cantidad
+            </th>
+            <th class="right">
+              SubTotal
+            </th>
+            <th></th>
+          </tr>
+        </thead>
 
-      <tbody>
-
-
-        <tr class="group" style="cursor: pointer" *ngFor="let item of items; let i = index">
-          <td>
-            <p>{{ item.product.nombre}}</p>
+        <tbody>
 
 
-          </td>
-          <td class="right">
-            <p>${{item.precio}}</p>
-          </td>
-          <td class="center">
-            <input id="cantidad " type="number" class="form-control mb-2" [(ngModel)]="item. cantidad"
-              (change)=" actualizarCantidad(item)">
-          </td>
+          <tr class="group" style="cursor: pointer" *ngFor="let item of items; let i = index">
+            <td>
+              <p>{{ item.product.nombre}}</p>
 
-          <td class="right">
-            <p>${{ item.subtotal}}</p>
-          </td>
-          <td>
-            <button class="btn btn-primary btn-sm" (click)="eliminarItem(item)"><i
-                class="far fa-trash-alt"></i></button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="row clearfix d-flex justify-content-end">
-      <div class="col-md-4">
-        <table class="table table-bordered table-hover">
-          <tbody>
-            <tr>
-              <td class="left">
-                <strong>Subtotal</strong>
-              </td>
-              <td class="right">
-                <div class="input-group mb-2">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">₡</div>
+
+            </td>
+            <td class="right">
+              <p>${{item.precio}}</p>
+            </td>
+            <td class="center">
+              <input id="cantidad " type="number" class="form-control mb-2" [(ngModel)]="item. cantidad"
+                (change)=" actualizarCantidad(item)">
+            </td>
+
+            <td class="right">
+              <p>${{ item.subtotal}}</p>
+            </td>
+            <td>
+              <button class="btn btn-primary btn-sm" (click)="eliminarItem(item)"><i
+                  class="far fa-trash-alt"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row clearfix d-flex justify-content-end">
+        <div class="col-md-4">
+          <table class="table table-bordered table-hover">
+            <tbody>
+              <tr>
+                <td class="left">
+                  <strong>Subtotal</strong>
+                </td>
+                <td class="right">
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">₡</div>
+                    </div>
+                    <input readonly type="text" class="form-control" id="subtotal" type="text" [value]="subtotal">
                   </div>
-                  <input readonly type="text" class="form-control" id="total" type="text" [value]="total">
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="left">
-                <strong>Impuesto</strong>
-              </td>
-              <td class="right">
-                <div class="input-group mb-2">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">₡</div>
+                </td>
+              </tr>
+              <tr>
+                <td class="left">
+                  <strong>Impuesto</strong>
+                </td>
+                <td class="right">
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">₡</div>
+                    </div>
+                    <input readonly type="text" class="form-control" id="impuesto" type="text" [value]="impuesto">
                   </div>
-                  <input readonly type="text" class="form-control" id="total" type="text" [value]="total">
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="left">
-                <strong>Total</strong>
-              </td>
-              <td class="right">
-                <div class="input-group mb-2">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">₡</div>
+                </td>
+              </tr>
+              <tr>
+                <td class="left">
+                  <strong>Costo envio</strong>
+                </td>
+                <td class="right">
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">₡</div>
+                    </div>
+                    <input readonly type="text" class="form-control" id="costoEnvio" type="text" value="2500">
                   </div>
-                  <input readonly type="text" class="form-control" id="total" type="text" [value]="total">
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="col">
-          <button class="btn btn-success mb-2 float-right" (click)="ordenar()">Ordenar</button>
+                </td>
+              </tr>
+              <tr>
+                <td class="left">
+                  <strong>Total</strong>
+                </td>
+                <td class="right">
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">₡</div>
+                    </div>
+                    <input readonly type="text" class="form-control" id="total" type="text" [value]="total">
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="col">
+            <button class="btn btn-success mb-2 float-right" (click)="ordenar()">Ordenar</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+

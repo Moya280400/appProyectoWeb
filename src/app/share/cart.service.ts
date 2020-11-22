@@ -6,6 +6,7 @@ export class ItemCart {
   cantidad: number;
   precio: number;
   subtotal: number;
+  impuesto: number;
 }
 @Injectable({
   providedIn: 'root',
@@ -30,6 +31,7 @@ export class CartService {
     newItem.cantidad = 1;
     newItem.subtotal = this.calculoSubtotal(newItem);
     newItem.product = producto;
+    newItem.impuesto= this.calculoSubtotal(newItem)*0.13;
     //Obtenemos el valor actual
     let listCart = this.cart.getValue();
     //Si no es el primer item del carrito
@@ -69,7 +71,9 @@ export class CartService {
   }
   private calculoSubtotal(item: ItemCart) {
     return item.precio * item.cantidad;
+
   }
+
   public removeFromCart(newData: ItemCart) {
     //Obtenemos el valor actual de carrito
     let listCart = this.cart.getValue();
@@ -100,7 +104,7 @@ export class CartService {
     let listCart = this.cart.getValue();
     if (listCart != null) {
       listCart.forEach((item: ItemCart, index) => {
-        total += item.subtotal;
+        total += item.subtotal+(item.subtotal*0.13)+2500;
       });
     }
 
@@ -111,4 +115,29 @@ export class CartService {
     this.qtyItems.next(0);
     localStorage.setItem('orden', JSON.stringify(this.cart.getValue()));
   }
+
+  public getImpuesto(): number {
+    let total = 0;
+    let listCart = this.cart.getValue();
+    if (listCart != null) {
+      listCart.forEach((item: ItemCart, index) => {
+        total += item.subtotal;
+      });
+    }
+
+    return total*0.13;
+  }
+
+  public getSubtotal(): number {
+    let subtotal = 0;
+    let listCart = this.cart.getValue();
+    if (listCart != null) {
+      listCart.forEach((item: ItemCart, index) => {
+        subtotal += item.subtotal;
+      });
+    }
+
+    return subtotal;
+  }
+
 }
