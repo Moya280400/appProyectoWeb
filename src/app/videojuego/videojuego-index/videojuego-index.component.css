@@ -7,10 +7,18 @@
   width: 219.99px;
   margin-top: -35px;
   background: #BB4F5A;
+  color: white;
+}
+
+#carrito:hover {
+  background-color: #94323c;
+  transition: 6s;
 }
 
 #letraCarro{
   color: white;
+  font: BlinkMacSystemFont;
+  cursor: pointer;
 }
 
 #main {
@@ -20,6 +28,7 @@
 #juego-container {
   padding-bottom: 1rem;
 }
+
 
 #juego-container a :hover {
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.767);

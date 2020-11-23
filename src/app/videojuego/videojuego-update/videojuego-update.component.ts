@@ -171,7 +171,7 @@ export class VideojuegoUpdateComponent implements OnInit {
     return this.formUpdate.get('plataformas') as FormArray;
   }
   get plataforma_id(): FormArray {
-    return this.formUpdate.get('plataformas') as FormArray;
+    return this.formUpdate.get('plataforma_id') as FormArray;
   }
   private checkboxplataforma() {
     //Recorrer la lista de plataformas y especificar si esta seleccionado
