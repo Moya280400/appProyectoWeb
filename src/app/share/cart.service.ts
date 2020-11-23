@@ -7,11 +7,14 @@ export class ItemCart {
   precio: number;
   subtotal: number;
   impuesto: number;
+  costoEnvio: number;
+
 }
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
+  public estadoEnvio=1;
   private cart = new BehaviorSubject<ItemCart[]>(null); //Definimos nuestro BehaviorSubject, este debe tener un valor inicial siempre
   public currentDataCart$ = this.cart.asObservable(); //Tenemos un observable con el valor actual del BehaviorSubject
   public qtyItems = new BehaviorSubject<number>(0);
@@ -32,6 +35,7 @@ export class CartService {
     newItem.subtotal = this.calculoSubtotal(newItem);
     newItem.product = producto;
     newItem.impuesto= this.calculoSubtotal(newItem)*0.13;
+    newItem.costoEnvio = this.calculoCostoEnvio();
     //Obtenemos el valor actual
     let listCart = this.cart.getValue();
     //Si no es el primer item del carrito
@@ -104,10 +108,11 @@ export class CartService {
     let listCart = this.cart.getValue();
     if (listCart != null) {
       listCart.forEach((item: ItemCart, index) => {
-        total += item.subtotal+(item.subtotal*0.13)+2500;
+        total += item.subtotal+(item.subtotal*0.13);
       });
     }
-
+    let costoEnvio = this.calculoCostoEnvio();
+    total+=costoEnvio;
     return total;
   }
   public deleteCart() {
@@ -140,4 +145,16 @@ export class CartService {
     return subtotal;
   }
 
+  public setEstadoEnvio(estado: number){
+    this.estadoEnvio=estado;
+  }
+
+
+  public calculoCostoEnvio(){
+    let total = 0;
+    if(this.estadoEnvio==1){
+      total=2500;
+    }
+    return total;
+  }
 }

@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
   currentUser: any;
   isAutenticated: boolean;
   esAdmin:boolean;
+  esVendedor:boolean;
   qtyItems = 0;
   constructor(
     private authService: AuthenticationService,
@@ -33,6 +34,10 @@ export class HeaderComponent implements OnInit {
 
     this.authService.esAdmin.subscribe(
       (valor) => (this.esAdmin = valor)
+    );
+
+    this.authService.esVendedor.subscribe(
+      (valor) => (this.esVendedor = valor)
     );
 
     console.log(this.esAdmin)

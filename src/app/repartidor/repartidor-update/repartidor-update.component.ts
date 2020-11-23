@@ -64,7 +64,7 @@ export class RepartidorUpdateComponent implements OnInit {
     else {
       this.radioActivo = false;
     }
-    console.log(this.radioActivo);
+
   }
   ngOnInit(): void { }
 

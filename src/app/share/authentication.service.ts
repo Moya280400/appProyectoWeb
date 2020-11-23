@@ -19,6 +19,7 @@ private authenticated = new BehaviorSubject<boolean>(false);
 
 private admin = new BehaviorSubject<boolean>(false);
 
+private vendedor = new BehaviorSubject<boolean>(false);
 //Inyectar cliente HTTP para las solicitudes al API
 constructor(private http: HttpClient) {
 //Obtener los datos del usuario en localStorage, si existe
@@ -54,10 +55,21 @@ get esAdmin() {
   if(this.currentUserValue !=null){
     if (this.currentUserValue.usuario['rol_id']==1) {
       this.admin.next(true);
+      this.vendedor.next(false);
     }
   }
   return this.admin.asObservable();
   }
+
+  get esVendedor() {
+    if(this.currentUserValue !=null){
+      if (this.currentUserValue.usuario['rol_id']==2) {
+        this.vendedor.next(true);
+        this.admin.next(false);
+      }
+    }
+    return this.vendedor.asObservable();
+    }
 
 //Login
 loginUser(user: any): Observable<any> {
@@ -72,10 +84,19 @@ loginUser(user: any): Observable<any> {
   this.currentUserSubject.next(user);
   if (this.currentUserValue.usuario['rol_id']==1) {
     this.admin.next(true);
+    this.vendedor.next(false);
   }
   else{
-    this.admin.next(false);
+    if (this.currentUserValue.usuario['rol_id']==2) {
+      this.vendedor.next(true);
+      this.admin.next(false);
+    }
+    else{
+      this.admin.next(false);
+      this.vendedor.next(false);
+    }
   }
+
   return user;
   })
   );
@@ -91,6 +112,7 @@ loginUser(user: any): Observable<any> {
   //Eliminarlo del observable del boleano si esta autenticado
   this.authenticated.next(false);
   this.admin.next(false);
+  this.vendedor.next(false);
   return this.http.post<any>(this.ServerUrl + '/', {});
   }
   }

@@ -27,6 +27,7 @@ export class VideojuegoUpdateComponent implements OnInit {
   distribuidores: any;
   desarrolladors: any;
   formUpdate: FormGroup;
+  radioActivo: any;
   destroy$: Subject<boolean> = new Subject<boolean>();
   makeSubmit: boolean = false;
   lista = new Array();
@@ -80,6 +81,7 @@ export class VideojuegoUpdateComponent implements OnInit {
         pathCover: [this.videojuego.pathCover],
         pathVideo: [this.videojuego.pathVideo],
         generos: this.fb.array([]),
+        estado: [this.videojuego.estado, [Validators.required]],
         genero_id: this.fb.array([]),
         plataformas: this.fb.array([]),
         plataforma_id: this.fb.array([]),
@@ -91,6 +93,13 @@ export class VideojuegoUpdateComponent implements OnInit {
       // Vista previa imagen
       this.imageURL = this.videojuego.pathImagen;
       this.getImagenes();
+    if (this.formUpdate.controls.estado.value == 1) {
+      this.radioActivo = true;
+    }
+    else {
+      this.radioActivo = false;
+    }
+
     }
   }
   ngOnInit(): void { }
@@ -224,8 +233,22 @@ export class VideojuegoUpdateComponent implements OnInit {
       reader.readAsDataURL(file);
     }
   }
+   agregarEmbed(form:any){
+    if(!(form.value.pathVideo=="")){
+    let linkVideo=form.value.pathVideo;
+
+    var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    var match = linkVideo.match(regExp);
+
+      if (match[1].length==8) {
+        var linkCompleto= 'https://www.youtube.com/embed/'+match[2];
+        this.formUpdate.value.pathVideo=linkCompleto;
+      }
+    }
+  }
 
   submitForm() {
+    this.agregarEmbed(this.formUpdate);
     this.makeSubmit = true;
      this.gService
       .update('videojuego/update', this.formUpdate.value)
@@ -309,6 +332,14 @@ export class VideojuegoUpdateComponent implements OnInit {
     });
 
 
+  }
+    onRadioChangeEstado(event) {
+    /* seleccionado */
+    if (event.target.value == "1") {
+      this.formUpdate.value.estado = 1;
+    } else {
+      this.formUpdate.value.estado = 0;
+    }
   }
 }
 

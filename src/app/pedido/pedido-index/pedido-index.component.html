@@ -111,7 +111,7 @@
 
             </td>
             <td class="right">
-              <p>${{item.precio}}</p>
+              <p>₡{{item.precio}}</p>
             </td>
             <td class="center">
               <input id="cantidad " type="number" class="form-control mb-2" [(ngModel)]="item. cantidad"
@@ -119,7 +119,7 @@
             </td>
 
             <td class="right">
-              <p>${{ item.subtotal}}</p>
+              <p>₡{{ item.subtotal}}</p>
             </td>
             <td>
               <button class="btn btn-primary btn-sm" (click)="eliminarItem(item)"><i
@@ -167,7 +167,7 @@
                     <div class="input-group-prepend">
                       <div class="input-group-text">₡</div>
                     </div>
-                    <input readonly type="text" class="form-control" id="costoEnvio" type="text" value="2500">
+                    <input readonly type="text" class="form-control" id="costoEnvio" type="text" [value]="costoEnvio">
                   </div>
                 </td>
               </tr>

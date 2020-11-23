@@ -26,6 +26,7 @@ export class PedidoIndexComponent implements OnInit {
   total = 0;
   subtotal = 0;
   impuesto=0;
+  costoEnvio=0;
 
   fecha = new Date();
   qtyItems = 0;
@@ -60,6 +61,8 @@ export class PedidoIndexComponent implements OnInit {
     this.total = this.cartService.getTotal();
     this.impuesto = this.cartService.getImpuesto();
     this.subtotal = this.cartService.getSubtotal();
+    this.cartService.setEstadoEnvio(1);
+    this.costoEnvio=this.cartService.calculoCostoEnvio();
 
     console.log(this.impuesto)
     this.cartService.countItems.subscribe((value) => {
@@ -72,6 +75,7 @@ export class PedidoIndexComponent implements OnInit {
     this.impuesto = this.cartService.getImpuesto();
     this.subtotal = this.cartService.getSubtotal();
     this.noti.mensaje('Orden', 'Cantidad actualizada', 'success');
+
   }
   eliminarItem(item: any) {
     this.cartService.removeFromCart(item);
@@ -133,9 +137,16 @@ export class PedidoIndexComponent implements OnInit {
 
   cambioEntrega(event: any){
     if(event.target.value=='2'){
+
       this.boolRepartidor=true;
+      this.cartService.setEstadoEnvio(2);
     }else{
       this.boolRepartidor=false;
+      this.cartService.setEstadoEnvio(1);
+    
+
     }
+      this.costoEnvio=this.cartService.calculoCostoEnvio();
+      this.total=this.cartService.getTotal();
   }
 }

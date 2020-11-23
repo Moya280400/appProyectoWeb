@@ -68,7 +68,7 @@ export class ClienteCreateComponent implements OnInit {
     this.formCreate.value['telefono'] = numeroString;
 
 
-    this.Server_URL='cliente/create?';
+    this.Server_URL='cliente/store?';
     this.gService.create(this.Server_URL, this.formCreate.value).subscribe((respuesta: any)=> {
         this.router.navigate(['/'], {
           //Parametro es cualquiera

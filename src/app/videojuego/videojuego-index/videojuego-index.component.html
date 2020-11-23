@@ -18,7 +18,7 @@
                   <hr class="mb-n3 bg-light" style="margin-top: 7px;"> <br>Precio: ₡
                   <strong>{{item.precio}}</strong></span>
               </p>
-              <button class="btn" id="carrito" (click)="agregarProducto(item.id)"><label id="letraCarro">Agregar al carrito </label><i id="letraCarro"
+              <button *ngIf="esVendedor" class="btn" id="carrito" (click)="agregarProducto(item.id)"><label id="letraCarro">Agregar al carrito </label><i id="letraCarro"
                   class="fas fa-cart-plus"></i></button>
             </div>
           </div>

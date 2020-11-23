@@ -2,7 +2,7 @@
   <div class="col-11">
     <h4 class="mb-3">Actualizar videojuego</h4>
     <ng-template #loading>
-      <img class="img-fluid rounded mx-auto d-block" src="/assets/img/loading.gif" alt="Cargando..."
+      <img class="img-fluid rounded mx-auto d-block" src="../../../assets/Imagenes/loading-gear.gif" alt="Cargando..."
         style="width: 300px;" />
     </ng-template>
     <ng-template [ngIf]="videojuego" [ngIfElse]="loading">
@@ -28,7 +28,7 @@
             <div class="form-group">
               <label class="font-weight-bold col-form-label" for="descripcion">Descripción </label>
               <div class="group rounded">
-                <input type="text" class="form-control" formControlName="descripcion" />
+                <textarea type="text" class="form-control" formControlName="descripcion" rows="4"></textarea>
               </div>
               <div class="col-sm-12">
                 <small *ngIf="errorHandling('descripcion', 'required')" class="text-danger">
@@ -120,6 +120,22 @@
                 </small>
               </div>
             </div>
+         <div class="form-check">
+           <label class="form-check-input font-weight-bold">Estado</label>
+            <br>
+            <input class="form-check-input" type="radio" name="radioActivo" value="1" ngModel="radioActivo"
+            (change)="onRadioChangeEstado($event)" [checked]="radioActivo" />
+             <label class="form-check-label" for="estado">
+               Activo
+              </label>
+          </div>
+            <div class="form-check">
+           <input class="form-check-input" type="radio" name="radioActivo" value="0" ngModel="radioActivo"
+              (change)="onRadioChangeEstado($event)" [checked]="!radioActivo">
+           <label class="form-check-label" for="estado">
+             Inactivo
+            </label>
+         </div>
           </article>
           <!--Imagen-->
           <article class="col-md-6" id="Imagenes">

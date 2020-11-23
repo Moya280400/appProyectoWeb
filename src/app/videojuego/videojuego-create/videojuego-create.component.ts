@@ -193,6 +193,7 @@ export class VideojuegoCreateComponent implements OnInit {
     //this.lista.forEach(function (value){
     //this.formCreate.controls.imagenes.push(value);
     //});
+    this.agregarEmbed(this.formCreate);
 
     this.makeSubmit = true;
 
@@ -204,6 +205,23 @@ export class VideojuegoCreateComponent implements OnInit {
         queryParams: { crear: 'true' },
       });
     });
+  }
+
+  agregarEmbed(form:any){
+    if(!(form.value.pathVideo=='')){
+      let linkVideo=form.value.pathVideo;
+
+       var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+       var match = linkVideo.match(regExp);
+
+
+      var linkCompleto= 'https://www.youtube.com/embed/'+match[2];
+      console.log(linkCompleto);
+      this.formCreate.value.pathVideo=linkCompleto;
+
+    }
+
+
   }
   onReset() {
     this.formCreate.reset();

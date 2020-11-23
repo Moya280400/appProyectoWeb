@@ -24,7 +24,7 @@
         <a class="nav-link text-light" id="button" routerLink="/cliente/register" routerLinkActive="active">
           <i class="fas fa-plus-circle fa-lg"></i> Clientes</a>
       </div>
-      <div id="button-2" *ngIf="esAdmin">
+      <div id="button-2">
         <div id="underline" class="rounded text-light"></div>
         <a class="nav-link text-light" id="button" routerLink="/videojuego/index"><i
             class="fas fa-clipboard-list fa-lg mr-1"></i>
@@ -104,7 +104,7 @@
         </ul>
       </div>
 
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="esVendedor">
         <a class="nav-link" routerLink="/pedido/index" routerLinkActive="active" class="nav-link"><i
             class="fas fa-shopping-cart"></i> <span class="badge badge-light">{{qtyItems}}</span> </a>
       </li>
