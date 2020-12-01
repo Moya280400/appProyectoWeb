@@ -1,27 +1,64 @@
-      <ng-template #loading>
-        <img class="img-fluid rounded mx-auto d-block " id="loading" src="/assets/Imagenes/loading-gear.gif"
-          alt="Cargando..." style="width: 600px;" />
-      </ng-template>
-      <ng-template [ngIf]="datos" [ngIfElse]="loading">
-        <div class="container">
-          <h2 class="text-center mt-n2">Cátalogo de juegos</h2>
-          <br>
-          <br>
-          <br>
-          <!-- /.row -->
-          <div class=" main row mt-n5">
-            <!-- Lista videojuegos -->
-            <div class="col-sm-6 col-md-3" id="juego-container" *ngFor="let item of datos">
-              <a title="{{item.nombre}}" [routerLink]="['/videojuego/',item.id]" routerLinkActive="active"><img
-                  src="{{item.pathCover}}" class="img-fluid rounded" alt="img"></a>
-              <p class="text-center"><strong>{{item.nombre}}</strong><span>
-                  <hr class="mb-n3 bg-light" style="margin-top: 7px;"> <br>Precio: ₡
-                  <strong>{{item.precio}}</strong></span>
-              </p>
-              <button *ngIf="esVendedor" class="btn" id="carrito" (click)="agregarProducto(item.id)"><label id="letraCarro">Agregar al carrito </label><i id="letraCarro"
-                  class="fas fa-cart-plus"></i></button>
+<ng-template #loading>
+  <img class="img-fluid rounded mx-auto d-block " id="loading" src="/assets/Imagenes/loading-gear.gif" alt="Cargando..."
+    style="width: 600px;" />
+</ng-template>
+
+<ng-template [ngIf]="datos" [ngIfElse]="loading">
+  <div class="container">
+    <h2 class="text-center mt-n2">Cátalogo de juegos</h2>
+    <br>
+
+    <div class="alert alert-secondary" role="alert">
+      <form [formGroup]="formFiltrar" novalidate>
+        <div class="form-group">
+          <label for="roles">Filtrar por tipo</label>
+          <select class="form-control" (change)="cambioFiltro($event)">
+            <option value="0">
+              Plataformas
+            </option>
+            <option value="1">
+              Generos
+            </option>
+          </select>
+          <div class="col-auto my-1">
+            <button type="button" class="btn btn-success mt-1" (click)="filtrar(); ">
+              Filtar
+            </button>
+          </div>
+        </div>
+
+
+        <label for="generos" class="col-sm-4 col-form-label font-weight-bold mt-n1">Generos</label>
+        <div class="col-sm-8">
+          <!--Array control genero-->
+          <div formArrayName="filtros">
+            <!--Nombre del control con el indice y valor obtenido de la lista de generos-->
+            <!--Cada vez que cambia o se selecciona, debe actualizar el array que guarda los id de genero-->
+            <div class="form-check" *ngFor="let p of filtros.controls; index as i">
+              <input type="checkbox" class="form-check-input" [formControlName]="i" [value]="filtradoList[i]?.id"
+                (change)="onCheckChange(filtradoList[i]?.id, $event)" />
+              <label class="form-check-label">{{
+              filtradoList[i]?.descripcion
+            }}</label>
             </div>
           </div>
-          <!-- /.row -->
         </div>
-      </ng-template>
+      </form>
+      <!-- /.row -->
+      <div class=" main row">
+        <!-- Lista videojuegos -->
+        <div class="col-sm-6 col-md-3" id="juego-container" *ngFor="let item of datos">
+          <a title="{{item.nombre}}" [routerLink]="['/videojuego/',item.id]" routerLinkActive="active"><img
+              src="{{item.pathCover}}" class="img-fluid rounded" alt="img"></a>
+          <p class="text-center"><strong>{{item.nombre}}</strong><span>
+              <hr class="mb-n3 bg-light" style="margin-top: 7px;"> <br>Precio: ₡
+              <strong>{{item.precio}}</strong></span>
+          </p>
+          <button *ngIf="esVendedor" class="btn" id="carrito" (click)="agregarProducto(item.id)"><label
+              id="letraCarro">Agregar al carrito </label><i id="letraCarro" class="fas fa-cart-plus"></i></button>
+        </div>
+      </div>
+      <!-- /.row -->
+    </div>
+  </div>
+</ng-template>

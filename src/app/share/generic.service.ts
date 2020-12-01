@@ -41,6 +41,10 @@ return this.http.get<any>(this.urlAPI + endopoint);
 get(endopoint: string, filtro: any): Observable<any | any[]> {
 return this.http.get<any | any[]>(this.urlAPI + endopoint + `/${filtro}`);
 }
+//filtrar
+filter(endopoint: string, objFilter: any | any):  Observable<any> {
+  return this.http.get<any>(this.urlAPI + endopoint, objFilter);
+  }
 // crear
 create(endopoint: string, objCreate: any | any): Observable<any | any[]> {
 return this.http.post<any | any[]>(this.urlAPI + endopoint, objCreate);
