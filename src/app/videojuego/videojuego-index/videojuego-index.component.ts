@@ -160,17 +160,20 @@ export class VideojuegoIndexComponent implements OnInit {
   }
 
   filtrar(){
-
-    if(this.boolTipoFiltro){
-      this.gService.filter('videojuego/filtroPlataforma', this.formFiltrar.controls.filtro_id.value).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+    if(!this.boolTipoFiltro){
+      this.gService.filter('videojuego/filtradoPlataforma', this.formFiltrar.value).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+        console.log(data);
         console.log(this.formFiltrar.value);
         this.datos = data;
+        console.log(this.datos);
       });
     }
     else{
-      this.gService.filter('videojuego/filtroGenero', this.formFiltrar.value).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+      this.gService.filter('videojuego/filtradoGenero', this.formFiltrar.value).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+        console.log('Genero');
         console.log(this.formFiltrar.value);
         this.datos = data;
+        console.log(this.datos);
       });
     }
   }
