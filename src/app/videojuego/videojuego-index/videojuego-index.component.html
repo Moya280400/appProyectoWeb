@@ -20,15 +20,11 @@
               Generos
             </option>
           </select>
-          <div class="col-auto my-1">
-            <button type="button" class="btn btn-success mt-1" (click)="filtrar(); ">
-              Filtar
-            </button>
-          </div>
         </div>
 
 
-        <label for="generos" class="col-sm-4 col-form-label font-weight-bold mt-n1">Generos</label>
+        <label for="generos" class="col-sm-4 col-form-label font-weight-bold mt-n1">Elija de las opciones para poder
+          filtrar</label>
         <div class="col-sm-8">
           <!--Array control genero-->
           <div formArrayName="filtros">
@@ -42,6 +38,11 @@
             }}</label>
             </div>
           </div>
+        </div>
+        <div class="col-auto my-1">
+          <button type="button" class="btn btn-success mt-1 btn-lg" (click)="filtrar(); ">
+            Filtar
+          </button>
         </div>
       </form>
       <!-- /.row -->

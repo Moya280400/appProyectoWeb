@@ -25,13 +25,13 @@ export class VideojuegoIndexComponent implements OnInit {
   filtradoList: any;
   destroy$: Subject<boolean> = new Subject<boolean>();
   infoVideojuego: any;
-  esVendedor:boolean;
+  esVendedor: boolean;
   currentUser: any;
-  boolTipoFiltro:any;
+  boolTipoFiltro: any = true;
   datosFiltradoSeleccionado: any;
   formFiltrar: FormGroup;
   constructor(
-     public fb: FormBuilder,
+    public fb: FormBuilder,
     private authService: AuthenticationService,
     private gService: GenericService,
     private notificacion: NotificacionService,
@@ -68,7 +68,7 @@ export class VideojuegoIndexComponent implements OnInit {
       this.datos = data;
     });
 
-  this.gService.list('plataforma').subscribe(
+    this.gService.list('plataforma').subscribe(
       (respuesta: any) => {
         (this.filtradoList = respuesta), this.checkboxFiltrado();
       },
@@ -100,7 +100,7 @@ export class VideojuegoIndexComponent implements OnInit {
     return this.formFiltrar.get('filtro_id') as FormArray;
   }
   private checkboxFiltrado() {
-  this.reactiveForm();
+    this.reactiveForm();
     this.filtradoList.forEach(() => {
       const control = new FormControl(); // primer parámetro valor a asignar
       (this.formFiltrar.controls.filtros as FormArray).push(control);
@@ -108,31 +108,31 @@ export class VideojuegoIndexComponent implements OnInit {
   }
 
 
-  cambioFiltro(event: any){
-    if(event.target.value=='0'){
-      this.boolTipoFiltro=true;
-            return this.gService.list('plataforma').subscribe(
-      (respuesta: any) => {
-        (this.filtradoList = respuesta), this.checkboxFiltrado();
-        console.log(this.filtradoList)
-      },
-      (error) => {
-        this.error = error;
-        this.notificacion.msjValidacion(this.error);
-      }
-    );
-    }else{
-      this.boolTipoFiltro=false;
+  cambioFiltro(event: any) {
+    if (event.target.value == '0') {
+      this.boolTipoFiltro = true;
+      return this.gService.list('plataforma').subscribe(
+        (respuesta: any) => {
+          (this.filtradoList = respuesta), this.checkboxFiltrado();
+          console.log(this.filtradoList)
+        },
+        (error) => {
+          this.error = error;
+          this.notificacion.msjValidacion(this.error);
+        }
+      );
+    } else {
+      this.boolTipoFiltro = false;
       return this.gService.list('genero').subscribe(
-      (respuesta: any) => {
-        (this.filtradoList = respuesta), this.checkboxFiltrado();
-        console.log(this.filtradoList)
-      },
-      (error) => {
-        this.error = error;
-        this.notificacion.msjValidacion(this.error);
-      }
-    );
+        (respuesta: any) => {
+          (this.filtradoList = respuesta), this.checkboxFiltrado();
+          console.log(this.filtradoList)
+        },
+        (error) => {
+          this.error = error;
+          this.notificacion.msjValidacion(this.error);
+        }
+      );
     }
   }
 
@@ -159,22 +159,24 @@ export class VideojuegoIndexComponent implements OnInit {
     }
   }
 
-  filtrar(){
-    if(!this.boolTipoFiltro){
+  filtrar() {
+    if (this.boolTipoFiltro) {
       this.gService.filter('videojuego/filtradoPlataforma', this.formFiltrar.value).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
-        console.log(data);
-        console.log(this.formFiltrar.value);
         this.datos = data;
-        console.log(this.datos);
+        if (this.datos == null) {
+          this.listaVideojuegos();
+        }
       });
+
     }
-    else{
+    else {
       this.gService.filter('videojuego/filtradoGenero', this.formFiltrar.value).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
-        console.log('Genero');
-        console.log(this.formFiltrar.value);
         this.datos = data;
-        console.log(this.datos);
+        if (this.datos == null) {
+          this.listaVideojuegos();
+        }
       });
+
     }
   }
 }
