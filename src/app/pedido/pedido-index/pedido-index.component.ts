@@ -13,6 +13,7 @@ import {
 } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { AuthenticationService } from 'src/app/share/authentication.service';
 @Component({
   selector: 'app-pedido-index',
   templateUrl: './pedido-index.component.html',
@@ -20,6 +21,7 @@ import { Subject } from 'rxjs';
 })
 export class PedidoIndexComponent implements OnInit {
 
+  Server_URL: any;
   tipoEntrega: any;
   repartidor: any;
   items: ItemCart[] = [];
@@ -42,16 +44,28 @@ export class PedidoIndexComponent implements OnInit {
     private cartService: CartService,
     private noti: NotificacionService,
     private gService: GenericService,
+    private authServiceUser: AuthenticationService,
     private router: Router,
   ) {
     this.reactiveForm();
   }
   reactiveForm() {
     this.formCliente = this.fb.group({
-      id: ['', [Validators.required, Validators.pattern('[0-9]+')]],
+      fecha: [''],
+      direccion_entrega: [''],
+      subtotal: [''],
+      costo_envio: [''],
+      impuesto: [''],
+      total: [''],
+      estado:[''],
+      cliente_id: ['', [Validators.required, Validators.pattern('[0-9]+')]],
+      usuario_id: [''],
       repartidor_id: ['', [Validators.required]],
       tipo_entrega_id: ['1', [Validators.required]],
+      detalle: this.fb.array([])
+
     });
+
     this.getTipoEntrega();
     this.getRepartidores();
   }
@@ -91,15 +105,47 @@ export class PedidoIndexComponent implements OnInit {
       (this.makeSubmit || this.formCliente.controls[control].touched)
     );
   };
+
   ordenar() {
+
     if (this.qtyItems > 0) {
-      let detalles = { detalles: this.cartService.getItems() };
+      var detalles = new Array();
+      this.formCliente.controls.fecha.setValue(this.fecha);
+      this.formCliente.controls.direccion_entrega.setValue(this.cliente.direccion);
+      this.formCliente.controls.subtotal.setValue(this.cartService.getSubtotal());
+      this.formCliente.controls.total.setValue(this.cartService.getTotal());
+      this.formCliente.controls.impuesto.setValue(this.cartService.getImpuesto());
+      this.formCliente.controls.costo_envio.setValue(this.costoEnvio);
+      this.formCliente.controls.usuario_id.setValue(this.authServiceUser.currentUserValue.usuario.id);
+      this.formCliente.controls.estado.setValue('1');
+      console.log(this.formCliente.controls);
+
+      console.log(this.cartService.getItems());
+
+      this.cartService.getItems().forEach(function (item){
+
+        var linea= item.idItem+','+item.cantidad+','+item.subtotal;
+        detalles.push(linea);
+      });
+
+
+      detalles.forEach((obj) => {
+        (this.formCliente.controls.detalle as FormArray).push(
+          new FormControl(obj)
+        );
+
+
+      });
+
+
+      console.log(this.formCliente.controls);
+
       this.gService
-        .create('videojuego/orden', detalles)
+        .create('pedido/store?', this.formCliente.value)
         .subscribe((respuesta: any) => {
           this.noti.mensaje(
-            'Orden',
-            'Orden registrada satisfactoriamente',
+            'Pedido',
+            'Pedido registrado satisfactoriamente',
             'sucess'
           );
           this.cartService.deleteCart();
@@ -107,12 +153,14 @@ export class PedidoIndexComponent implements OnInit {
           this.total = this.cartService.getTotal();
         });
     } else {
-      this.noti.mensaje('Orden', 'Agregue videojuegos a la orden', 'warning');
-    }
+      this.noti.mensaje('Pedido', 'Agregue videojuegos al pedido', 'warning');
+      this.noti.mensaje('Pedido', 'Verifique si agregó un cliente registrado', 'warning');
+      }
+
   }
 
   buscarCliente() {
-    this.gService.get('cliente', this.formCliente.value.id).subscribe((data: any) => {
+    this.gService.get('cliente', this.formCliente.value.cliente_id).subscribe((data: any) => {
       this.cliente = data;
       console.log(this.cliente);
     })
@@ -143,7 +191,7 @@ export class PedidoIndexComponent implements OnInit {
     }else{
       this.boolRepartidor=false;
       this.cartService.setEstadoEnvio(1);
-    
+
 
     }
       this.costoEnvio=this.cartService.calculoCostoEnvio();

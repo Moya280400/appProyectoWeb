@@ -10,7 +10,7 @@
           <label class="font-weight-bold">Cliente </label>
           <div class="form-row align-items-center">
             <div class="col-sm-7 my-1">
-              <input type="text" class="form-control" placeholder="Cédula Cliente" formControlName="id" />
+              <input type="text" class="form-control" placeholder="Cédula Cliente" formControlName="cliente_id" />
             </div>
             <div class="col-auto my-1">
               <button type="button" class="btn btn-success mt-1" (click)="buscarCliente(); ">
@@ -19,10 +19,10 @@
             </div>
 
             <div class="col-sm-12">
-              <small *ngIf="errorHandling('id', 'required')" class="text-danger">
+              <small *ngIf="errorHandling('cliente_id', 'required')" class="text-danger">
                 La cédula del cliente es requerido
               </small>
-              <small *ngIf="errorHandling('id', 'pattern')" class="text-danger">
+              <small *ngIf="errorHandling('cliente_id', 'pattern')" class="text-danger">
                 La cédula debe contener solo números
               </small>
             </div>
