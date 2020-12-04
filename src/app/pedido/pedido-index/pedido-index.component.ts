@@ -107,8 +107,12 @@ export class PedidoIndexComponent implements OnInit {
   };
 
   ordenar() {
+if (this.cliente.nombre!='') {
 
-    if (this.qtyItems > 0) {
+    if (this.qtyItems > 0 ) {
+      if(this.formCliente.controls.tipo_entrega_id.value=='0'){
+        this.formCliente.controls.repartidor_id.setValue('');
+      }
       var detalles = new Array();
       this.formCliente.controls.fecha.setValue(this.fecha);
       this.formCliente.controls.direccion_entrega.setValue(this.cliente.direccion);
@@ -124,7 +128,7 @@ export class PedidoIndexComponent implements OnInit {
 
       this.cartService.getItems().forEach(function (item){
 
-        var linea= item.idItem+','+item.cantidad+','+item.subtotal;
+        var linea= item.product.id+','+item.cantidad+','+item.subtotal;
         detalles.push(linea);
       });
 
@@ -151,11 +155,17 @@ export class PedidoIndexComponent implements OnInit {
           this.cartService.deleteCart();
           this.items = this.cartService.getItems();
           this.total = this.cartService.getTotal();
+          this.subtotal = this.cartService.getSubtotal();
+          this.impuesto = this.cartService.getImpuesto();
         });
     } else {
       this.noti.mensaje('Pedido', 'Agregue videojuegos al pedido', 'warning');
-      this.noti.mensaje('Pedido', 'Verifique si agregó un cliente registrado', 'warning');
+
       }
+    }
+    else{
+      this.noti.mensaje('Pedido', 'Verifique si agregó un cliente registrado', 'warning');
+    }
 
   }
 
