@@ -7,26 +7,21 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">Fecha</th>
-        <th scope="col">Tipo Envio</th>
-        <th scope="col">Estado</th>
         <th scope="col">Subtotal</th>
+        <th scope="col">Impuesto</th>
         <th scope="col">Total</th>
         <th scope="col"> </th>
-        <th *ngIf="esBodeguero" scope="col"> </th>
       </tr>
     </thead>
     <ng-template [ngIf]="datos" [ngIfElse]="loading">
     <tbody>
       <tr *ngFor="let item of datos">
         <th scope="row">{{item.id}}</th>
-        <td>{{item.fecha}}</td>
-        <td>{{item.tipo_entrega.descripcion}}</td>
-        <td>{{item.estado_pedido.descripcion}}</td>
+        <td>{{item.fecha_emision}}</td>
         <td>₡ {{item.subtotal}}</td>
+        <td>₡ {{item.impuesto}}</td>
         <td>₡ {{item.total}}</td>
-        <td><button type="button" [routerLink]="['/pedido/',item.id]" class="btn btn-primary">Detalle</button></td>
-        <td *ngIf="esBodeguero"><button type="button" class="btn btn-primary ml-1" (click)="cambiarEstado(item.id)">
-              Cambiar Estado</button></td>
+        <td><button type="button" [routerLink]="['/factura/',item.id]" class="btn btn-primary">Detalle</button></td>
       </tr>
     </tbody>
         </ng-template>

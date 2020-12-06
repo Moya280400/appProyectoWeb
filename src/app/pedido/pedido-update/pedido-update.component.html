@@ -1,4 +1,4 @@
-      <ng-template #loading>
+  <ng-template #loading>
     <img class="img-fluid rounded mx-auto d-block " id="loading" src="/assets/Imagenes/loading-gear.gif" alt="Cargando..." style="width: 600px;"/>
   </ng-template>
  <ng-template [ngIf]="datos" [ngIfElse]="loading">
@@ -7,6 +7,7 @@
     <article class="col-md-6">
       <h2>Detalle</h2>
       <div *ngIf="datos?.id">
+        <form [formGroup]="formUpdate" (ngSubmit)="submitForm()" novalidate>
         <h4>Pedido</h4>
         <dl class="dl-horizontal">
           <span>
@@ -33,14 +34,19 @@
             {{datos.direccion_entrega}}
           </dd>
         </dl>
-        <dl class="dl-horizontal">
-          <dt>
-            Estado
-          </dt>
-          <dd>
-            {{datos.estado_pedido.descripcion}}
-          </dd>
-        </dl>
+        <div class="form-group">
+          <label for="roles font-weight-bold" class="font-weight-bold">Estado del pedido</label>
+          <select class="form-control" formControlName="estado_pedido_id">
+            <option *ngFor="let estadoPedidos of estadoPedidos" [value]="estadoPedidos.id">
+              {{estadoPedidos.descripcion}}
+            </option>
+          </select>
+          <div class="col-sm-4">
+            <small *ngIf="errorHandling('estado_pedido_id', 'required')" class="text-danger">
+              El estado es requerido
+            </small>
+          </div>
+        </div>
         <dl class="dl-horizontal">
           <dt>
             Tipo Entrega
@@ -49,9 +55,7 @@
             {{datos.tipo_entrega.descripcion}}
           </dd>
         </dl>
-      </div>
-
-      <dl class="dl-horizontal">
+          <dl class="dl-horizontal">
         <dt>
           Subtotal pedido
         </dt>
@@ -85,30 +89,18 @@
          ₡ {{datos.total}}
         </dd>
       </dl>
-    </article>
+        <div class="col-md-12 mb-3 text-center">
+           <div class="btn-group" role="group">
+            <button type="submit" class="btn butttonBajos">Guardar</button>
+           </div>
+        </div>
+        </form>
+      </div>
 
-    <article class="col-md-6">
-      <h4>Linea detalle pedido</h4>
-      <!-- Tabla -->
-      <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">Codigo</th>
-            <th scope="col">Videojuego</th>
-            <th scope="col">Cantidad</th>
-            <th scope="col">Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of datos.pedido__videojuegos">
-            <th scope="row">{{item.videojuego_id}}</th>
-            <th>{{item.videojuego.nombre}}</th>
-            <td>{{item.cantidad}}</td>
-            <td>₡ {{item.total}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </article>
+      </article>
+
   </div>
+
 </div>
   </ng-template>
+

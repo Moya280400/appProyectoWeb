@@ -19,6 +19,7 @@ import { MarcaModule } from './marca/marca.module';
 import { VehiculoModule } from './vehiculo/vehiculo.module';
 import { DesarrolladorModule } from './desarrollador/desarrollador.module';
 import { DistribuidorModule } from './distribuidor/distribuidor.module';
+import { FacturaModule } from './factura/factura.module';
 
 
 @NgModule({
@@ -46,9 +47,12 @@ import { DistribuidorModule } from './distribuidor/distribuidor.module';
     VehiculoModule,
     DesarrolladorModule,
     DistribuidorModule,
+    FacturaModule,
 
     //Va de ultimo gestor de rutas principal
     AppRoutingModule,
+
+
 
 
 

@@ -11,26 +11,33 @@
     <div class="alert alert-secondary" role="alert">
       <form [formGroup]="formFiltrar" novalidate>
         <div class="form-group">
-          <label for="roles">Filtrar por tipo</label>
-          <select class="form-control" (change)="cambioFiltro($event)">
-            <option value="0">
-              Plataformas
-            </option>
-            <option value="1">
-              Generos
-            </option>
-          </select>
+          <div class="form-row align-items-center">
+            <label class="font-weight-bold col-md-12" for="roles">Filtrar por tipo</label>
+            <select class="form-control col-sm-8 my-1" (change)="cambioFiltro($event)">
+              <option value="0">
+                Plataformas
+              </option>
+              <option value="1">
+                Generos
+              </option>
+            </select>
+            <div class="col-auto my-1">
+              <button type="button"  class="btn btn-success mt-1" (click)="filtrar(); ">
+                Filtar
+              </button>
+            </div>
+          </div>
         </div>
 
 
         <label for="generos" class="col-sm-4 col-form-label font-weight-bold mt-n1">Elija de las opciones para poder
           filtrar</label>
-        <div class="col-sm-8">
+        <div class="col-sm-12">
           <!--Array control genero-->
-          <div formArrayName="filtros">
+          <div formArrayName="filtros" id="filtrosContainer">
             <!--Nombre del control con el indice y valor obtenido de la lista de generos-->
             <!--Cada vez que cambia o se selecciona, debe actualizar el array que guarda los id de genero-->
-            <div class="form-check" *ngFor="let p of filtros.controls; index as i">
+            <div class="form-check form-check-inline" id="filtros" *ngFor="let p of filtros.controls; index as i">
               <input type="checkbox" class="form-check-input" [formControlName]="i" [value]="filtradoList[i]?.id"
                 (change)="onCheckChange(filtradoList[i]?.id, $event)" />
               <label class="form-check-label">{{
@@ -38,11 +45,6 @@
             }}</label>
             </div>
           </div>
-        </div>
-        <div class="col-auto my-1">
-          <button type="button" class="btn btn-success mt-1 btn-lg" (click)="filtrar(); ">
-            Filtar
-          </button>
         </div>
       </form>
       <!-- /.row -->

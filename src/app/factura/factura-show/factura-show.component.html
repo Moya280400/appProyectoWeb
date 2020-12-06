@@ -1,0 +1,102 @@
+     <ng-template #loading>
+    <img class="img-fluid rounded mx-auto d-block " id="loading" src="/assets/Imagenes/loading-gear.gif" alt="Cargando..." style="width: 600px;"/>
+  </ng-template>
+ <ng-template [ngIf]="datos" [ngIfElse]="loading">
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      Factura
+      <strong>{{datos.fecha_emision}}</strong>
+
+    </div>
+    <div class="card-body">
+      <div class="row mb-4">
+        <div class="col-sm-4">
+          <h6 class="mb-3">De:</h6>
+          <div>
+            <strong>Arcadia GameStore</strong>
+          </div>
+          <div>Av. Central Juan López del Corral</div>
+          <div>Provincia de Alajuela, Alajuela</div>
+          <div>Email: arcadiagamestore@gmail.com</div>
+          <div>Telefono: +506 24445609</div>
+        </div>
+        <div class="col-sm-4">
+          <h6 class="mb-3">Para:</h6>
+          <div>
+            <strong>{{datos.pedido.cliente.nombre}}</strong>
+          </div>
+          <div>{{datos.pedido.cliente.direccion}}</div>
+          <div>{{datos.pedido.cliente.correo}}</div>
+          <div>{{datos.pedido.cliente.telefono}}</div>
+        </div>
+
+
+        <div *ngIf="datos.pedido.repartidor_id!=null" class="col-sm-4">
+          <h6 class="mb-3">Repartidor:</h6>
+          <div>
+            <strong>{{datos.pedido.repartidor.nombre}}</strong>
+          </div>
+          <div>{{datos.pedido.repartidor.vehiculo_id}}</div>
+          <div>{{datos.pedido.repartidor.correo}}</div>
+          <div>{{datos.pedido.repartidor.telefono}}</div>
+        </div>
+      </div>
+
+      <div class="table-responsive-sm">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th class="center">#</th>
+              <th>Codigo</th>
+              <th>Cantidad</th>
+
+              <th class="right">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of datos.pedido.pedido__videojuegos; let i=index">
+              <td class="center">{{i+1}}</td>
+              <td class="left strong">{{item.videojuego_id}}</td>
+              <td class="left">{{item.cantidad}}</td>
+
+              <td class="right">{{item.total}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-sm-5">
+
+        </div>
+        <div class="col-lg-4 col-sm-5 ml-auto">
+          <table class="table table-clear">
+            <tbody>
+              <tr>
+                <td class="left">
+                  <strong>Subtotal</strong>
+                </td>
+                <td class="right">{{datos.subtotal}}</td>
+              </tr>
+              <tr>
+                <td class="left">
+                  <strong>Impuesto(13%)</strong>
+                </td>
+                <td class="right">{{datos.impuesto}}</td>
+              </tr>
+              <tr>
+                <td class="left">
+                  <strong>Total</strong>
+                </td>
+                <td class="right">
+                  <strong>{{datos.total}}</strong>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  </ng-template>

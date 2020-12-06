@@ -31,10 +31,17 @@
           Catálogo</a>
       </div>
 
-      <div id="button-2" *ngIf="esAdmin">
+
+      <div id="button-2" *ngIf="esAdmin||esBodeguero">
         <div id="underline" class="rounded text-light"></div>
         <a class="nav-link text-light" id="button" routerLink="/pedido"><i class="fas fa-box fa-lg mr-1"></i>
           Pedidos</a>
+      </div>
+
+      <div id="button-2" *ngIf="esAdmin">
+        <div id="underline" class="rounded text-light"></div>
+        <a class="nav-link text-light" id="button" routerLink="/factura"><i class="fas fa-file-invoice-dollar fa-lg mr-1"></i>
+          Facturas</a>
       </div>
 
       <!-- Usuarios/ -->

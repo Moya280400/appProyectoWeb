@@ -6,11 +6,11 @@ import { NotificacionService } from 'src/app/share/notificacion.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-pedido-show',
-  templateUrl: './pedido-show.component.html',
-  styleUrls: ['./pedido-show.component.css']
+  selector: 'app-factura-show',
+  templateUrl: './factura-show.component.html',
+  styleUrls: ['./factura-show.component.css']
 })
-export class PedidoShowComponent implements OnInit {
+export class FacturaShowComponent implements OnInit {
 
   datos; any;
   destroy$: Subject<boolean> = new Subject<boolean>();
@@ -23,22 +23,23 @@ export class PedidoShowComponent implements OnInit {
     //Obtener el id del repartidor
     let id = +this.route.snapshot.paramMap.get('id');
     //Obtener el pedido
-    this.obtenerPedido(id);
-    console.log(this.datos)
+    this.obtenerFactura(id);
+
   }
 
-  obtenerPedido(id: any) {
-    this.gService.get('pedido', id)
+  obtenerFactura(id: any) {
+    this.gService.get('factura', id)
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
         this.datos = data;
       })
+
+
   }
   ngOnDestroy() {
     this.destroy$.next(true);
     // Desinscribirse
     this.destroy$.unsubscribe();
   }
-
 
 }

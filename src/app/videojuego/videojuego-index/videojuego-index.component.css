@@ -2,12 +2,17 @@
   margin-top: 10rem;
 }
 
+
 #carrito{
   max-width: 219.99px;
   width: 219.99px;
   margin-top: -35px;
   background: #BB4F5A;
   color: white;
+}
+
+#filtrosContainer{
+  margin-bottom: 15px;;
 }
 
 #carrito:hover {

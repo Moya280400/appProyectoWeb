@@ -6,10 +6,11 @@ import { PedidoListComponent } from './pedido-list/pedido-list.component';
 import { PedidoShowComponent } from './pedido-show/pedido-show.component';
 import { PedidoIndexComponent } from './pedido-index/pedido-index.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PedidoUpdateComponent } from './pedido-update/pedido-update.component';
 
 
 @NgModule({
-  declarations: [PedidoListComponent, PedidoShowComponent, PedidoIndexComponent],
+  declarations: [PedidoListComponent, PedidoShowComponent, PedidoIndexComponent, PedidoUpdateComponent],
   imports: [
     CommonModule,
     PedidoRoutingModule,

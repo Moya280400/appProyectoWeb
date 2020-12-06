@@ -20,6 +20,9 @@ private authenticated = new BehaviorSubject<boolean>(false);
 private admin = new BehaviorSubject<boolean>(false);
 
 private vendedor = new BehaviorSubject<boolean>(false);
+
+private bodeguero = new BehaviorSubject<boolean>(false);
+
 //Inyectar cliente HTTP para las solicitudes al API
 constructor(private http: HttpClient) {
 //Obtener los datos del usuario en localStorage, si existe
@@ -56,16 +59,29 @@ get esAdmin() {
     if (this.currentUserValue.usuario['rol_id']==1) {
       this.admin.next(true);
       this.vendedor.next(false);
+      this.bodeguero.next(false);
     }
   }
   return this.admin.asObservable();
   }
+
+  get esBodeguero() {
+    if(this.currentUserValue !=null){
+      if (this.currentUserValue.usuario['rol_id']==3) {
+        this.bodeguero.next(true);
+        this.admin.next(false);
+        this.vendedor.next(false);
+      }
+    }
+    return this.bodeguero.asObservable();
+    }
 
   get esVendedor() {
     if(this.currentUserValue !=null){
       if (this.currentUserValue.usuario['rol_id']==2) {
         this.vendedor.next(true);
         this.admin.next(false);
+        this.bodeguero.next(false);
       }
     }
     return this.vendedor.asObservable();
@@ -85,15 +101,25 @@ loginUser(user: any): Observable<any> {
   if (this.currentUserValue.usuario['rol_id']==1) {
     this.admin.next(true);
     this.vendedor.next(false);
+    this.bodeguero.next(false);
   }
   else{
     if (this.currentUserValue.usuario['rol_id']==2) {
       this.vendedor.next(true);
       this.admin.next(false);
+      this.bodeguero.next(false);
     }
     else{
-      this.admin.next(false);
-      this.vendedor.next(false);
+      if(this.currentUserValue.usuario['rol_id']==3){
+        this.bodeguero.next(true);
+        this.admin.next(false);
+        this.vendedor.next(false);
+      }
+      else{
+        this.bodeguero.next(false);
+        this.admin.next(false);
+        this.vendedor.next(false);
+      }
     }
   }
 
@@ -113,6 +139,7 @@ loginUser(user: any): Observable<any> {
   this.authenticated.next(false);
   this.admin.next(false);
   this.vendedor.next(false);
+  this.bodeguero.next(false);
   return this.http.post<any>(this.ServerUrl + '/', {});
   }
   }
