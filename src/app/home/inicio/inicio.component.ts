@@ -22,10 +22,12 @@ export class InicioComponent implements OnInit {
   mensajes() {
     let login = false;
     let crear = false;
+    let authError=false;
     //Obtener parámetros de la URL
     this.route.queryParams.subscribe((params) => {
       login = params.login || false;
       crear = params.crear || false;
+      authError=params.authError||false;
     });
 
     if (crear) {
@@ -42,6 +44,15 @@ export class InicioComponent implements OnInit {
         'Iniciado con exito',
         'success'
       );
+    }
+
+    if (authError) {
+      this.notificacion.mensaje(
+        'Usuario',
+        'Usuario no autorizado para ingresar al recurso',
+        'warning'
+      );
+
     }
   }
 }

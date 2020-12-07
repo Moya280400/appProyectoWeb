@@ -5,8 +5,8 @@ import { VehiculoListComponent } from './vehiculo-list/vehiculo-list.component';
 
 
 const routes: Routes = [  //Rutas a utilizar
-  { path: 'vehiculo/create', component: VehiculoCreateComponent },
-  { path: 'vehiculo', component: VehiculoListComponent }
+  //{ path: 'vehiculo/create', component: VehiculoCreateComponent },
+  //{ path: 'vehiculo', component: VehiculoListComponent }
 ];
 
 @NgModule({

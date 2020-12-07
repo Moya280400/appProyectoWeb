@@ -45,6 +45,7 @@ export class VideojuegoCreateComponent implements OnInit {
 
   reactiveForm() {
     const reg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+    const youtube = /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
     this.formCreate = this.fb.group({
       id: ['', [Validators.required]],
       nombre: ['', [Validators.required]],
@@ -56,7 +57,7 @@ export class VideojuegoCreateComponent implements OnInit {
       plataformas: this.fb.array([]),
       plataforma_id: this.fb.array([]),
       pathCover: ['', [Validators.required, Validators.pattern(reg)]],
-      pathVideo: ['', [Validators.required, Validators.pattern(reg)]],
+      pathVideo: ['', [Validators.required, Validators.pattern(youtube)]],
       distribuidor_id: ['', [Validators.required]],
       desarrollador_id: ['', [Validators.required]],
 

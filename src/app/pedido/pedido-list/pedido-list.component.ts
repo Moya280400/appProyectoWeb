@@ -29,13 +29,12 @@ export class PedidoListComponent implements OnInit {
   ngOnInit(): void {
     this.authService.currentUser.subscribe((x) => (this.currentUser = x));
 
-    console.log(this.currentUser)
 
     this.authService.esBodeguero.subscribe(
       (valor) => (this.esBodeguero = valor)
     );
+    this.mensajes();
 
-    console.log(this.esBodeguero)
   }
 
   listaPedidos(){
@@ -43,6 +42,18 @@ export class PedidoListComponent implements OnInit {
       console.log(data);
       this.datos=data;
     });
+  }
+    mensajes() {
+    let actualizar = true;
+    //Obtener parametros de la URL
+    this.route.queryParams.subscribe((params => {
+      //Le indico que si no lo encuentra coloquelo como falso
+      actualizar = params.actualizar || false;
+    }))
+
+    if (actualizar) {
+      this.notification.mensaje('Pedido', 'Pedido actualizado con exito', 'success');
+    }
   }
   cambiarEstado(id: number) {
     this.router.navigate(['/pedido/update', id], {

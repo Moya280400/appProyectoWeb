@@ -4,8 +4,8 @@ import { PlataformaCreateComponent } from './plataforma-create/plataforma-create
 import { PlataformaListComponent } from './plataforma-list/plataforma-list.component';
 
 const routes: Routes = [
-  { path: 'plataforma', component: PlataformaListComponent},
-  { path: 'plataforma/create', component: PlataformaCreateComponent},
+  //{ path: 'plataforma', component: PlataformaListComponent},
+  //{ path: 'plataforma/create', component: PlataformaCreateComponent},
 ];
 
 @NgModule({

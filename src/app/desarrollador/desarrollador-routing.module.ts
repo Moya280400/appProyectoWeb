@@ -4,8 +4,8 @@ import { DesarrolladorCreateComponent } from './desarrollador-create/desarrollad
 import { DesarrolladorListComponent } from './desarrollador-list/desarrollador-list.component';
 
 const routes: Routes = [
-  { path: 'desarrollador/create', component: DesarrolladorCreateComponent},
-  { path: 'desarrollador', component: DesarrolladorListComponent }
+  //{ path: 'desarrollador/create', component: DesarrolladorCreateComponent},
+  //{ path: 'desarrollador', component: DesarrolladorListComponent }
 ];
 
 @NgModule({

@@ -46,8 +46,11 @@ export class RepartidorListComponent implements OnInit {
   }
   listaRepartidores() {
     this.gService.list('repartidor/').pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
-
       this.datos = data;
+      for (const item of data) {
+        let estadoVar = item.estado ? 'Activo' : 'Inactivo';
+        item.estado = estadoVar;
+      }
     });
   }
   actualizarRepartidor(id: number) {

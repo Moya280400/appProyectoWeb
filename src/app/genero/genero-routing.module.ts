@@ -4,8 +4,8 @@ import { GeneroCreateComponent } from './genero-create/genero-create.component';
 import { GeneroListComponent } from './genero-list/genero-list.component';
 
 const routes: Routes = [
-  { path: 'genero/create', component: GeneroCreateComponent},
-  { path: 'genero', component: GeneroListComponent},
+  //{ path: 'genero/create', component: GeneroCreateComponent},
+  //{ path: 'genero', component: GeneroListComponent},
 ];
 
 @NgModule({
