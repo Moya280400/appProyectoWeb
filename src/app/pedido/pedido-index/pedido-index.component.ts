@@ -122,9 +122,6 @@ if (this.cliente.nombre!='') {
       this.formCliente.controls.costo_envio.setValue(this.costoEnvio);
       this.formCliente.controls.usuario_id.setValue(this.authServiceUser.currentUserValue.usuario.id);
       this.formCliente.controls.estado.setValue('1');
-      console.log(this.formCliente.controls);
-
-      console.log(this.cartService.getItems());
 
       this.cartService.getItems().forEach(function (item){
 
@@ -170,10 +167,21 @@ if (this.cliente.nombre!='') {
   }
 
   buscarCliente() {
-    this.gService.get('cliente', this.formCliente.value.cliente_id).subscribe((data: any) => {
+    if(this.formCliente.value.cliente_id!=""){
+      this.gService.get('cliente', this.formCliente.value.cliente_id).subscribe((data: any) => {
       this.cliente = data;
-      console.log(this.cliente);
-    })
+      if(Object.keys(data).length === 0){
+         this.noti.mensaje('Cliente', 'El cliente que buscó no se encuentra registrado', 'warning');
+       }else{
+          this.noti.mensaje('Cliente', 'Usuario encontrado', 'success');
+       }
+    }
+
+    )
+    }else{
+      this.noti.mensaje('Cliente', 'Debe colocar la cédula', 'warning');
+    }
+
   }
 
   getTipoEntrega() {
@@ -187,7 +195,7 @@ if (this.cliente.nombre!='') {
 
   getRepartidores() {
     this.gService
-      .list('repartidor')
+      .list('repartidor/activos')
       .subscribe((data: any) => {
         this.repartidor = data;
       });

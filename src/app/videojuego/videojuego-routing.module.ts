@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'videojuego/index', component: VideojuegoIndexComponent },
   { path: 'videojuego/list', component: VideojuegoListComponent,canActivate:[AuthGuardService,RolGuardService],data:{roles:[1]}},
   { path: 'videojuego/create', component: VideojuegoCreateComponent,canActivate:[AuthGuardService,RolGuardService],data:{roles:[1]}},
-  { path: 'videojuego/:id', component: VideojuegoShowComponent,canActivate:[AuthGuardService,RolGuardService],data:{roles:[1]}},
+  { path: 'videojuego/:id', component: VideojuegoShowComponent},
   { path: 'videojuego/update/:id', component: VideojuegoUpdateComponent,canActivate:[AuthGuardService,RolGuardService],data:{roles:[1]}},
 ];
 
